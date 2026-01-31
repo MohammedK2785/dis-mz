@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ===================================
-   Mza3et Design Tokens (V3 - Soft UI + Glass)
+   Mza3et Design Tokens (V6 - Premium Platform)
    ================================== */
 :root {
   /* Brand colors - using CSS variables for easier theming */
@@ -15,8 +15,15 @@
   --mza-border: #e2e8f0;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.07);
-  --mza-radius: 1rem; /* Updated to 1rem for rounded-2xl feel */
+  --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.04);
+  --mza-radius: 1rem;
+  --mza-radius-3xl: 1.5rem;
   --mza-text: var(--primary, #1e293b);
+  /* Avatar ring - solid color for better contrast */
+  --mza-avatar-ring: #f1f5f9;
+  /* Glass background - higher opacity for accessibility */
+  --mza-glass-bg: rgb(255 255 255 / 0.75);
+  --mza-glass-bg-solid: rgb(255 255 255 / 0.92);
 }
 
 /* Dark mode overrides */
@@ -26,6 +33,10 @@ html[data-theme="dark"] {
   --mza-border: #334155;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.3);
+  --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.15);
+  --mza-avatar-ring: #475569;
+  --mza-glass-bg: rgb(30 41 59 / 0.75);
+  --mza-glass-bg-solid: rgb(30 41 59 / 0.92);
 }
 
 /* Mza3et Sky Blue Gradient Utility */
@@ -112,50 +123,60 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     V5 Premium Typography - .cooked content
-     Cairo-optimized, leading-loose for Arabic readability
+     V6 Premium Typography - .cooked content
+     Cairo-optimized, leading-loose (1.9-2.0) for Arabic readability
+     Strong heading weights with tracking-tight for modern feel
+     
+     Note: Paragraph spacing is 0.75rem with line-height 2.0 to create
+     visual breathing room between lines while keeping paragraphs 
+     connected for reading flow. This balances Arabic script's vertical
+     height with comfortable reading rhythm.
      ================================== */
   
   /* Post content typography - enhanced line-height for Arabic */
   .cooked {
-    line-height: 1.95; /* leading-loose for premium Arabic readability */
+    line-height: 2; /* V6: leading-loose ~2.0 for premium Arabic readability */
     
-    /* Paragraph spacing */
+    /* Paragraph spacing - balances reading flow with line-height */
     p {
-      margin-block-end: 1.25rem;
-      line-height: 1.95;
+      margin-block-end: 0.75rem;
+      line-height: 2;
     }
     
-    /* Heading hierarchy with tracking-tight and stronger weights */
+    /* Heading hierarchy with tracking-tight and strong weights */
     h1, h2, h3, h4, h5, h6 {
       letter-spacing: -0.025em; /* tracking-tight */
-      margin-block-start: 1.75rem;
-      margin-block-end: 0.875rem;
-      line-height: 1.35;
+      margin-block-start: 2rem;
+      margin-block-end: 1rem;
+      line-height: 1.3;
+      color: var(--primary);
     }
     
+    /* V6: h1/h2 get extrabold (800) for strong contrast */
     h1 {
-      font-weight: 800;
+      font-weight: 800; /* font-extrabold */
       font-size: 1.875rem; /* text-3xl */
+      letter-spacing: -0.03em; /* tighter tracking for large headings */
     }
     
     h2 {
-      font-weight: 700;
+      font-weight: 800; /* font-extrabold */
       font-size: 1.5rem; /* text-2xl */
+      letter-spacing: -0.03em;
     }
     
     h3 {
-      font-weight: 700;
+      font-weight: 700; /* font-bold */
       font-size: 1.25rem; /* text-xl */
     }
     
     h4 {
-      font-weight: 600;
+      font-weight: 700; /* font-bold */
       font-size: 1.125rem; /* text-lg */
     }
     
     h5, h6 {
-      font-weight: 600;
+      font-weight: 600; /* font-semibold */
       font-size: 1rem;
     }
     
@@ -163,10 +184,10 @@ html[data-theme="dark"] {
     ul, ol {
       margin-block: 1rem;
       padding-inline-start: 1.75rem;
-      line-height: 1.85;
+      line-height: 1.9; /* V6: comfortable list line-height */
       
       li {
-        margin-block-end: 0.625rem;
+        margin-block-end: 0.5rem;
       }
       
       /* Nested lists */
