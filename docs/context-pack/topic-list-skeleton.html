@@ -1,0 +1,250 @@
+<table class="topic-list ember-view">
+  <thead>
+    <tr class="topic-list-header">
+      <th class="default bulk-select topic-list-data"><input type="checkbox" class="bulk-select"></th>
+      <th class="default topic-list-data" data-sort-order="default"><span class="d-button-label">Topic</span></th>
+      <th class="posts sortable num" data-sort-order="posts"><span class="d-button-label">Replies</span></th>
+      <th class="views sortable num" data-sort-order="views"><span class="d-button-label">Views</span></th>
+      <th class="activity sortable num" data-sort-order="activity"><span class="d-button-label">Activity</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-topic-id="12345" id="ember123" class="topic-list-item category-general has-excerpt pinned ember-view">
+      <td class="bulk-select topic-list-data">
+        <label for="bulk-select-12345"><input type="checkbox" class="bulk-select" id="bulk-select-12345"></label>
+      </td>
+      <td class="main-link clearfix topic-list-data" colspan="1">
+        <div class="topic-details">
+          <div class="topic-statuses">
+            <span class="topic-status" title="This topic is pinned for you; it will display at the top of its category">
+              <svg class="fa d-icon d-icon-thumbtack svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#thumbtack"></use></svg>
+            </span>
+          </div>
+          <div class="link-top-line">
+            <a href="/t/example-topic/12345" class="title raw-link raw-topic-link" data-topic-id="12345" level="2">
+              Example Topic Title
+            </a>
+            <span class="topic-post-badges">
+              <a href="/t/example-topic/12345/1" class="badge badge-notification new-topic" title="new topic"></a>
+            </span>
+          </div>
+          <div class="discourse-tags">
+            <a href="/tag/discussion" data-tag-name="discussion" class="discourse-tag bullet">discussion</a>
+            <a href="/tag/help" data-tag-name="help" class="discourse-tag bullet">help</a>
+          </div>
+          <div class="link-bottom-line">
+            <a class="badge-wrapper bullet" href="/c/general/5">
+              <span class="badge-category-bg" style="background-color: #0088CC;"></span>
+              <span class="badge-category clear-badge">
+                <span class="category-name">General</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </td>
+      <td class="num posts-map posts heatmap-high topic-list-data">
+        <button class="btn-link posts-map badge-posts heatmap-high">
+          <span class="number" aria-label="This topic has 42 replies">42</span>
+        </button>
+      </td>
+      <td class="num views topic-list-data">
+        <span class="number" title="this topic has been viewed 1234 times">1.2k</span>
+      </td>
+      <td class="num topic-list-data age activity" title="First post: Jan 15, 2024 3:45 pm
+Last post: Jan 30, 2024 10:20 am">
+        <a class="post-activity" href="/t/example-topic/12345/43">
+          <span class="relative-date" data-time="1706609220000" data-format="tiny">2h</span>
+        </a>
+      </td>
+    </tr>
+    <tr data-topic-id="12346" id="ember124" class="topic-list-item category-support has-excerpt closed ember-view">
+      <td class="bulk-select topic-list-data">
+        <label for="bulk-select-12346"><input type="checkbox" class="bulk-select" id="bulk-select-12346"></label>
+      </td>
+      <td class="main-link clearfix topic-list-data" colspan="1">
+        <div class="topic-details">
+          <div class="topic-statuses">
+            <span class="topic-status" title="This topic is closed; it no longer accepts new replies">
+              <svg class="fa d-icon d-icon-lock svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#lock"></use></svg>
+            </span>
+            <span class="topic-status" title="This topic has a solution">
+              <svg class="fa d-icon d-icon-check-square svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#check-square"></use></svg>
+            </span>
+          </div>
+          <div class="link-top-line">
+            <a href="/t/another-topic/12346" class="title raw-link raw-topic-link" data-topic-id="12346" level="2">
+              Another Topic Example
+            </a>
+            <span class="topic-post-badges"></span>
+          </div>
+          <div class="link-bottom-line">
+            <a class="badge-wrapper bullet" href="/c/support/8">
+              <span class="badge-category-bg" style="background-color: #F1592A;"></span>
+              <span class="badge-category clear-badge">
+                <span class="category-name">Support</span>
+              </span>
+            </a>
+            <div class="topic-excerpt">
+              This is an excerpt of the topic content that appears under the title...
+            </div>
+          </div>
+        </div>
+      </td>
+      <td class="num posts-map posts topic-list-data">
+        <button class="btn-link posts-map badge-posts">
+          <span class="number" aria-label="This topic has 8 replies">8</span>
+        </button>
+      </td>
+      <td class="num views topic-list-data">
+        <span class="number" title="this topic has been viewed 256 times">256</span>
+      </td>
+      <td class="num topic-list-data age activity" title="First post: Jan 20, 2024 9:15 am
+Last post: Jan 28, 2024 4:30 pm">
+        <a class="post-activity" href="/t/another-topic/12346/8">
+          <span class="relative-date" data-time="1706458230000" data-format="tiny">3d</span>
+        </a>
+      </td>
+    </tr>
+    <tr data-topic-id="12347" id="ember125" class="topic-list-item category-announcements has-excerpt pinned globally-pinned ember-view">
+      <td class="bulk-select topic-list-data">
+        <label for="bulk-select-12347"><input type="checkbox" class="bulk-select" id="bulk-select-12347"></label>
+      </td>
+      <td class="main-link clearfix topic-list-data" colspan="1">
+        <div class="topic-details">
+          <div class="topic-statuses">
+            <span class="topic-status" title="This topic is pinned globally; it will display at the top of all topic lists">
+              <svg class="fa d-icon d-icon-thumbtack svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#thumbtack"></use></svg>
+            </span>
+          </div>
+          <div class="link-top-line">
+            <a href="/t/important-announcement/12347" class="title raw-link raw-topic-link" data-topic-id="12347" level="2">
+              <svg class="fa d-icon d-icon-bullhorn svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#bullhorn"></use></svg>
+              Important Announcement
+            </a>
+            <span class="topic-post-badges">
+              <a href="/t/important-announcement/12347/1" class="badge badge-notification unread" title="unread topic"></a>
+            </span>
+          </div>
+          <div class="link-bottom-line">
+            <a class="badge-wrapper bullet" href="/c/announcements/3">
+              <span class="badge-category-parent-bg" style="background-color: #AB9364;"></span>
+              <span class="badge-category-bg" style="background-color: #E45735;"></span>
+              <span class="badge-category clear-badge">
+                <span class="category-name">Announcements</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </td>
+      <td class="num posts-map posts topic-list-data">
+        <button class="btn-link posts-map badge-posts">
+          <span class="number" aria-label="This topic has 0 replies">0</span>
+        </button>
+      </td>
+      <td class="num views topic-list-data">
+        <span class="number" title="this topic has been viewed 3421 times">3.4k</span>
+      </td>
+      <td class="num topic-list-data age activity" title="First post: Jan 10, 2024 8:00 am
+Last post: Jan 10, 2024 8:00 am">
+        <a class="post-activity" href="/t/important-announcement/12347/1">
+          <span class="relative-date" data-time="1704873600000" data-format="tiny">21d</span>
+        </a>
+      </td>
+    </tr>
+    <tr data-topic-id="12348" id="ember126" class="topic-list-item category-meta ember-view">
+      <td class="bulk-select topic-list-data">
+        <label for="bulk-select-12348"><input type="checkbox" class="bulk-select" id="bulk-select-12348"></label>
+      </td>
+      <td class="main-link clearfix topic-list-data" colspan="1">
+        <div class="topic-details">
+          <div class="topic-statuses"></div>
+          <div class="link-top-line">
+            <a href="/t/regular-topic/12348" class="title raw-link raw-topic-link" data-topic-id="12348" level="2">
+              Regular Topic Without Special Status
+            </a>
+            <span class="topic-post-badges"></span>
+          </div>
+          <div class="discourse-tags">
+            <a href="/tag/meta" data-tag-name="meta" class="discourse-tag bullet">meta</a>
+          </div>
+          <div class="link-bottom-line">
+            <a class="badge-wrapper bullet" href="/c/meta/2">
+              <span class="badge-category-bg" style="background-color: #283890;"></span>
+              <span class="badge-category clear-badge">
+                <span class="category-name">Meta</span>
+              </span>
+            </a>
+            <a href="/u/username" data-user-card="username" class="latest-poster trigger-user-card">
+              <img loading="lazy" alt="" width="25" height="25" src="/user_avatar/forum/username/50/123_2.png" class="avatar latest single">
+            </a>
+          </div>
+        </div>
+      </td>
+      <td class="num posts-map posts heatmap-med topic-list-data">
+        <button class="btn-link posts-map badge-posts heatmap-med">
+          <span class="number" aria-label="This topic has 15 replies">15</span>
+        </button>
+      </td>
+      <td class="num views topic-list-data">
+        <span class="number" title="this topic has been viewed 542 times">542</span>
+      </td>
+      <td class="num topic-list-data age activity" title="First post: Jan 25, 2024 2:30 pm
+Last post: Jan 29, 2024 11:15 am">
+        <a class="post-activity" href="/t/regular-topic/12348/15">
+          <span class="relative-date" data-time="1706528100000" data-format="tiny">1d</span>
+        </a>
+      </td>
+    </tr>
+    <tr data-topic-id="12349" id="ember127" class="topic-list-item category-features has-excerpt liked ember-view">
+      <td class="bulk-select topic-list-data">
+        <label for="bulk-select-12349"><input type="checkbox" class="bulk-select" id="bulk-select-12349"></label>
+      </td>
+      <td class="main-link clearfix topic-list-data" colspan="1">
+        <div class="topic-details">
+          <div class="topic-statuses">
+            <span class="topic-status" title="You liked a post in this topic">
+              <svg class="fa d-icon d-icon-heart svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#heart"></use></svg>
+            </span>
+          </div>
+          <div class="link-top-line">
+            <a href="/t/feature-request/12349" class="title raw-link raw-topic-link" data-topic-id="12349" level="2">
+              Feature Request: New Functionality
+            </a>
+            <span class="topic-post-badges">
+              <a href="/t/feature-request/12349/3" class="badge badge-notification clicks" title="3 clicks">3</a>
+            </span>
+          </div>
+          <div class="discourse-tags">
+            <a href="/tag/feature" data-tag-name="feature" class="discourse-tag bullet">feature</a>
+            <a href="/tag/request" data-tag-name="request" class="discourse-tag bullet">request</a>
+          </div>
+          <div class="link-bottom-line">
+            <a class="badge-wrapper bullet" href="/c/features/6">
+              <span class="badge-category-bg" style="background-color: #12A89D;"></span>
+              <span class="badge-category clear-badge">
+                <span class="category-name">Features</span>
+              </span>
+            </a>
+            <div class="topic-excerpt">
+              It would be great if we could add this new feature that many users have requested...
+            </div>
+          </div>
+        </div>
+      </td>
+      <td class="num posts-map posts heatmap-low topic-list-data">
+        <button class="btn-link posts-map badge-posts heatmap-low">
+          <span class="number" aria-label="This topic has 5 replies">5</span>
+        </button>
+      </td>
+      <td class="num views topic-list-data">
+        <span class="number" title="this topic has been viewed 89 times">89</span>
+      </td>
+      <td class="num topic-list-data age activity" title="First post: Jan 29, 2024 5:45 pm
+Last post: Jan 30, 2024 9:10 am">
+        <a class="post-activity" href="/t/feature-request/12349/5">
+          <span class="relative-date" data-time="1706604600000" data-format="tiny">5h</span>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
