@@ -1,16 +1,12 @@
-<!-- Mza3et Theme - Head Tag -->
-<!-- Additional head elements can be added here -->
+import { apiInitializer } from "discourse/lib/api";
 
-<script type="text/discourse-plugin" version="0.8">
-(function() {
-  'use strict';
+export default apiInitializer("1.14.0", (api) => {
+  // Mza3et Theme - Reposition custom elements
+  // Migrated from legacy head_tag.html
   
-  // Wait for DOM to be ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', repositionElements);
-  } else {
+  api.onPageChange(() => {
     repositionElements();
-  }
+  });
   
   function repositionElements() {
     // Find the custom elements
@@ -65,5 +61,4 @@
       }
     }
   }
-})();
-</script>
+});
