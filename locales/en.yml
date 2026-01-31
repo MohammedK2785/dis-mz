@@ -1,0 +1,5 @@
+en:
+  theme_metadata:
+    description: "Mza3et Theme - A custom Discourse theme for the Mza3et community"
+    settings:
+      mza3et_example_setting: "A description of a setting."
