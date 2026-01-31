@@ -47,6 +47,17 @@ html[dir="rtl"] .mza-topbar-inner {
   font-size: 1.25rem;
   font-weight: bold;
   margin: 0;
+  
+  a {
+    color: white;
+    text-decoration: none;
+    
+    &:hover,
+    &:focus {
+      color: white;
+      text-decoration: none;
+    }
+  }
 }
 
 // Main navigation
