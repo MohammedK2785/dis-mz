@@ -6,8 +6,7 @@ $mza-accent-blue: #2196f3;
 $mza-accent-purple: #9c27b0;
 $mza-bg-light: #f5f5f5;
 
-// Breakpoints (following Discourse standards)
-$small-width: 800px;
+// Breakpoints
 $mza-mobile-breakpoint: 768px;
 
 // Arabic-friendly font stack
@@ -267,25 +266,6 @@ div.discourse-tags {
     text-align: start;
     padding-block: 0.25rem;
     padding-inline: 0.5rem;
-    
-    &::before {
-      font-weight: 600;
-      margin-inline-end: 0.5rem;
-      color: var(--primary);
-    }
-  }
-  
-  // Add labels for meta columns on mobile
-  td.num.posts-map.posts::before {
-    content: attr(data-label);
-  }
-  
-  td.num.views::before {
-    content: attr(data-label);
-  }
-  
-  td.num.topic-list-data.age.activity::before {
-    content: attr(data-label);
   }
   
   // Hide bulk select on mobile
