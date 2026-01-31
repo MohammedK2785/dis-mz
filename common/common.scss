@@ -430,7 +430,6 @@ html[dir="rtl"] .mza-section-tabs {
 }
 
 html[dir="rtl"] .mza-section-tabs-inner {
-  direction: rtl;
   justify-content: flex-start;
 }
 
@@ -501,8 +500,7 @@ html[dir="rtl"] .mza-section-tabs-inner {
   // Mobile-specific tabs styling
   .mza-section-tabs {
     padding: 0.75rem 1rem;
-    // Enable horizontal scroll, prevent page overflow
-    overflow-x: auto;
+    // Prevent vertical scroll on tabs container
     overflow-y: hidden;
     // Ensure smooth scrolling
     scroll-behavior: smooth;
