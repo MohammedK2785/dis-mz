@@ -222,6 +222,38 @@ html[data-theme="dark"] {
       white-space: nowrap;
     }
 
+    /* V7: Avatar stack styling for posters column */
+    td.posters {
+      a {
+        display: inline-flex;
+        margin-inline-end: -0.5rem; /* V7: Overlap avatars (RTL-safe) */
+        position: relative;
+
+        &:hover {
+          z-index: 2;
+        }
+      }
+
+      /* V7: Avatar ring styling for modern overlap look */
+      img.avatar {
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px var(--mza-avatar-ring); /* ring-2 ring-white */
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        position: relative; /* Required for z-index to work */
+      }
+
+      a:hover img.avatar {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 2px var(--mza-avatar-ring), 0 2px 4px rgb(0 0 0 / 0.1);
+        z-index: 10;
+      }
+
+      /* Reset margin on last avatar to prevent overflow */
+      a:last-child {
+        margin-inline-end: 0;
+      }
+    }
+
     th.num,
     td.num {
       width: 4.5rem;
@@ -248,9 +280,13 @@ html[data-theme="dark"] {
       background: transparent;
     }
 
+    /* V7: Minimal styling for stats column headers */
     th.num,
     th.activity {
       text-align: center;
+      font-size: 0.75rem; /* V7: smaller */
+      color: var(--primary-low-mid); /* V7: more muted */
+      background: transparent; /* V7: no background */
     }
 
     th.sortable {
@@ -263,7 +299,7 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Topic row - V4 card visuals with rounded-2xl */
+  /* Topic row - V7 card visuals with rounded-2xl */
   tr.topic-list-item {
     transition: transform 0.2s ease;
 
@@ -432,7 +468,7 @@ html[data-theme="dark"] {
   }
 
 
-  /* Topic excerpt - V4 text-sm, muted, leading-relaxed */
+  /* Topic excerpt - V7 single-line clamp, text-sm, muted */
   div.topic-excerpt {
     margin-block-start: 0.625rem;
     padding-inline-start: 1rem;
@@ -440,10 +476,15 @@ html[data-theme="dark"] {
     padding-block: 0.5rem;
     color: var(--primary-medium);
     font-size: 0.875rem; /* text-sm */
-    line-height: 1.75; /* leading-relaxed */
+    line-height: 1.5;
     border-inline-start: 3px solid var(--primary-low-mid);
     background-color: var(--primary-very-low);
     border-radius: 4px;
+    /* V7: Single-line clamp for clean appearance */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   html[dir="rtl"] div.topic-excerpt {
@@ -451,23 +492,24 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     V4 Minimal Stats (Phase 1: CSS-only)
+     V7 Minimal Stats (Phase A: CSS-only)
      Reduce visual weight of stats columns
      ================================== */
   
-  /* Stats columns - subtle, smaller, centered */
+  /* Stats columns - V7: smaller font, muted, no backgrounds */
   td.num {
     text-align: center;
-    font-size: 0.8125rem; /* Smaller than var(--font-down-1) */
+    font-size: 0.75rem; /* V7: even smaller for minimal weight */
     color: var(--primary-medium);
     white-space: nowrap;
     min-width: 3.5rem;
     padding-inline: 0.75rem;
+    background: transparent; /* V7: remove any background shading */
 
     /* Posts map button */
     button.btn-link.posts-map.badge-posts {
-      font-weight: 500; /* Reduced from 600 */
-      color: var(--primary-medium); /* More subtle */
+      font-weight: 400; /* V7: lighter weight */
+      color: var(--primary-medium); /* V7: muted color */
       transition: color 0.15s ease, transform 0.1s ease;
 
       &:hover {
@@ -478,30 +520,31 @@ html[data-theme="dark"] {
 
     /* Number display */
     span.number {
-      font-weight: 400; /* Reduced from 500 */
+      font-weight: 400; /* V7: light weight */
       font-variant-numeric: tabular-nums;
+      color: var(--primary-medium);
     }
   }
 
-  /* Reduce heatmap intensity */
+  /* V7: Subtle heatmap colors */
   button.btn-link.posts-map.badge-posts.heatmap-high {
-    color: var(--primary); /* Reduced from danger */
-    font-weight: 500; /* Reduced from 700 */
+    color: var(--danger); /* Keep danger but lighter weight */
+    font-weight: 500;
   }
 
   button.btn-link.posts-map.badge-posts.heatmap-med {
-    color: var(--primary-medium); /* Reduced from tertiary */
-    font-weight: 500; /* Reduced from 600 */
+    color: var(--tertiary);
+    font-weight: 400;
   }
 
   button.btn-link.posts-map.badge-posts.heatmap-low {
     color: var(--primary-medium);
-    font-weight: 400; /* Reduced from 500 */
+    font-weight: 400;
   }
 
-  /* Activity cell - subtle */
+  /* Activity cell - V7: minimal styling */
   td.num.topic-list-data.age.activity {
-    font-size: 0.8125rem;
+    font-size: 0.75rem; /* V7: smaller */
 
     a.post-activity {
       color: var(--primary-medium);
@@ -518,9 +561,10 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Views column - subtle */
+  /* Views column - V7: minimal styling */
   td.num.views.topic-list-data {
     color: var(--primary-medium);
+    font-size: 0.75rem; /* V7: smaller */
 
     span.number {
       font-variant-numeric: tabular-nums;
@@ -549,32 +593,34 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Pinned topics - enhanced with border accent */
+  /* Pinned topics - V7: subtle amber stripe, no full-row background */
   tr.topic-list-item.pinned,
   tr.topic-list-item.globally-pinned {
     td {
-      background: linear-gradient(to right, var(--tertiary-very-low), var(--mza-surface));
+      /* V7: Remove gradient, keep surface color for card consistency */
+      background: var(--mza-surface);
     }
 
     td:first-child {
-      border-inline-start-color: var(--tertiary);
+      /* V7: Warm amber stripe on inline-start side (RTL-safe) */
+      border-inline-start-color: #f59e0b; /* amber-500 */
       border-inline-start-width: 4px;
     }
 
     &:hover td {
-      background: linear-gradient(to right, var(--tertiary-low), var(--primary-very-low));
+      background: var(--mza-surface-2);
     }
   }
 
-  /* RTL pinned topics */
+  /* RTL pinned topics - V7: same surface background */
   html[dir="rtl"] tr.topic-list-item.pinned,
   html[dir="rtl"] tr.topic-list-item.globally-pinned {
     td {
-      background: linear-gradient(to left, var(--tertiary-very-low), var(--mza-surface));
+      background: var(--mza-surface);
     }
 
     &:hover td {
-      background: linear-gradient(to left, var(--tertiary-low), var(--primary-very-low));
+      background: var(--mza-surface-2);
     }
   }
 
