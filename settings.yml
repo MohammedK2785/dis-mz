@@ -1,2 +1,7 @@
 mza3et_example_setting:
   default: true
+
+compact_topic_stats:
+  type: bool
+  default: false
+  description: "Enable compact inline topic stats (hides standard stats columns and shows minimal inline stats under topic titles)"
