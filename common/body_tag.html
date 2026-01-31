@@ -8,7 +8,7 @@
     </div>
     
     <!-- Hamburger menu toggle for mobile -->
-    <button class="mza-menu-toggle" aria-label="Toggle menu">
+    <button class="mza-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span class="mza-menu-toggle__icon"></span>
     </button>
     
@@ -30,8 +30,8 @@
   <div class="mza-section-tabs__container">
     <a href="#offers" class="mza-section-tab mza-section-tab--offers">Offers &amp; Booking</a>
     <a href="#cars" class="mza-section-tab mza-section-tab--cars">Cars</a>
-    <a href="#reports-tab" class="mza-section-tab mza-section-tab--reports">Reports</a>
-    <a href="#questions-tab" class="mza-section-tab mza-section-tab--questions">Questions</a>
+    <a href="#reports" class="mza-section-tab mza-section-tab--reports">Reports</a>
+    <a href="#questions" class="mza-section-tab mza-section-tab--questions">Questions</a>
   </div>
 </div>
 
@@ -43,8 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (menuToggle && nav) {
     menuToggle.addEventListener('click', function() {
-      menuToggle.classList.toggle('is-open');
+      var isOpen = menuToggle.classList.toggle('is-open');
       nav.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
   }
 });
