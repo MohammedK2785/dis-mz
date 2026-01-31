@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ===================================
-   Mza3et Design Tokens (V3 - Soft UI + Glass)
+   Mza3et Design Tokens (V6 - Premium Platform)
    ================================== */
 :root {
   /* Brand colors - using CSS variables for easier theming */
@@ -15,8 +15,15 @@
   --mza-border: #e2e8f0;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.07);
+  --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.04); /* V6: ultra-soft card shadow */
   --mza-radius: 1rem; /* Updated to 1rem for rounded-2xl feel */
+  --mza-radius-3xl: 1.5rem; /* V6: rounded-3xl for post cards (24px) */
   --mza-text: var(--primary, #1e293b);
+  /* V6: Avatar ring token (light mode) */
+  --mza-avatar-ring: rgb(248 250 252 / 0.9);
+  /* V6: Glass background for action bar */
+  --mza-glass-bg: rgb(255 255 255 / 0.6);
+  --mza-glass-bg-solid: rgb(255 255 255 / 0.85);
 }
 
 /* Dark mode overrides */
@@ -26,6 +33,12 @@ html[data-theme="dark"] {
   --mza-border: #334155;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.3);
+  --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.15); /* V6: darker shadow for dark mode */
+  /* V6: Avatar ring token (dark mode) */
+  --mza-avatar-ring: rgb(51 65 85 / 0.9);
+  /* V6: Glass background (dark mode) */
+  --mza-glass-bg: rgb(30 41 59 / 0.6);
+  --mza-glass-bg-solid: rgb(30 41 59 / 0.85);
 }
 
 /* Mza3et Sky Blue Gradient Utility */
@@ -112,50 +125,55 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     V5 Premium Typography - .cooked content
-     Cairo-optimized, leading-loose for Arabic readability
+     V6 Premium Typography - .cooked content
+     Cairo-optimized, leading-loose (1.9-2.0) for Arabic readability
+     Strong heading weights with tracking-tight for modern feel
      ================================== */
   
   /* Post content typography - enhanced line-height for Arabic */
   .cooked {
-    line-height: 1.95; /* leading-loose for premium Arabic readability */
+    line-height: 2; /* V6: leading-loose ~2.0 for premium Arabic readability */
     
-    /* Paragraph spacing */
+    /* Paragraph spacing - comfortable for long reading */
     p {
-      margin-block-end: 1.25rem;
-      line-height: 1.95;
+      margin-block-end: 0.75rem; /* V6: paragraph spacing as specified */
+      line-height: 2;
     }
     
-    /* Heading hierarchy with tracking-tight and stronger weights */
+    /* Heading hierarchy with tracking-tight and strong weights */
     h1, h2, h3, h4, h5, h6 {
       letter-spacing: -0.025em; /* tracking-tight */
-      margin-block-start: 1.75rem;
-      margin-block-end: 0.875rem;
-      line-height: 1.35;
+      margin-block-start: 2rem;
+      margin-block-end: 1rem;
+      line-height: 1.3;
+      color: var(--primary);
     }
     
+    /* V6: h1/h2 get extrabold (800) for strong contrast */
     h1 {
-      font-weight: 800;
+      font-weight: 800; /* font-extrabold */
       font-size: 1.875rem; /* text-3xl */
+      letter-spacing: -0.03em; /* tighter tracking for large headings */
     }
     
     h2 {
-      font-weight: 700;
+      font-weight: 800; /* font-extrabold */
       font-size: 1.5rem; /* text-2xl */
+      letter-spacing: -0.03em;
     }
     
     h3 {
-      font-weight: 700;
+      font-weight: 700; /* font-bold */
       font-size: 1.25rem; /* text-xl */
     }
     
     h4 {
-      font-weight: 600;
+      font-weight: 700; /* font-bold */
       font-size: 1.125rem; /* text-lg */
     }
     
     h5, h6 {
-      font-weight: 600;
+      font-weight: 600; /* font-semibold */
       font-size: 1rem;
     }
     
@@ -163,10 +181,10 @@ html[data-theme="dark"] {
     ul, ol {
       margin-block: 1rem;
       padding-inline-start: 1.75rem;
-      line-height: 1.85;
+      line-height: 1.9; /* V6: comfortable list line-height */
       
       li {
-        margin-block-end: 0.625rem;
+        margin-block-end: 0.5rem;
       }
       
       /* Nested lists */
