@@ -8,13 +8,19 @@
 // Mza3et custom styles (migrated from legacy styles.scss)
 // TODO: Refine and organize these styles
 
-// Mza3et Theme Color Palette
-$mza-primary-red: #d32f2f;
+// Mza3et Theme Color Palette (Sky Blue Design Tokens)
+$mza-sky: #0ea5e9;
+$mza-sky-dark: #0369a1;
+$mza-sky-light: #7dd3fc;
+$mza-accent: #06b6d4;
+$mza-bg: #f8fafc;
+$mza-border: #e2e8f0;
+
+// Legacy accent colors for section tabs
 $mza-accent-green: #4caf50;
 $mza-accent-orange: #ff9800;
 $mza-accent-blue: #2196f3;
 $mza-accent-purple: #9c27b0;
-$mza-bg-light: #f5f5f5;
 
 // Typography
 $mza-font-size-nav: 0.9375rem; // 15px
@@ -24,7 +30,10 @@ $mza-mobile-breakpoint: 768px;
 
 // Arabic-friendly font stack
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 
 // ===================================
@@ -48,13 +57,15 @@ tr.topic-list-item {
   display: table;
   width: 100%;
   table-layout: fixed;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-  
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+
   &:hover {
     background: var(--primary-very-low);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgb(0, 0, 0, 0.08);
   }
-  
+
   // Comfortable spacing for better card feel
   td {
     padding-block: 0.875rem;
@@ -77,7 +88,7 @@ a.title {
   color: var(--primary);
   display: block;
   margin-block-end: 0.5rem;
-  
+
   &:hover {
     color: var(--tertiary);
   }
@@ -147,7 +158,7 @@ td.num {
   font-size: var(--font-down-1);
   color: var(--primary-medium);
   white-space: nowrap;
-  
+
   // Posts map button - using correct selector from allowlist
   button.btn-link.posts-map.badge-posts {
     font-weight: 600;
@@ -170,10 +181,10 @@ button.btn-link.posts-map.badge-posts.heatmap-low {
 // Activity cell
 td.num.topic-list-data.age.activity {
   font-size: var(--font-down-1);
-  
+
   a.post-activity {
     color: var(--primary-medium);
-    
+
     &:hover {
       color: var(--tertiary);
     }
@@ -185,7 +196,7 @@ div.topic-statuses {
   display: inline-flex;
   gap: 0.25rem;
   align-items: center;
-  
+
   svg.fa.d-icon {
     width: 0.875em;
     height: 0.875em;
@@ -209,14 +220,14 @@ div.discourse-tags {
   gap: 0.5rem;
   flex-wrap: wrap;
   align-items: center;
-  
+
   a.discourse-tag {
     font-size: var(--font-down-2);
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
     background: var(--primary-low);
     color: var(--primary-high);
-    
+
     &:hover {
       background: var(--primary-low-mid);
     }
@@ -230,17 +241,17 @@ div.discourse-tags {
     display: block;
     overflow-x: visible;
   }
-  
+
   tbody {
     display: block;
   }
-  
+
   // Stack topic rows
   tr.topic-list-item {
     display: block;
     margin-block-end: 1rem;
     border-radius: 12px;
-    
+
     td {
       display: block;
       padding-block: 0.5rem;
@@ -249,31 +260,31 @@ div.discourse-tags {
       width: 100% !important;
     }
   }
-  
+
   // Hide table header on mobile
   thead,
   tr.topic-list-header {
     display: none;
   }
-  
+
   // Main link takes full width
   td.main-link.clearfix.topic-list-data {
     padding-inline: 1rem;
   }
-  
+
   // Title sizing for mobile
   a.title {
     font-size: var(--font-0);
     margin-block-end: 0.75rem;
   }
-  
+
   // Stack meta info cleanly
   div.link-bottom-line {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   // Meta columns in horizontal layout on mobile
   td.num {
     display: inline-block;
@@ -282,18 +293,18 @@ div.discourse-tags {
     padding-block: 0.25rem;
     padding-inline: 0.5rem;
   }
-  
+
   // Hide bulk select on mobile to reduce clutter
   td.bulk-select.topic-list-data {
     display: none;
   }
-  
+
   // Excerpt on mobile
   div.topic-excerpt {
     padding-inline-start: 0.75rem;
     font-size: var(--font-down-2);
   }
-  
+
   // Tags on mobile
   div.discourse-tags {
     margin-block-start: 0.5rem;
@@ -301,50 +312,42 @@ div.discourse-tags {
 }
 
 // Extra small devices - ensure no horizontal scroll at 375px
-@media screen and (max-width: 375px) {
+@media screen and (width <= 375px) {
   tr.topic-list-item {
     td {
       padding-inline: 0.75rem;
     }
   }
-  
+
   td.main-link.clearfix.topic-list-data {
     padding-inline: 0.75rem;
   }
-  
+
   a.title {
     font-size: var(--font-down-1);
-    word-wrap: break-word;
     overflow-wrap: break-word;
   }
-  
+
   div.topic-excerpt {
     font-size: var(--font-down-3);
     padding-inline-start: 0.5rem;
   }
 }
 
-// Header styling
+// Header styling - now using sky blue gradient
 .d-header {
-  background-color: $mza-primary-red;
+  background: linear-gradient(to left, $mza-sky, $mza-sky-dark);
 }
 
 // ===================================
 // Custom Top Header Bar (.mza-topbar)
-// Slim red bar with minimal design
+// Slim sky blue gradient bar with minimal design
+// RTL-first and mobile-first
 // ===================================
 .mza-topbar {
-  background-color: $mza-primary-red;
+  // Gradient fallback for browsers without Tailwind
+  background: linear-gradient(to left, $mza-sky, $mza-sky-dark);
   color: white;
-  padding: 0.5rem 1rem;
-}
-
-.mza-topbar-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 // RTL-specific styles for topbar
@@ -352,49 +355,17 @@ html[dir="rtl"] .mza-topbar-inner {
   direction: rtl;
 }
 
-// Logo styling - smaller and cleaner
+// Logo styling - now handled mostly by Tailwind utilities
 .mza-logo {
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  
   a {
-    color: white;
-    text-decoration: none;
-    
     &:hover,
     &:focus {
-      color: white;
       text-decoration: none;
-      opacity: 0.9;
     }
   }
 }
 
-// Main navigation - simple text links
-.mza-main-nav {
-  display: flex;
-  gap: 1.25rem;
-  
-  a {
-    color: white;
-    text-decoration: none;
-    padding: 0.375rem 0;
-    display: inline-block;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.2s ease;
-    font-size: $mza-font-size-nav;
-    
-    &:hover,
-    &:focus {
-      color: white;
-      border-bottom-color: rgba(255, 255, 255, 0.8);
-    }
-  }
-}
-
-// RTL-specific styles for main nav
+// Main navigation - RTL support
 html[dir="rtl"] .mza-main-nav {
   direction: rtl;
 }
@@ -409,17 +380,17 @@ html[dir="rtl"] .mza-main-nav {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding: 0 1rem;
-  
+
   // Subtle scrollbar for mobile
   &::-webkit-scrollbar {
     height: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgb(0, 0, 0, 0.15);
     border-radius: 2px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
@@ -454,8 +425,10 @@ html[dir="rtl"] .mza-section-tabs-inner {
   white-space: nowrap;
   flex-shrink: 0;
   border-bottom: 3px solid transparent;
-  transition: border-bottom-color 0.2s ease, color 0.2s ease;
-  
+  transition:
+    border-bottom-color 0.2s ease,
+    color 0.2s ease;
+
   &:hover,
   &:focus {
     color: var(--primary);
@@ -496,34 +469,6 @@ html[dir="rtl"] .mza-section-tabs-inner {
 // Mobile Responsive Styles
 // ===================================
 @media (max-width: $mza-mobile-breakpoint) {
-  // Reduce header padding on mobile
-  .mza-topbar {
-    padding: 0.5rem 0.75rem;
-  }
-  
-  // Stack header items on smaller screens if needed
-  .mza-topbar-inner {
-    flex-direction: row;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-  
-  // Smaller logo on mobile
-  .mza-logo {
-    font-size: 0.9375rem;
-  }
-  
-  // Adjust navigation spacing on mobile
-  .mza-main-nav {
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    
-    a {
-      font-size: 0.875rem;
-      padding: 0.25rem 0;
-    }
-  }
-  
   // Mobile-specific tabs styling
   .mza-section-tabs {
     padding: 0 0.75rem;
@@ -531,12 +476,12 @@ html[dir="rtl"] .mza-section-tabs-inner {
     scroll-behavior: smooth;
     overscroll-behavior-x: contain;
   }
-  
+
   .mza-section-tabs-inner {
     max-width: none;
     margin: 0;
   }
-  
+
   .mza-section-tab {
     padding: 0.625rem 0.875rem;
     font-size: 0.875rem;
