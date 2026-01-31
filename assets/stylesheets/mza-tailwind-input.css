@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 /* Mza3et Sky Blue Gradient Utility */
+/* Note: "to left" direction is intentional for RTL-first design - 
+   gradient flows from light (RTL start/right) to dark (RTL end/left) */
 @layer utilities {
   .bg-mza-sky-gradient {
     background: linear-gradient(to left, theme('colors.mza-sky'), theme('colors.mza-sky-dark'));
