@@ -2,6 +2,8 @@
 $mza-primary-red: #d32f2f;
 $mza-accent-green: #4caf50;
 $mza-accent-orange: #ff9800;
+$mza-accent-blue: #2196f3;
+$mza-accent-purple: #9c27b0;
 $mza-bg-light: #f5f5f5;
 
 // Arabic-friendly font stack
@@ -179,11 +181,11 @@ body {
 }
 
 .mza-section-tab--reports {
-  background-color: #2196f3; // Blue
+  background-color: $mza-accent-blue;
 }
 
 .mza-section-tab--questions {
-  background-color: #9c27b0; // Purple
+  background-color: $mza-accent-purple;
 }
 
 // ===================================
