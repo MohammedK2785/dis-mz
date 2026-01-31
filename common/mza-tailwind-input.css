@@ -2165,24 +2165,19 @@ body[class*="category-عروض"],
         font-size: 0.75rem;
       }
     }
-  }
-  
-  /* Ensure long numbers/links wrap safely */
-  body[class*="category-offers"],
-  body[class*="category-عروض"],
-  .category-offers,
-  .category-عروض {
-    table.topic-list a.title,
-    table.topic-list .topic-excerpt,
-    table.topic-list .badge-category,
-    table.topic-list .discourse-tag {
+    
+    /* Ensure long numbers/links wrap safely - inside topic-list */
+    a.title,
+    .topic-excerpt,
+    .badge-category,
+    .discourse-tag {
       overflow-wrap: anywhere;
       word-break: break-word;
     }
     
-    /* CTA/button alignment */
-    .topic-list-item .btn,
-    .topic-list-item button {
+    /* CTA/button alignment - inside topic-list */
+    tr.topic-list-item .btn,
+    tr.topic-list-item button {
       min-height: 44px;
       width: 100%;
       justify-content: center;
