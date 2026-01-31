@@ -391,22 +391,45 @@ html[dir="rtl"] .mza-main-nav {
 }
 
 // ===================================
-// Section Tabs
+// Section Tabs - Full-width bar under header
 // ===================================
 .mza-section-tabs {
-  padding: 1rem 1.5rem;
+  width: 100%;
   background-color: $mza-bg-light;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  
+  // Prevent horizontal scroll on the page
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+// Inner container for tabs with RTL support
+.mza-section-tabs-inner {
   display: flex;
   gap: 0.75rem;
   flex-wrap: nowrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 // RTL-specific styles for section tabs
 html[dir="rtl"] .mza-section-tabs {
+  direction: rtl;
+}
+
+html[dir="rtl"] .mza-section-tabs-inner {
   direction: rtl;
   justify-content: flex-start;
 }
@@ -420,6 +443,7 @@ html[dir="rtl"] .mza-section-tabs {
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: opacity 0.2s ease, transform 0.1s ease;
   
   &:hover,
@@ -472,5 +496,29 @@ html[dir="rtl"] .mza-section-tabs {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+  }
+  
+  // Mobile-specific tabs styling
+  .mza-section-tabs {
+    padding: 0.75rem 1rem;
+    // Enable horizontal scroll, prevent page overflow
+    overflow-x: auto;
+    overflow-y: hidden;
+    // Ensure smooth scrolling
+    scroll-behavior: smooth;
+    // Prevent pull-to-refresh on mobile
+    overscroll-behavior-x: contain;
+  }
+  
+  .mza-section-tabs-inner {
+    // No max-width constraint on mobile
+    max-width: none;
+    margin: 0;
+  }
+  
+  .mza-section-tab {
+    // Slightly smaller padding on mobile
+    padding: 0.5rem 1rem;
+    font-size: var(--font-down-1);
   }
 }
