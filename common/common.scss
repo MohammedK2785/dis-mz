@@ -92,7 +92,7 @@ tr.topic-list-item {
 
   &:hover {
     background: var(--primary-very-low);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
     border-color: var(--primary-low-mid);
   }
 
@@ -213,7 +213,9 @@ td.num {
   button.btn-link.posts-map.badge-posts {
     font-weight: 600;
     color: var(--primary);
-    transition: color 0.15s ease, transform 0.1s ease;
+    transition:
+      color 0.15s ease,
+      transform 0.1s ease;
 
     &:hover {
       color: var(--tertiary);
@@ -266,7 +268,7 @@ td.num.topic-list-data.age.activity {
 // Views column
 td.num.views.topic-list-data {
   color: var(--primary-medium);
-  
+
   span.number {
     font-variant-numeric: tabular-nums;
   }
@@ -337,7 +339,9 @@ div.discourse-tags {
     background: var(--primary-low);
     color: var(--primary-high);
     font-weight: 500;
-    transition: background-color 0.15s ease, transform 0.1s ease;
+    transition:
+      background-color 0.15s ease,
+      transform 0.1s ease;
     text-decoration: none;
 
     &:hover {
@@ -449,6 +453,201 @@ div.discourse-tags {
   div.topic-excerpt {
     font-size: var(--font-down-3);
     padding-inline-start: 0.5rem;
+  }
+}
+
+// ===================================
+// Topic Page Polish (Sprint V2)
+// Enhanced reading experience with RTL support
+// ===================================
+
+// Post stream - improved separators
+.topic-body {
+  .cooked {
+    // Headings in posts
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-block-start: 1.5rem;
+      margin-block-end: 1rem;
+      line-height: 1.4;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    h1 {
+      font-size: var(--font-up-3);
+    }
+
+    h2 {
+      font-size: var(--font-up-2);
+    }
+
+    h3 {
+      font-size: var(--font-up-1);
+    }
+
+    h4 {
+      font-size: var(--font-0);
+    }
+
+    // Paragraphs
+    p {
+      margin-block-end: 1rem;
+      line-height: 1.75;
+    }
+
+    // Lists
+    ul,
+    ol {
+      margin-block-start: 0.5rem;
+      margin-block-end: 1rem;
+      padding-inline-start: 2rem;
+      line-height: 1.7;
+
+      li {
+        margin-block-end: 0.5rem;
+      }
+    }
+
+    // Horizontal rules
+    hr {
+      border: none;
+      border-top: 2px solid var(--primary-low);
+      margin-block: 2rem;
+    }
+
+    // Images
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-block: 1rem;
+    }
+  }
+}
+
+// Post actions - better spacing
+.post-controls {
+  margin-block-start: 1rem;
+  padding-block-start: 0.75rem;
+  border-top: 1px solid var(--primary-very-low);
+
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    button {
+      @apply inline-flex items-center gap-1;
+      padding: 0.375rem 0.75rem;
+      border-radius: 4px;
+      font-size: var(--font-down-1);
+      color: var(--primary-medium);
+      background-color: transparent;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background-color: var(--primary-low);
+        color: var(--primary);
+        border-color: var(--primary-low-mid);
+      }
+
+      &.liked,
+      &.toggled {
+        color: var(--love);
+        background-color: var(--love-low);
+      }
+    }
+  }
+}
+
+// Reply line (nested posts)
+.embedded-posts {
+  margin-block-start: 1rem;
+  margin-inline-start: 2rem;
+  padding-inline-start: 1rem;
+  border-inline-start: 2px solid var(--primary-low);
+
+  .topic-body {
+    background-color: var(--primary-very-low);
+    padding: 1rem;
+    border-radius: 6px;
+  }
+}
+
+// Composer enhancements
+#reply-control {
+  .d-editor-container {
+    border: 1px solid var(--primary-low-mid);
+    border-radius: 6px;
+
+    .d-editor-textarea-wrapper {
+      textarea {
+        padding: 1rem;
+        font-size: var(--font-0);
+        line-height: 1.7;
+      }
+    }
+  }
+
+  .d-editor-button-bar {
+    padding: 0.5rem;
+    background-color: var(--primary-very-low);
+    border-bottom: 1px solid var(--primary-low);
+
+    button {
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: var(--primary-low);
+      }
+    }
+  }
+
+  .submit-panel {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--primary-low);
+
+    .btn-primary {
+      padding: 0.625rem 1.5rem;
+      font-weight: 600;
+    }
+  }
+}
+
+// Mobile adjustments for topic page
+@media screen and (max-width: $mza-mobile-breakpoint) {
+  .embedded-posts {
+    margin-inline-start: 1rem;
+    padding-inline-start: 0.75rem;
+  }
+
+  .topic-body .cooked {
+    font-size: var(--font-down-1);
+
+    h1 {
+      font-size: var(--font-up-2);
+    }
+
+    h2 {
+      font-size: var(--font-up-1);
+    }
+
+    h3 {
+      font-size: var(--font-0);
+    }
+
+    ul,
+    ol {
+      padding-inline-start: 1.5rem;
+    }
   }
 }
 
