@@ -31,9 +31,9 @@ $mza-border: #e2e8f0;
   --mza-radius: 1rem;
   --mza-radius-3xl: 1.5rem;
   --mza-text: var(--primary);
-  --mza-avatar-ring: rgb(248 250 252 / 0.9);
-  --mza-glass-bg: rgb(255 255 255 / 0.6);
-  --mza-glass-bg-solid: rgb(255 255 255 / 0.85);
+  --mza-avatar-ring: #f1f5f9;
+  --mza-glass-bg: rgb(255 255 255 / 0.75);
+  --mza-glass-bg-solid: rgb(255 255 255 / 0.92);
 }
 
 // Dark mode overrides
@@ -44,9 +44,9 @@ html[data-theme="dark"] {
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.3);
   --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.15);
-  --mza-avatar-ring: rgb(51 65 85 / 0.9);
-  --mza-glass-bg: rgb(30 41 59 / 0.6);
-  --mza-glass-bg-solid: rgb(30 41 59 / 0.85);
+  --mza-avatar-ring: #475569;
+  --mza-glass-bg: rgb(30 41 59 / 0.75);
+  --mza-glass-bg-solid: rgb(30 41 59 / 0.92);
 }
 
 // Page background - slate-like surface for modern look (non-admin pages only)
@@ -832,6 +832,7 @@ div.discourse-tags {
 // ===================================
 // Floating Action Bar (V6 Premium)
 // Glass pill at the bottom of each post with hover/focus visibility
+// Higher default opacity (0.8) for accessibility - WCAG contrast
 // ===================================
 .topic-post .post-controls {
   margin-block-start: 1.25rem;
@@ -841,7 +842,7 @@ div.discourse-tags {
   border-radius: 9999px;
   border: 1px solid var(--mza-border);
   box-shadow: var(--mza-shadow-sm);
-  opacity: 0.65;
+  opacity: 0.8;
   transition:
     opacity 0.2s ease,
     background 0.2s ease,
@@ -851,7 +852,6 @@ div.discourse-tags {
   display: inline-flex;
   align-items: center;
 
-  // Full visibility on hover/focus-within
   &:hover,
   &:focus-within {
     opacity: 1;
@@ -876,26 +876,12 @@ div.discourse-tags {
       background-color: transparent;
       border: none;
       transition:
-        transform 0.15s ease,
         color 0.15s ease,
         background-color 0.15s ease;
 
       &:hover {
         background-color: var(--primary-low);
         color: var(--primary);
-        transform: scale(1.08);
-
-        .d-icon {
-          transform: scale(1.1);
-        }
-      }
-
-      &:active {
-        transform: scale(1.02);
-      }
-
-      .d-icon {
-        transition: transform 0.15s ease;
       }
 
       &.liked,
@@ -903,13 +889,39 @@ div.discourse-tags {
         color: var(--love);
         background-color: color-mix(in srgb, var(--love) 10%, transparent);
       }
+
+      .d-icon {
+        transition: transform 0.15s ease;
+      }
+    }
+  }
+}
+
+// Scale effects only for users who haven't opted out of motion
+@media (prefers-reduced-motion: no-preference) {
+  .topic-post .post-controls .actions button {
+    transition:
+      transform 0.15s ease,
+      color 0.15s ease,
+      background-color 0.15s ease;
+
+    &:hover {
+      transform: scale(1.08);
+
+      .d-icon {
+        transform: scale(1.1);
+      }
+    }
+
+    &:active {
+      transform: scale(1.02);
     }
   }
 }
 
 @media screen and (max-width: $mza-mobile-breakpoint) {
   .topic-post .post-controls {
-    opacity: 0.85;
+    opacity: 0.9;
     margin-inline: 0.5rem;
     padding: 0.375rem 0.75rem;
   }
@@ -917,7 +929,7 @@ div.discourse-tags {
 
 @media (hover: none) {
   .topic-post .post-controls {
-    opacity: 0.9;
+    opacity: 0.95;
     background: var(--mza-glass-bg-solid);
   }
 }
