@@ -98,6 +98,190 @@
    Component Layer - Reusable Components
    ================================== */
 @layer components {
+  /* ===================================
+     Topic Page Components
+     ================================== */
+  
+  /* Post stream container improvements */
+  .topic-post {
+    @apply mb-4;
+    border-bottom: 1px solid var(--primary-low);
+    transition: background-color 0.2s ease;
+  }
+
+  .topic-post:hover {
+    background-color: var(--primary-very-low);
+  }
+
+  /* Post body - improved typography for reading */
+  .topic-body {
+    line-height: 1.7;
+  }
+
+  .topic-body .cooked {
+    font-size: var(--font-0);
+    line-height: 1.75;
+    color: var(--primary);
+  }
+
+  /* Enhanced link styles in posts */
+  .topic-body .cooked a {
+    color: var(--tertiary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+
+  .topic-body .cooked a:hover {
+    color: var(--tertiary-hover);
+    text-decoration-thickness: 2px;
+  }
+
+  /* Quote styling in posts */
+  .topic-body .cooked blockquote,
+  .topic-body .cooked aside.quote {
+    border-inline-start: 3px solid var(--primary-low-mid);
+    padding-inline-start: 1rem;
+    padding-block: 0.5rem;
+    margin-block: 1rem;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    background-color: var(--primary-very-low);
+    border-radius: 4px;
+    color: var(--primary-high);
+  }
+
+  /* Code block styling */
+  .topic-body .cooked pre,
+  .topic-body .cooked code {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    border-radius: 4px;
+  }
+
+  .topic-body .cooked pre {
+    @apply p-4 mb-4;
+    background-color: var(--primary-very-low);
+    border: 1px solid var(--primary-low);
+    overflow-x: auto;
+    font-size: var(--font-down-1);
+    line-height: 1.6;
+  }
+
+  .topic-body .cooked code:not(pre code) {
+    @apply px-1 py-0.5;
+    background-color: var(--primary-low);
+    color: var(--primary);
+    font-size: var(--font-down-1);
+  }
+
+  /* Table styling in posts */
+  .topic-body .cooked table {
+    @apply w-full mb-4;
+    border-collapse: collapse;
+    border: 1px solid var(--primary-low);
+  }
+
+  .topic-body .cooked table th,
+  .topic-body .cooked table td {
+    padding: 0.75rem;
+    border: 1px solid var(--primary-low);
+    text-align: start;
+  }
+
+  .topic-body .cooked table th {
+    background-color: var(--primary-very-low);
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .topic-body .cooked table tbody tr:hover {
+    background-color: var(--primary-very-low);
+  }
+
+  /* Post avatar and meta section */
+  .topic-avatar {
+    margin-inline-end: 1rem;
+  }
+
+  .topic-meta-data {
+    @apply flex flex-col gap-1;
+  }
+
+  .topic-meta-data .username {
+    font-weight: 600;
+    font-size: var(--font-0);
+    color: var(--primary);
+  }
+
+  .topic-meta-data .post-date {
+    font-size: var(--font-down-1);
+    color: var(--primary-medium);
+  }
+
+  /* Post action buttons */
+  .post-actions {
+    @apply flex gap-2 items-center;
+    margin-block-start: 1rem;
+  }
+
+  .post-actions button {
+    @apply inline-flex items-center gap-1;
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
+    font-size: var(--font-down-1);
+    color: var(--primary-medium);
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .post-actions button:hover {
+    background-color: var(--primary-low);
+    color: var(--primary);
+    border-color: var(--primary-low-mid);
+  }
+
+  /* Composer improvements */
+  .composer-popup {
+    border: 1px solid var(--primary-low);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .composer-fields {
+    @apply p-4;
+  }
+
+  .composer-fields input[type="text"],
+  .composer-fields textarea {
+    border: 1px solid var(--primary-low-mid);
+    border-radius: 6px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .composer-fields input[type="text"]:focus,
+  .composer-fields textarea:focus {
+    border-color: var(--tertiary);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.08);
+    outline: none;
+  }
+
+  .composer-action-buttons {
+    @apply flex gap-2;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--primary-low);
+  }
+
+  .composer-action-buttons .btn {
+    @apply px-4 py-2;
+    font-weight: 500;
+  }
+
+  /* ===================================
+     Header Components
+     ================================== */
+  
   /* Custom Top Header Bar */
   .mza-topbar {
     @apply text-white;
