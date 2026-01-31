@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Mza3et Sky Blue Gradient Utility */
+@layer utilities {
+  .bg-mza-sky-gradient {
+    background: linear-gradient(to left, theme('colors.mza-sky'), theme('colors.mza-sky-dark'));
+  }
+}
