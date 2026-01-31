@@ -339,35 +339,3 @@ div.discourse-tags {
 .d-header {
   background: transparent;
 }
-
-// ===================================
-// Custom Top Header Bar (.mza-topbar)
-// Core styles are in Tailwind layers (mza-tailwind-input.css)
-// Below: Gradient fallback and RTL-specific overrides
-// ===================================
-.mza-topbar {
-  // Gradient fallback for browsers without Tailwind
-  background: linear-gradient(to left, $mza-sky, $mza-sky-dark);
-}
-
-// RTL-specific styles for topbar
-html[dir="rtl"] .mza-topbar-inner {
-  direction: rtl;
-}
-
-// RTL-specific styles for main navigation
-html[dir="rtl"] .mza-main-nav {
-  direction: rtl;
-}
-
-// ===================================
-// Section Tabs - RTL overrides
-// Core styles are in Tailwind layers (mza-tailwind-input.css)
-// ===================================
-html[dir="rtl"] .mza-section-tabs {
-  direction: rtl;
-}
-
-html[dir="rtl"] .mza-section-tabs-inner {
-  justify-content: flex-start;
-}
