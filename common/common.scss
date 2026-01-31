@@ -69,7 +69,7 @@ $mza-mobile-breakpoint: 768px;
 
 // Main topic list container
 table.topic-list {
-  border-spacing: 0 0.75rem; // Increased spacing between rows for breathing room
+  border-spacing: 0 0.75rem; // Increased spacing from 0.5rem to 0.75rem for breathing room
   margin-block-end: 1.5rem;
   table-layout: fixed;
   width: 100%;

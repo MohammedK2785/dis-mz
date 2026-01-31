@@ -707,7 +707,7 @@ textarea {
   font-weight: 600;
 }
 
-/* Nav Pills - Soft UI V3: Fully rounded pills with pastel backgrounds */
+/* Nav Pills - Soft UI V3: Fully rounded pills with subtle backgrounds */
 .nav-pills {
   @apply flex mb-4;
   gap: 0.5rem;
@@ -720,7 +720,7 @@ textarea {
   color: var(--mza-text);
   text-decoration: none;
   font-weight: 500;
-  background-color: var(--mza-surface-2); /* Subtle pastel background */
+  background-color: var(--mza-surface-2); /* Subtle light neutral background */
   border: 1px solid var(--mza-border);
   box-shadow: var(--mza-shadow-sm);
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
