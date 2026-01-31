@@ -27,6 +27,29 @@ This theme is structured according to the official Discourse theme skeleton:
 - `settings.yml` - Theme settings
 - `about.json` - Theme metadata
 
+### How to Build Tailwind
+
+This theme uses Tailwind CSS for utility classes. Tailwind is compiled at build time (locally or in CI), not on the Discourse server.
+
+**Prerequisites:**
+- Node.js >= 22
+- pnpm >= 10
+
+**Build steps:**
+
+```bash
+# Install dependencies
+pnpm install
+
+# Build Tailwind CSS (one-time build)
+pnpm build:css
+
+# Watch for changes during development
+pnpm watch:css
+```
+
+The compiled output (`common/mza-tailwind.scss`) must be committed to the repository. CI will fail if the generated file is outdated.
+
 ### Documentation
 
 See the `docs/` folder for additional documentation:
