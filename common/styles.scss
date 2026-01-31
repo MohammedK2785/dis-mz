@@ -32,9 +32,13 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  direction: rtl;
   align-items: center;
   justify-content: space-between;
+}
+
+// RTL-specific styles for topbar
+html[dir="rtl"] .mza-topbar__container {
+  direction: rtl;
 }
 
 // Logo styling
@@ -65,8 +69,12 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  direction: rtl;
   gap: 1.5rem;
+}
+
+// RTL-specific styles for nav list
+html[dir="rtl"] .mza-nav-list {
+  direction: rtl;
 }
 
 .mza-nav-item {
@@ -116,7 +124,7 @@ body {
   &::after {
     content: '';
     position: absolute;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: 2px;
     background-color: white;
@@ -145,9 +153,14 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  direction: rtl;
   gap: 0.75rem;
   flex-wrap: nowrap;
+}
+
+// RTL-specific styles for section tabs
+html[dir="rtl"] .mza-section-tabs__container {
+  direction: rtl;
+  justify-content: flex-start;
 }
 
 .mza-section-tab {
@@ -215,6 +228,11 @@ body {
     &.is-open {
       display: block;
     }
+  }
+  
+  // RTL-specific styles for mobile nav
+  html[dir="rtl"] .mza-topbar__nav.is-open {
+    text-align: right;
   }
   
   // Make nav list vertical on mobile
