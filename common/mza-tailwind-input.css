@@ -860,3 +860,50 @@ html[dir="rtl"] .sidebar-wrapper {
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
+
+/* ===================================
+   Topic List Layout Fix (Outside @layer)
+   Prevents posters column from expanding and fixes blank gap
+   ================================== */
+
+/* Fixed table layout to control column widths */
+.topic-list {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* Fixed width for posters/avatars column */
+.topic-list th.posters,
+.topic-list td.posters {
+  width: 7.5rem;
+  white-space: nowrap;
+}
+
+/* Poster links should be inline-flex to stay compact */
+.topic-list td.posters a {
+  display: inline-flex;
+}
+
+/* Fixed widths for numeric columns (replies, views, activity) */
+.topic-list th.num,
+.topic-list td.num,
+.topic-list th.activity,
+.topic-list td.activity {
+  width: 4.5rem;
+  white-space: nowrap;
+}
+
+/* Topic title truncation for fixed layout */
+.topic-list .main-link .title,
+.topic-list .main-link .link-top-line a.title {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Allow main-link column to take remaining space */
+.topic-list th.main-link,
+.topic-list td.main-link {
+  overflow: hidden;
+}
