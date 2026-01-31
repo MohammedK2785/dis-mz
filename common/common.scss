@@ -38,7 +38,7 @@ body {
 }
 
 // ===================================
-// Topic List Polish (T3)
+// Topic List Polish (T3 + Sprint V2)
 // Card-like appearance with RTL support
 // Mobile-first design with no horizontal scroll at 375px
 // ===================================
@@ -49,7 +49,34 @@ table.topic-list {
   margin-block-end: 1.5rem;
 }
 
-// Topic row - subtle card-like appearance
+// Table header row - improved readability
+tr.topic-list-header {
+  th {
+    padding-block: 0.75rem;
+    padding-inline: 1rem;
+    font-size: var(--font-down-1);
+    font-weight: 600;
+    color: var(--primary-high);
+    text-align: start;
+    border-bottom: 2px solid var(--primary-low);
+  }
+
+  th.num {
+    text-align: center;
+  }
+
+  // Sortable headers
+  th.sortable {
+    cursor: pointer;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+// Topic row - enhanced card-like appearance
 tr.topic-list-item {
   border: 1px solid var(--primary-low);
   border-radius: 8px;
@@ -60,28 +87,31 @@ tr.topic-list-item {
   table-layout: fixed;
   transition:
     background 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover {
     background: var(--primary-very-low);
-    box-shadow: 0 2px 8px rgb(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary-low-mid);
   }
 
   // Comfortable spacing for better card feel
   td {
-    padding-block: 0.875rem;
-    padding-inline: 0.75rem;
+    padding-block: 1rem;
+    padding-inline: 0.875rem;
     border: none;
+    vertical-align: middle;
   }
 }
 
 // Main content cell - better spacing
 td.main-link.clearfix.topic-list-data {
-  padding-inline-start: 1rem;
-  padding-inline-end: 1rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
 }
 
-// Topic title - clear hierarchy for Arabic readability
+// Topic title - enhanced hierarchy for Arabic readability
 a.title {
   font-size: var(--font-up-1);
   font-weight: 600;
@@ -89,9 +119,17 @@ a.title {
   color: var(--primary);
   display: block;
   margin-block-end: 0.5rem;
+  transition: color 0.15s ease;
 
   &:hover {
     color: var(--tertiary);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
@@ -111,41 +149,50 @@ div.topic-details {
 div.link-top-line {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
-// Bottom line (category, tags, metadata) - better spacing
+// Bottom line (category, tags, metadata) - enhanced spacing
 div.link-bottom-line {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.875rem;
   flex-wrap: wrap;
   font-size: var(--font-down-1);
   color: var(--primary-medium);
 }
 
-// Category badge styling
+// Category badge styling - enhanced
 a.badge-wrapper {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.375rem;
   padding-inline-end: 0.5rem;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 span.badge-category {
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--font-down-1);
 }
 
-// Topic excerpt - improved spacing
+// Topic excerpt - enhanced spacing and styling
 div.topic-excerpt {
-  margin-block-start: 0.5rem;
+  margin-block-start: 0.625rem;
   padding-inline-start: 1rem;
+  padding-inline-end: 0.5rem;
+  padding-block: 0.5rem;
   color: var(--primary-medium);
   font-size: var(--font-down-1);
-  line-height: 1.6;
-  border-inline-start: 2px solid var(--primary-low);
+  line-height: 1.65;
+  border-inline-start: 3px solid var(--primary-low-mid);
+  background-color: var(--primary-very-low);
+  border-radius: 4px;
 }
 
 // RTL excerpt alignment
@@ -153,69 +200,130 @@ html[dir="rtl"] div.topic-excerpt {
   text-align: start;
 }
 
-// Meta columns (posts, views, activity)
+// Meta columns (posts, views, activity) - enhanced readability
 td.num {
   text-align: center;
   font-size: var(--font-down-1);
   color: var(--primary-medium);
   white-space: nowrap;
+  min-width: 3.5rem;
+  padding-inline: 0.75rem;
 
   // Posts map button - using correct selector from allowlist
   button.btn-link.posts-map.badge-posts {
     font-weight: 600;
+    color: var(--primary);
+    transition: color 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      color: var(--tertiary);
+      transform: scale(1.05);
+    }
+  }
+
+  // Number display
+  span.number {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
   }
 }
 
-// Heatmap styling - using correct selectors from allowlist
+// Heatmap styling - enhanced with better colors
 button.btn-link.posts-map.badge-posts.heatmap-high {
   color: var(--danger);
+  font-weight: 700;
 }
 
 button.btn-link.posts-map.badge-posts.heatmap-med {
   color: var(--tertiary);
+  font-weight: 600;
 }
 
 button.btn-link.posts-map.badge-posts.heatmap-low {
   color: var(--primary-medium);
+  font-weight: 500;
 }
 
-// Activity cell
+// Activity cell - enhanced
 td.num.topic-list-data.age.activity {
   font-size: var(--font-down-1);
 
   a.post-activity {
     color: var(--primary-medium);
+    transition: color 0.15s ease;
 
     &:hover {
       color: var(--tertiary);
+      text-decoration: none;
     }
   }
-}
 
-// Topic status icons - compact display
-div.topic-statuses {
-  display: inline-flex;
-  gap: 0.25rem;
-  align-items: center;
-
-  svg.fa.d-icon {
-    width: 0.875em;
-    height: 0.875em;
+  span.relative-date {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-// Pinned topics highlight with border accent
+// Views column
+td.num.views.topic-list-data {
+  color: var(--primary-medium);
+  
+  span.number {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// Topic status icons - enhanced display
+div.topic-statuses {
+  display: inline-flex;
+  gap: 0.375rem;
+  align-items: center;
+  margin-inline-end: 0.5rem;
+
+  svg.fa.d-icon {
+    width: 1em;
+    height: 1em;
+    transition: transform 0.15s ease;
+  }
+
+  // Icon color enhancements
+  svg.fa.d-icon.d-icon-thumbtack {
+    color: var(--tertiary);
+  }
+
+  svg.fa.d-icon.d-icon-lock {
+    color: var(--primary-medium);
+  }
+}
+
+// Pinned topics highlight with enhanced border accent
 tr.topic-list-item.pinned,
 tr.topic-list-item.globally-pinned {
-  border-inline-start: 3px solid var(--tertiary);
+  border-inline-start: 4px solid var(--tertiary);
+  background: linear-gradient(
+    to right,
+    var(--tertiary-very-low),
+    var(--secondary)
+  );
+
+  &:hover {
+    background: linear-gradient(
+      to right,
+      var(--tertiary-low),
+      var(--primary-very-low)
+    );
+  }
 }
 
-// Closed topics styling
+// Closed topics styling - more subtle
 tr.topic-list-item.closed {
-  opacity: 0.7;
+  opacity: 0.65;
+
+  a.title {
+    color: var(--primary-medium);
+  }
 }
 
-// Tags styling - clean pill design
+// Tags styling - enhanced pill design
 div.discourse-tags {
   display: inline-flex;
   gap: 0.5rem;
@@ -224,13 +332,22 @@ div.discourse-tags {
 
   a.discourse-tag {
     font-size: var(--font-down-2);
-    padding: 0.25rem 0.5rem;
-    border-radius: 3px;
+    padding: 0.25rem 0.625rem;
+    border-radius: 4px;
     background: var(--primary-low);
     color: var(--primary-high);
+    font-weight: 500;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+    text-decoration: none;
 
     &:hover {
       background: var(--primary-low-mid);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 }
