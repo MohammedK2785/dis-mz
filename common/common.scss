@@ -90,6 +90,37 @@ table.topic-list {
     white-space: nowrap;
   }
 
+  // V7: Avatar stack styling for posters column
+  td.posters {
+    a {
+      display: inline-flex;
+      margin-inline-end: -0.5rem; // V7: Overlap avatars (RTL-safe)
+      position: relative;
+
+      &:hover {
+        z-index: 2; // Bring hovered avatar forward
+      }
+    }
+
+    // V7: Avatar ring styling for modern overlap look
+    img.avatar {
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--mza-avatar-ring); // ring-2 ring-white equivalent
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    a:hover img.avatar {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 2px var(--mza-avatar-ring), 0 2px 4px rgb(0 0 0 / 0.1);
+      z-index: 10;
+    }
+
+    // Reset margin on last avatar link to prevent overflow
+    a:last-child {
+      margin-inline-end: 0;
+    }
+  }
+
   th.num,
   td.num {
     width: 4.5rem;
@@ -259,7 +290,7 @@ span.badge-category {
 }
 
 // Topic excerpt - enhanced spacing and styling
-// Sprint V3: text-sm, muted color, leading-relaxed for readability
+// Sprint V7: single-line clamp, text-sm, muted color
 div.topic-excerpt {
   margin-block-start: 0.625rem;
   padding-inline-start: 1rem;
@@ -267,10 +298,16 @@ div.topic-excerpt {
   padding-block: 0.5rem;
   color: var(--primary-medium);
   font-size: var(--font-down-1); // text-sm
-  line-height: 1.75; // leading-relaxed (changed from 1.65)
+  line-height: 1.5;
   border-inline-start: 3px solid var(--primary-low-mid);
   background-color: var(--primary-very-low);
   border-radius: 4px;
+
+  // V7: Single-line clamp for clean appearance
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 // RTL excerpt alignment
@@ -278,19 +315,21 @@ html[dir="rtl"] div.topic-excerpt {
   text-align: start;
 }
 
-// Meta columns (posts, views, activity) - enhanced readability
+// Meta columns (posts, views, activity) - V7 minimal visual weight
+// Smaller font, muted colors, no loud backgrounds
 td.num {
   text-align: center;
-  font-size: var(--font-down-1);
+  font-size: var(--font-down-2); // V7: smaller font for minimal visual weight
   color: var(--primary-medium);
   white-space: nowrap;
   min-width: 3.5rem;
   padding-inline: 0.75rem;
+  background: transparent; // V7: remove any background shading
 
   // Posts map button - using correct selector from allowlist
   button.btn-link.posts-map.badge-posts {
-    font-weight: 600;
-    color: var(--primary);
+    font-weight: 500; // V7: reduced from 600 for subtler look
+    color: var(--primary-medium); // V7: muted color
     transition:
       color 0.15s ease,
       transform 0.1s ease;
@@ -303,30 +342,31 @@ td.num {
 
   // Number display
   span.number {
-    font-weight: 500;
+    font-weight: 400; // V7: lighter weight for minimal stats
     font-variant-numeric: tabular-nums;
+    color: var(--primary-medium);
   }
 }
 
-// Heatmap styling - enhanced with better colors
+// Heatmap styling - V7: more subtle colors
 button.btn-link.posts-map.badge-posts.heatmap-high {
   color: var(--danger);
-  font-weight: 700;
+  font-weight: 600; // V7: reduced from 700
 }
 
 button.btn-link.posts-map.badge-posts.heatmap-med {
   color: var(--tertiary);
-  font-weight: 600;
+  font-weight: 500; // V7: reduced from 600
 }
 
 button.btn-link.posts-map.badge-posts.heatmap-low {
   color: var(--primary-medium);
-  font-weight: 500;
+  font-weight: 400; // V7: reduced from 500
 }
 
-// Activity cell - enhanced
+// Activity cell - V7: minimal styling
 td.num.topic-list-data.age.activity {
-  font-size: var(--font-down-1);
+  font-size: var(--font-down-2); // V7: smaller font
 
   a.post-activity {
     color: var(--primary-medium);
@@ -343,12 +383,24 @@ td.num.topic-list-data.age.activity {
   }
 }
 
-// Views column
+// Views column - V7: minimal styling
 td.num.views.topic-list-data {
   color: var(--primary-medium);
+  font-size: var(--font-down-2); // V7: smaller font
 
   span.number {
     font-variant-numeric: tabular-nums;
+    font-weight: 400; // V7: lighter weight
+  }
+}
+
+// Table header for stats columns - V7: minimal styling
+tr.topic-list-header {
+  th.num,
+  th.activity {
+    font-size: var(--font-down-2); // V7: smaller font for minimal headers
+    color: var(--primary-low-mid); // V7: even more muted
+    background: transparent; // V7: no background shading
   }
 }
 
@@ -375,51 +427,36 @@ div.topic-statuses {
   }
 }
 
-// Pinned topics highlight with enhanced border accent (cell-based card)
-// Note: Gradient flows from accent color on inline-start to neutral on inline-end
+// Pinned topics highlight with subtle amber stripe (V7 - Smart Row Cards)
+// Removed full-row tinted gradient, replaced with warm border-inline-start
+// Uses RTL-safe logical properties
 tr.topic-list-item.pinned,
 tr.topic-list-item.globally-pinned {
   td {
-    // LTR: gradient flows left (accent) to right (neutral)
-    background: linear-gradient(
-      to right,
-      var(--tertiary-very-low),
-      var(--secondary)
-    );
+    // V7: Remove gradient background, keep surface color for card consistency
+    background: var(--mza-surface);
   }
 
-  // First cell gets the accent border on pinned topics
+  // V7: Subtle warm amber stripe on inline-start side (RTL-safe)
   td:first-child {
-    border-inline-start: 4px solid var(--tertiary);
+    border-inline-start: 4px solid #f59e0b; // amber-500 for warm indicator
   }
 
   &:hover td {
-    background: linear-gradient(
-      to right,
-      var(--tertiary-low),
-      var(--primary-very-low)
-    );
+    background: var(--mza-surface-2);
   }
 }
 
-// RTL override for pinned topics gradient
+// RTL override for pinned topics (gradient removed, border handled by logical properties)
 html[dir="rtl"] tr.topic-list-item.pinned,
 html[dir="rtl"] tr.topic-list-item.globally-pinned {
   td {
-    // RTL: gradient flows right (accent) to left (neutral)
-    background: linear-gradient(
-      to left,
-      var(--tertiary-very-low),
-      var(--secondary)
-    );
+    // V7: Same surface background for RTL
+    background: var(--mza-surface);
   }
 
   &:hover td {
-    background: linear-gradient(
-      to left,
-      var(--tertiary-low),
-      var(--primary-very-low)
-    );
+    background: var(--mza-surface-2);
   }
 }
 
