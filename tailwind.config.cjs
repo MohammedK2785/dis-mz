@@ -26,7 +26,7 @@ module.exports = {
         'mza-border': '#e2e8f0',        // Subtle border color
       },
       fontFamily: {
-        'mza-sans': ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        'mza-sans': ['Cairo', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
       },
     },
   },
