@@ -35,7 +35,7 @@ jobs:
 
       - name: Check Tailwind output is up to date
         run: |
-          git diff --exit-code common/mza-tailwind.scss || {
+          git diff --exit-code scss/mza-tailwind.scss || {
             echo "::error::Tailwind output is outdated. Run 'pnpm build:css' and commit the changes."
             exit 1
           }
