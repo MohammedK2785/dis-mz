@@ -344,7 +344,7 @@ div.discourse-tags {
 .mza-header-bar {
   width: 100%;
   background: linear-gradient(to left, $mza-sky-light, $mza-sky);
-  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 60px;
   display: flex;
   align-items: center;
@@ -400,7 +400,7 @@ html[dir="rtl"] .mza-header-nav {
 
 // Navigation links - simple white text
 .mza-header-link {
-  color: rgb(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.9375rem;
   font-weight: 400;
   text-decoration: none;
@@ -412,8 +412,8 @@ html[dir="rtl"] .mza-header-nav {
   white-space: nowrap;
   
   &:hover {
-    color: rgb(255, 255, 255, 1);
-    border-bottom-color: rgb(255, 255, 255, 0.6);
+    color: rgb(255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
   }
   
