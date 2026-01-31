@@ -137,7 +137,8 @@ td.main-link.clearfix.topic-list-data {
 }
 
 // Topic title - enhanced hierarchy for Arabic readability
-a.title {
+// Scoped to table.topic-list to prevent unintended large titles elsewhere
+table.topic-list a.title {
   font-size: var(--font-up-1);
   font-weight: 600;
   line-height: 1.5;
@@ -159,7 +160,7 @@ a.title {
 }
 
 // RTL-specific title alignment - right-aligned for Arabic
-html[dir="rtl"] a.title {
+html[dir="rtl"] table.topic-list a.title {
   text-align: start;
 }
 
@@ -465,7 +466,7 @@ div.discourse-tags {
   }
 
   // Title sizing for mobile
-  a.title {
+  table.topic-list a.title {
     font-size: var(--font-0);
     margin-block-end: 0.75rem;
   }
@@ -515,7 +516,7 @@ div.discourse-tags {
     padding-inline: 0.75rem;
   }
 
-  a.title {
+  table.topic-list a.title {
     font-size: var(--font-down-1);
     overflow-wrap: break-word;
   }
@@ -724,4 +725,28 @@ div.discourse-tags {
 // Header styling - transparent to avoid gradient duplication with .mza-topbar
 .d-header {
   background: transparent;
+}
+
+// ===================================
+// Compact Topic List on /categories page
+// Reduces padding and font-size for latest topics section
+// ===================================
+.categories-and-latest table.topic-list {
+  // Reduce table cell padding for compact look
+  td {
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+  }
+
+  // Reduce title font-size to base size for consistency with the page
+  a.title {
+    font-size: var(--font-0);
+    margin-block-end: 0.25rem;
+  }
+
+  // Reduce main-link padding
+  td.main-link.clearfix.topic-list-data {
+    padding-inline-start: 0.75rem;
+    padding-inline-end: 0.75rem;
+  }
 }

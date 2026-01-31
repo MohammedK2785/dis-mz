@@ -285,10 +285,30 @@
   /* Custom Top Header Bar */
   .mza-topbar {
     @apply text-white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .mza-topbar-inner {
-    @apply flex items-center justify-between py-2;
+    @apply flex items-center justify-between py-3;
+  }
+
+  /* High-specificity override to ensure header links are visible on gradient */
+  /* Required because #main-outlet a styles would otherwise override .mza-main-nav a */
+  #main-outlet .mza-topbar a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  #main-outlet .mza-topbar a:hover,
+  #main-outlet .mza-topbar a:focus {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+  }
+
+  #main-outlet .mza-topbar a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   /* Logo styling */
@@ -318,7 +338,12 @@
   }
 
   .mza-main-nav a {
-    @apply text-white no-underline text-sm py-1 border-b-2 border-transparent transition-colors;
+    @apply text-white no-underline text-sm;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    opacity: 0.9;
+    background-color: transparent;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
   }
 
   @media (min-width: 768px) {
@@ -329,7 +354,8 @@
 
   .mza-main-nav a:hover,
   .mza-main-nav a:focus {
-    border-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.15);
+    opacity: 1;
     text-decoration: none;
   }
 
