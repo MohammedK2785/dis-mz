@@ -162,11 +162,13 @@
   }
   
   /* Search input specific styling */
+  /* Note: Search icon placement is handled by Discourse core search component */
   input[type="search"] {
-    @apply pl-10; /* Space for search icon */
+    /* Removed custom padding - let Discourse handle search input styling */
   }
   
   /* Select dropdown */
+  /* Note: SVG arrow color is neutral gray - consider dark mode if needed in future */
   select {
     @apply pr-8; /* Space for dropdown arrow */
     appearance: none;
