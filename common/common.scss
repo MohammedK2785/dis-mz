@@ -29,13 +29,8 @@ $mza-font-size-nav: 0.9375rem; // 15px
 // Breakpoints
 $mza-mobile-breakpoint: 768px;
 
-// Arabic-friendly font stack
-body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-}
+// Cairo font is applied via Tailwind base layer (mza-tailwind-input.css)
+// and loaded via head_tag.html - no override needed here
 
 // ===================================
 // Topic List Polish (T3 + Sprint V2)
@@ -47,6 +42,27 @@ body {
 table.topic-list {
   border-spacing: 0 0.5rem;
   margin-block-end: 1.5rem;
+  table-layout: fixed;
+  width: 100%;
+
+  // Explicit column widths for alignment
+  th.posters,
+  td.posters {
+    width: 7.5rem;
+    white-space: nowrap;
+  }
+
+  th.num,
+  td.num {
+    width: 4.5rem;
+    white-space: nowrap;
+  }
+
+  th.activity,
+  td.activity {
+    width: 5rem;
+    white-space: nowrap;
+  }
 }
 
 // Table header row - improved readability
@@ -76,32 +92,39 @@ tr.topic-list-header {
   }
 }
 
-// Topic row - enhanced card-like appearance
+// Topic row - enhanced card-like appearance using cell-based card styling
+// Note: We do NOT use display:table on tr.topic-list-item to maintain column alignment with the header
 tr.topic-list-item {
-  border: 1px solid var(--primary-low);
-  border-radius: 8px;
-  background: var(--secondary);
-  margin-block-end: 0.5rem;
-  display: table;
-  width: 100%;
-  table-layout: fixed;
   transition:
     background 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    box-shadow 0.2s ease;
 
-  &:hover {
+  &:hover td {
     background: var(--primary-very-low);
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
-    border-color: var(--primary-low-mid);
   }
 
   // Comfortable spacing for better card feel
   td {
     padding-block: 1rem;
     padding-inline: 0.875rem;
-    border: none;
     vertical-align: middle;
+    background: var(--secondary);
+    border-top: 1px solid var(--primary-low);
+    border-bottom: 1px solid var(--primary-low);
+  }
+
+  // First cell gets left border + left border-radius (RTL: inline-start)
+  td:first-child {
+    border-inline-start: 1px solid var(--primary-low);
+    border-start-start-radius: 8px;
+    border-end-start-radius: 8px;
+  }
+
+  // Last cell gets right border + right border-radius (RTL: inline-end)
+  td:last-child {
+    border-inline-end: 1px solid var(--primary-low);
+    border-start-end-radius: 8px;
+    border-end-end-radius: 8px;
   }
 }
 
@@ -297,17 +320,23 @@ div.topic-statuses {
   }
 }
 
-// Pinned topics highlight with enhanced border accent
+// Pinned topics highlight with enhanced border accent (cell-based card)
 tr.topic-list-item.pinned,
 tr.topic-list-item.globally-pinned {
-  border-inline-start: 4px solid var(--tertiary);
-  background: linear-gradient(
-    to right,
-    var(--tertiary-very-low),
-    var(--secondary)
-  );
+  td {
+    background: linear-gradient(
+      to right,
+      var(--tertiary-very-low),
+      var(--secondary)
+    );
+  }
 
-  &:hover {
+  // First cell gets the accent border on pinned topics
+  td:first-child {
+    border-inline-start: 4px solid var(--tertiary);
+  }
+
+  &:hover td {
     background: linear-gradient(
       to right,
       var(--tertiary-low),
@@ -318,7 +347,9 @@ tr.topic-list-item.globally-pinned {
 
 // Closed topics styling - more subtle
 tr.topic-list-item.closed {
-  opacity: 0.65;
+  td {
+    opacity: 0.65;
+  }
 
   a.title {
     color: var(--primary-medium);
@@ -368,11 +399,14 @@ div.discourse-tags {
     display: block;
   }
 
-  // Stack topic rows
+  // Stack topic rows as mobile cards
   tr.topic-list-item {
     display: block;
     margin-block-end: 1rem;
+    border: 1px solid var(--primary-low);
     border-radius: 12px;
+    background: var(--secondary);
+    overflow: hidden;
 
     td {
       display: block;
@@ -380,6 +414,17 @@ div.discourse-tags {
       padding-inline: 1rem;
       text-align: start;
       width: 100% !important;
+
+      // Reset cell-based card styling for mobile
+      border: none;
+      border-radius: 0;
+    }
+
+    // First/last cell don't need special borders on mobile
+    td:first-child,
+    td:last-child {
+      border: none;
+      border-radius: 0;
     }
   }
 
