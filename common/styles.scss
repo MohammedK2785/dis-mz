@@ -28,7 +28,7 @@ body {
   padding: 1rem 1.5rem;
 }
 
-.mza-topbar__container {
+.mza-topbar-inner {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -37,106 +37,42 @@ body {
 }
 
 // RTL-specific styles for topbar
-html[dir="rtl"] .mza-topbar__container {
+html[dir="rtl"] .mza-topbar-inner {
   direction: rtl;
 }
 
 // Logo styling
-.mza-topbar__logo {
-  margin: 0;
-}
-
-.mza-logo-link {
+.mza-logo {
   color: white;
-  text-decoration: none;
   font-size: 1.25rem;
   font-weight: bold;
-  
-  &:hover,
-  &:focus {
-    color: white;
-    text-decoration: none;
-  }
+  margin: 0;
 }
 
 // Main navigation
-.mza-topbar__nav {
-  display: block;
-}
-
-.mza-nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.mza-main-nav {
   display: flex;
   gap: 1.5rem;
-}
-
-// RTL-specific styles for nav list
-html[dir="rtl"] .mza-nav-list {
-  direction: rtl;
-}
-
-.mza-nav-item {
-  margin: 0;
-}
-
-.mza-nav-link {
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 0;
-  display: inline-block;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease;
   
-  &:hover,
-  &:focus {
+  a {
     color: white;
-    border-bottom-color: white;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+    
+    &:hover,
+    &:focus {
+      color: white;
+      border-bottom-color: white;
+    }
   }
 }
 
-// Hamburger menu toggle
-.mza-menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  width: 30px;
-  height: 30px;
-  position: relative;
-  
-  &:focus {
-    outline: 2px solid white;
-    outline-offset: 2px;
-  }
-}
-
-.mza-menu-toggle__icon {
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 2px;
-  background-color: white;
-  
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    inset-inline-start: 0;
-    width: 100%;
-    height: 2px;
-    background-color: white;
-  }
-  
-  &::before {
-    top: -8px;
-  }
-  
-  &::after {
-    bottom: -8px;
-  }
+// RTL-specific styles for main nav
+html[dir="rtl"] .mza-main-nav {
+  direction: rtl;
 }
 
 // ===================================
@@ -147,9 +83,6 @@ html[dir="rtl"] .mza-nav-list {
   background-color: $mza-bg-light;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-}
-
-.mza-section-tabs__container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -158,7 +91,7 @@ html[dir="rtl"] .mza-nav-list {
 }
 
 // RTL-specific styles for section tabs
-html[dir="rtl"] .mza-section-tabs__container {
+html[dir="rtl"] .mza-section-tabs {
   direction: rtl;
   justify-content: flex-start;
 }
@@ -208,47 +141,21 @@ html[dir="rtl"] .mza-section-tabs__container {
 // Mobile Responsive Styles
 // ===================================
 @media (max-width: $mza-mobile-breakpoint) {
-  // Show hamburger menu button
-  .mza-menu-toggle {
-    display: block;
-  }
-  
-  // Hide main navigation by default
-  .mza-topbar__nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: $mza-primary-red;
-    padding: 1rem 1.5rem;
-    z-index: 1000;
-    
-    // Show when is-open class is added
-    &.is-open {
-      display: block;
-    }
-  }
-  
-  // RTL-specific styles for mobile nav
-  html[dir="rtl"] .mza-topbar__nav.is-open {
-    text-align: right;
-  }
-  
-  // Make nav list vertical on mobile
-  .mza-nav-list {
+  // Stack header items vertically on mobile
+  .mza-topbar-inner {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   
-  // Adjust nav links for vertical layout
-  .mza-nav-link {
-    display: block;
-    padding: 0.75rem 0;
+  // Center logo on mobile
+  .mza-logo {
+    text-align: center;
   }
   
-  // Make topbar position relative for absolute nav positioning
-  .mza-topbar {
-    position: relative;
+  // Make navigation wrap on mobile
+  .mza-main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
   }
 }
