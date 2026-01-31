@@ -1,2 +1,52 @@
 <!-- Mza3et Theme - Body Tag -->
-<!-- Additional body elements can be added here -->
+<!-- Custom Top Header Bar -->
+<div class="mza-topbar">
+  <div class="mza-topbar__container">
+    <!-- Logo area (right side for RTL) -->
+    <div class="mza-topbar__logo">
+      <a href="/" class="mza-logo-link">مزاعيط المغرب</a>
+    </div>
+    
+    <!-- Hamburger menu toggle for mobile -->
+    <button class="mza-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="mza-menu-toggle__icon"></span>
+    </button>
+    
+    <!-- Main navigation (left side for RTL) -->
+    <nav class="mza-topbar__nav">
+      <ul class="mza-nav-list">
+        <li class="mza-nav-item"><a href="/" class="mza-nav-link">Home</a></li>
+        <li class="mza-nav-item"><a href="#morocco" class="mza-nav-link">Morocco Gate</a></li>
+        <li class="mza-nav-item"><a href="#world" class="mza-nav-link">World Gate</a></li>
+        <li class="mza-nav-item"><a href="#reports" class="mza-nav-link">Reports</a></li>
+        <li class="mza-nav-item"><a href="#questions" class="mza-nav-link">Questions</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Horizontal Section Tabs Bar -->
+<div class="mza-section-tabs">
+  <div class="mza-section-tabs__container">
+    <a href="#offers" class="mza-section-tab mza-section-tab--offers">Offers &amp; Booking</a>
+    <a href="#cars" class="mza-section-tab mza-section-tab--cars">Cars</a>
+    <a href="#reports" class="mza-section-tab mza-section-tab--reports">Reports</a>
+    <a href="#questions" class="mza-section-tab mza-section-tab--questions">Questions</a>
+  </div>
+</div>
+
+<!-- Mobile Menu Toggle Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var menuToggle = document.querySelector('.mza-menu-toggle');
+  var nav = document.querySelector('.mza-topbar__nav');
+  
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', function() {
+      var isOpen = menuToggle.classList.toggle('is-open');
+      nav.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+});
+</script>
