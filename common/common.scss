@@ -9,9 +9,9 @@
 // TODO: Refine and organize these styles
 
 // Mza3et Theme Color Palette (Sky Blue Design Tokens)
+$mza-sky-light: #38bdf8;
 $mza-sky: #0ea5e9;
 $mza-sky-dark: #0369a1;
-$mza-sky-light: #7dd3fc;
 $mza-accent: #06b6d4;
 $mza-bg: #f8fafc;
 $mza-border: #e2e8f0;
@@ -334,156 +334,144 @@ div.discourse-tags {
   }
 }
 
-// Header styling - now using sky blue gradient
-.d-header {
-  background: linear-gradient(to left, $mza-sky, $mza-sky-dark);
+// ===================================
+// Mza3et Custom Header Bar (.mza-header-bar)
+// Slim sky blue gradient bar with clean navigation
+// RTL-first and mobile-first design
+// ===================================
+
+// Main header bar - slim and elegant
+.mza-header-bar {
+  width: 100%;
+  background: linear-gradient(to left, $mza-sky-light, $mza-sky);
+  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.1);
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 
-// ===================================
-// Custom Top Header Bar (.mza-topbar)
-// Slim sky blue gradient bar with minimal design
-// RTL-first and mobile-first
-// ===================================
-.mza-topbar {
-  // Gradient fallback for browsers without Tailwind
-  background: linear-gradient(to left, $mza-sky, $mza-sky-dark);
-  color: white;
+// Inner container - max-width and centering
+.mza-header-inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
 }
 
-// RTL-specific styles for topbar
-html[dir="rtl"] .mza-topbar-inner {
+// RTL: Logo/title on the right
+html[dir="rtl"] .mza-header-inner {
   direction: rtl;
 }
 
-// Logo styling - now handled mostly by Tailwind utilities
-.mza-logo {
+// Logo and site title styling
+.mza-header-logo {
+  display: flex;
+  align-items: center;
+  
   a {
-    &:hover,
-    &:focus {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+      opacity: 0.9;
       text-decoration: none;
     }
   }
 }
 
-// Main navigation - RTL support
-html[dir="rtl"] .mza-main-nav {
-  direction: rtl;
-}
-
-// ===================================
-// Section Tabs - Minimal text with colored bottom borders
-// ===================================
-.mza-section-tabs {
-  width: 100%;
-  background-color: white;
-  border-bottom: 1px solid var(--primary-low);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 1rem;
-
-  // Subtle scrollbar for mobile
-  &::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 0, 0, 0.15);
-    border-radius: 2px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-}
-
-// Inner container for tabs with RTL support
-.mza-section-tabs-inner {
+// Navigation container
+.mza-header-nav {
   display: flex;
-  gap: 0;
-  flex-wrap: nowrap;
-  max-width: 1200px;
-  margin: 0 auto;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-// RTL-specific styles for section tabs
-html[dir="rtl"] .mza-section-tabs {
+// RTL: Nav on the left
+html[dir="rtl"] .mza-header-nav {
   direction: rtl;
 }
 
-html[dir="rtl"] .mza-section-tabs-inner {
-  justify-content: flex-start;
-}
-
-.mza-section-tab {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  color: var(--primary-high);
-  font-weight: 500;
-  font-size: $mza-font-size-nav;
+// Navigation links - simple white text
+.mza-header-link {
+  color: rgb(255, 255, 255, 0.9);
+  font-size: 0.9375rem;
+  font-weight: 400;
   text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  border-bottom: 3px solid transparent;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
   transition:
-    border-bottom-color 0.2s ease,
-    color 0.2s ease;
-
-  &:hover,
-  &:focus {
-    color: var(--primary);
+    color 0.2s ease,
+    border-bottom-color 0.2s ease;
+  white-space: nowrap;
+  
+  &:hover {
+    color: rgb(255, 255, 255, 1);
+    border-bottom-color: rgb(255, 255, 255, 0.6);
     text-decoration: none;
   }
-}
-
-// Tab color variants - using colored bottom borders
-.mza-section-tab--offers {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-orange;
+  
+  // Active link state
+  &--active {
+    color: white;
+    font-weight: 600;
+    border-bottom-color: white;
   }
 }
 
-.mza-section-tab--cars {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-green;
-  }
-}
-
-.mza-section-tab--reports {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-blue;
-  }
-}
-
-.mza-section-tab--questions {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-purple;
-  }
-}
-
-// ===================================
-// Mobile Responsive Styles
-// ===================================
+// Mobile responsive - ensure no horizontal scroll
 @media (max-width: $mza-mobile-breakpoint) {
-  // Mobile-specific tabs styling
-  .mza-section-tabs {
-    padding: 0 0.75rem;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    overscroll-behavior-x: contain;
+  .mza-header-bar {
+    height: auto;
+    min-height: 60px;
   }
-
-  .mza-section-tabs-inner {
-    max-width: none;
-    margin: 0;
+  
+  .mza-header-inner {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
   }
-
-  .mza-section-tab {
-    padding: 0.625rem 0.875rem;
+  
+  .mza-header-logo {
+    a {
+      font-size: 1rem;
+    }
+  }
+  
+  .mza-header-nav {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .mza-header-link {
     font-size: 0.875rem;
+  }
+}
+
+// Extra small devices - no horizontal scroll at 375px
+@media (max-width: 375px) {
+  .mza-header-inner {
+    padding: 0.625rem 0.75rem;
+  }
+  
+  .mza-header-logo {
+    a {
+      font-size: 0.9375rem;
+    }
+  }
+  
+  .mza-header-nav {
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  .mza-header-link {
+    font-size: 0.8125rem;
   }
 }
