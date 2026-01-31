@@ -303,16 +303,15 @@ html[data-theme="dark"] {
   
   /* Custom Top Header Bar - Glass styling to match .d-header */
   .mza-topbar {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgb(255 255 255 / 0.8);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--mza-border);
     box-shadow: var(--mza-shadow-sm);
   }
   
   /* Dark mode glass topbar */
   html[data-theme="dark"] .mza-topbar {
-    background: rgba(30, 41, 59, 0.85);
+    background: rgb(30 41 59 / 0.85);
   }
 
   .mza-topbar-inner {

@@ -133,7 +133,7 @@ tr.topic-list-item {
 
   &:hover {
     transform: translateY(-1px); // Subtle lift on hover
-    
+
     td {
       background: var(--mza-surface-2);
       box-shadow: var(--mza-shadow-md);
@@ -770,12 +770,11 @@ div.discourse-tags {
 // Sticky glass header with blur effect and perfect readability
 // ===================================
 .d-header {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgb(255 255 255 / 0.8);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px); // Safari support
   border-bottom: 1px solid var(--mza-border);
   box-shadow: var(--mza-shadow-sm);
-  
+
   // Ensure text readability in glass header
   .header-title,
   .title,
@@ -783,11 +782,11 @@ div.discourse-tags {
     color: var(--primary);
     font-weight: 500;
   }
-  
+
   a:hover {
     color: var(--tertiary);
   }
-  
+
   // Focus accessibility
   a:focus-visible {
     outline: 2px solid var(--tertiary);
@@ -798,7 +797,7 @@ div.discourse-tags {
 
 // Dark mode glass header
 html[data-theme="dark"] .d-header {
-  background: rgba(30, 41, 59, 0.85); // slate-800 with transparency
+  background: rgb(30 41 59 / 0.85); // slate-800 with transparency
   border-bottom-color: var(--mza-border);
 }
 
