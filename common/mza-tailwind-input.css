@@ -239,6 +239,7 @@ html[data-theme="dark"] {
         border-radius: 50%;
         box-shadow: 0 0 0 2px var(--mza-avatar-ring); /* ring-2 ring-white */
         transition: transform 0.15s ease, box-shadow 0.15s ease;
+        position: relative; /* Required for z-index to work */
       }
 
       a:hover img.avatar {
