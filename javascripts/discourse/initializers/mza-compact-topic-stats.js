@@ -24,18 +24,26 @@ function initializeCompactTopicStats(api) {
 
       // Create compact inline stats HTML
       return helper.h("div.mza-compact-stats", [
-        helper.h("span.mza-stat-item", [
-          helper.h("svg.fa.d-icon.d-icon-comment", {
-            attributes: { "aria-hidden": "true" },
-          }),
-          helper.h("span", `${replies}`),
-        ]),
-        helper.h("span.mza-stat-item", [
-          helper.h("svg.fa.d-icon.d-icon-eye", {
-            attributes: { "aria-hidden": "true" },
-          }),
-          helper.h("span", `${views}`),
-        ]),
+        helper.h(
+          "span.mza-stat-item",
+          { attributes: { "aria-label": `${replies} replies` } },
+          [
+            helper.h("svg.fa.d-icon.d-icon-comment", {
+              attributes: { "aria-hidden": "true" },
+            }),
+            helper.h("span", `${replies}`),
+          ]
+        ),
+        helper.h(
+          "span.mza-stat-item",
+          { attributes: { "aria-label": `${views} views` } },
+          [
+            helper.h("svg.fa.d-icon.d-icon-eye", {
+              attributes: { "aria-hidden": "true" },
+            }),
+            helper.h("span", `${views}`),
+          ]
+        ),
       ]);
     } catch (e) {
       // Fail gracefully
