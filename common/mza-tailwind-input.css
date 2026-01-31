@@ -2,24 +2,334 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===================================
+   Mza3et Design Tokens (V1)
+   ================================== */
+:root {
+  /* Brand colors - using CSS variables for easier theming */
+  --mza-brand: #0ea5e9; /* Sky blue */
+  --mza-brand-dark: #0369a1; /* Darker sky blue */
+  --mza-surface: var(--secondary, #fff); /* Use Discourse secondary */
+  --mza-border: var(--primary-low, #e5e5e5); /* Use Discourse border */
+  --mza-radius: 0.5rem; /* Default border radius */
+}
+
 /* Mza3et Sky Blue Gradient Utility */
 /* Note: "to left" direction is intentional for RTL-first design - 
    gradient flows from light (RTL start/right) to dark (RTL end/left) */
 @layer utilities {
   .bg-mza-sky-gradient {
-    background: linear-gradient(to left, theme('colors.mza-sky'), theme('colors.mza-sky-dark'));
+    background: linear-gradient(to left, var(--mza-brand), var(--mza-brand-dark));
   }
 }
 
-/* Mza3et Component Layer - Custom Header and Section Tabs */
+/* ===================================
+   Base Layer - Typography & Focus
+   ================================== */
+@layer base {
+  /* Typography for main content area */
+  #main-outlet {
+    /* Headings hierarchy */
+    h1 {
+      @apply text-3xl font-bold mb-4;
+      color: var(--primary);
+    }
+    
+    h2 {
+      @apply text-2xl font-semibold mb-3;
+      color: var(--primary);
+    }
+    
+    h3 {
+      @apply text-xl font-semibold mb-2;
+      color: var(--primary);
+    }
+    
+    h4 {
+      @apply text-lg font-medium mb-2;
+      color: var(--primary);
+    }
+    
+    /* Paragraph spacing */
+    p {
+      @apply mb-4;
+      line-height: 1.6;
+    }
+    
+    /* Link behavior */
+    a {
+      color: var(--tertiary);
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  /* Focus ring style - accessible and visible */
+  *:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+}
+
+/* ===================================
+   Component Layer - Reusable Components
+   ================================== */
 @layer components {
+  /* Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 font-medium transition-colors;
+    border-radius: var(--mza-radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  .btn-primary {
+    @apply btn;
+    background-color: var(--tertiary);
+    color: var(--secondary);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--tertiary-hover);
+    }
+  }
+  
+  .btn-default {
+    @apply btn;
+    background-color: var(--primary-low);
+    color: var(--primary);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--primary-low-mid);
+    }
+  }
+  
+  .btn-link {
+    @apply btn;
+    background: transparent;
+    color: var(--tertiary);
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+    
+    &:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+  }
+  
+  .btn-icon {
+    @apply btn;
+    @apply w-10 h-10 p-0;
+    background-color: transparent;
+    color: var(--primary-high);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--primary-low);
+    }
+  }
+  
+  /* Input Styles */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  select {
+    @apply px-3 py-2 w-full;
+    border-radius: var(--mza-radius);
+    border: 1px solid var(--mza-border);
+    background-color: var(--mza-surface);
+    color: var(--primary);
+    
+    &:focus {
+      outline: 2px solid var(--tertiary);
+      outline-offset: 0;
+      border-color: var(--tertiary);
+    }
+    
+    &::placeholder {
+      color: var(--primary-medium);
+    }
+  }
+  
+  /* Search input specific styling */
+  /* Note: Search icon placement is handled by Discourse core search component */
+  input[type="search"] {
+    /* Removed custom padding - let Discourse handle search input styling */
+  }
+  
+  /* Select dropdown */
+  /* Note: SVG arrow color is neutral gray - consider dark mode if needed in future */
+  select {
+    @apply pr-8; /* Space for dropdown arrow */
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+  }
+  
+  /* Alert/Notice Styles */
+  .alert {
+    @apply px-4 py-3 mb-4;
+    border-radius: var(--mza-radius);
+    border: 1px solid transparent;
+  }
+  
+  .alert-info {
+    @apply alert;
+    background-color: var(--tertiary-very-low);
+    border-color: var(--tertiary-low);
+    color: var(--primary);
+    
+    strong {
+      color: var(--tertiary);
+    }
+  }
+  
+  .alert-error {
+    @apply alert;
+    background-color: var(--danger-low);
+    border-color: var(--danger);
+    color: var(--primary);
+    
+    strong {
+      color: var(--danger);
+    }
+  }
+  
+  .alert-warning {
+    @apply alert;
+    background-color: var(--primary-very-low);
+    border-color: var(--primary-low);
+    color: var(--primary);
+  }
+  
+  .alert-success {
+    @apply alert;
+    background-color: var(--success-low);
+    border-color: var(--success);
+    color: var(--primary);
+    
+    strong {
+      color: var(--success);
+    }
+  }
+  
+  /* Nav Pills */
+  .nav-pills {
+    @apply flex gap-2 mb-4;
+    flex-wrap: wrap;
+    
+    a {
+      @apply px-4 py-2;
+      border-radius: var(--mza-radius);
+      color: var(--primary-high);
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      
+      &:hover {
+        background-color: var(--primary-low);
+        text-decoration: none;
+      }
+      
+      &.active {
+        background-color: var(--tertiary);
+        color: var(--secondary);
+      }
+    }
+  }
+  
+  /* Sidebar Styles */
+  .sidebar-wrapper {
+    background-color: var(--mza-surface);
+    border-right: 1px solid var(--mza-border);
+    
+    /* RTL support */
+    html[dir="rtl"] & {
+      border-right: none;
+      border-left: 1px solid var(--mza-border);
+    }
+  }
+  
+  .sidebar-section-link {
+    @apply px-3 py-2 block;
+    color: var(--primary-high);
+    text-decoration: none;
+    border-radius: calc(var(--mza-radius) * 0.75);
+    transition: background-color 0.15s ease;
+    
+    &:hover {
+      background-color: var(--primary-very-low);
+      text-decoration: none;
+    }
+    
+    &.active {
+      background-color: var(--tertiary-very-low);
+      color: var(--tertiary);
+      font-weight: 600;
+    }
+  }
+  
+  /* Categories Page Polish */
+  .category-list {
+    /* Category rows */
+    .category-list-item,
+    .category-row {
+      @apply mb-4 p-4;
+      background-color: var(--mza-surface);
+      border: 1px solid var(--mza-border);
+      border-radius: var(--mza-radius);
+      transition: box-shadow 0.2s ease;
+      
+      &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+    }
+    
+    /* Category title */
+    .category-name {
+      @apply text-lg font-semibold mb-2;
+      color: var(--primary);
+    }
+    
+    /* Category description */
+    .category-description {
+      @apply text-sm mb-3;
+      color: var(--primary-medium);
+      line-height: 1.5;
+    }
+    
+    /* Category stats */
+    .category-stat {
+      @apply text-sm;
+      color: var(--primary-medium);
+    }
+  }
+  
+  /* Categories and Latest layout */
+  .categories-and-latest {
+    .category-list-item {
+      @apply mb-3;
+    }
+  }
+
   /* Custom Top Header Bar */
   .mza-topbar {
     @apply text-white;
   }
 
   .mza-topbar-inner {
-    @apply flex items-center justify-between px-4 py-2 max-w-screen-xl mx-auto;
+    @apply flex items-center justify-between py-2;
   }
 
   /* Logo styling */
@@ -68,7 +378,6 @@
   .mza-section-tabs {
     @apply w-full bg-white overflow-x-auto;
     border-bottom: 1px solid var(--primary-low, #e5e5e5);
-    padding-inline: 1rem;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -87,7 +396,7 @@
 
   /* Section Tabs Inner Container */
   .mza-section-tabs-inner {
-    @apply flex max-w-screen-xl mx-auto;
+    @apply flex;
     gap: 0;
     flex-wrap: nowrap;
   }
@@ -135,15 +444,9 @@
   /* Mobile responsive styles */
   @media (max-width: 768px) {
     .mza-section-tabs {
-      padding-inline: 0.75rem;
       overflow-y: hidden;
       scroll-behavior: smooth;
       overscroll-behavior-x: contain;
-    }
-
-    .mza-section-tabs-inner {
-      max-width: none;
-      margin: 0;
     }
 
     .mza-section-tab {
