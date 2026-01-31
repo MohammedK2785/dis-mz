@@ -1128,3 +1128,160 @@ div.discourse-tags {
     padding-inline-end: 1rem;
   }
 }
+
+// ===================================
+// Compact Welcome/Hero Banner (Sprint V8)
+// Reduces excessive padding/margins so more content visible above the fold
+// Applies to discovery pages (categories/latest) - scoped to non-admin
+// ===================================
+body:not(.admin-interface) {
+  // Custom banner / hero section - compact styling
+  // Common selectors for welcome banners in Discourse
+  .custom-banner,
+  .hero-banner,
+  .welcome-banner,
+  .banner-box,
+  [class*="banner"],
+  .d-wrap[data-wrap="banner"] {
+    padding-block: 1rem; // Reduced from typical 2-3rem
+    padding-inline: 1.25rem;
+    margin-block-end: 1rem; // Reduced from typical 2rem
+
+    h1,
+    .banner-title,
+    .hero-title {
+      font-size: 1.5rem; // Reduced from typical 2-2.5rem
+      line-height: 1.3;
+      margin-block-end: 0.5rem;
+    }
+
+    h2,
+    .banner-subtitle {
+      font-size: 1.125rem;
+      line-height: 1.4;
+      margin-block-end: 0.5rem;
+    }
+
+    p,
+    .banner-description {
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      margin-block-end: 0.5rem;
+    }
+  }
+
+  // Discourse's built-in category header description
+  .category-heading,
+  .category-title-header {
+    padding-block: 0.75rem;
+    margin-block-end: 1rem;
+
+    h1 {
+      font-size: 1.375rem;
+      margin-block-end: 0.25rem;
+    }
+
+    .category-title-description {
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+  }
+
+  // Discovery page main area - tighter spacing
+  .discovery-topics-page,
+  .categories-list,
+  .latest-topic-list {
+    padding-block-start: 0.5rem;
+  }
+
+  // Alert banners on discovery pages - more compact
+  #main-outlet .alert {
+    padding: 0.625rem 1rem;
+    margin-block-end: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+// ===================================
+// Sidebar Category Icons Support (Sprint V8)
+// Styling for category icons added via API
+// RTL-safe with logical properties
+// ===================================
+.sidebar-section-link-wrapper {
+  // Icon prefix styling for sidebar category links
+  .sidebar-section-link-prefix {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-end: 0.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+
+    .d-icon {
+      width: 1rem;
+      height: 1rem;
+      color: var(--primary-medium);
+      transition: color 0.15s ease;
+    }
+  }
+
+  // Hover state for icon
+  &:hover .sidebar-section-link-prefix .d-icon {
+    color: var(--tertiary);
+  }
+
+  // Active state
+  .sidebar-section-link.active .sidebar-section-link-prefix .d-icon {
+    color: var(--tertiary);
+  }
+}
+
+// Note: RTL is automatically handled by logical properties (margin-inline-end)
+// No explicit RTL overrides needed for sidebar icons
+
+// ===================================
+// Compact Topic Stats Column (Sprint V8)
+// Styling for the modern API compact stats column
+// ===================================
+.mza-compact-stats-header {
+  text-align: center;
+  width: 5rem;
+  padding: 0.5rem;
+
+  .d-icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--primary-medium);
+  }
+}
+
+.mza-compact-stats-cell {
+  text-align: center;
+  width: 5rem;
+  padding: 0.5rem;
+
+  .mza-compact-stats {
+    display: inline-flex;
+    gap: 0.75rem;
+    align-items: center;
+    font-size: 0.8125rem;
+    color: var(--primary-medium);
+  }
+
+  .mza-stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .d-icon {
+      width: 0.875em;
+      height: 0.875em;
+      opacity: 0.7;
+    }
+
+    span {
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}
