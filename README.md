@@ -48,7 +48,7 @@ pnpm build:css
 pnpm watch:css
 ```
 
-The compiled output (`common/mza-tailwind.scss`) must be committed to the repository. CI will fail if the generated file is outdated.
+The compiled output (`scss/mza-tailwind.scss`) must be committed to the repository. CI will fail if the generated file is outdated.
 
 ### Documentation
 
