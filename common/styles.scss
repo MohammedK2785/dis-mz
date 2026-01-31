@@ -17,15 +17,16 @@ body {
 // ===================================
 // Topic List Polish (T3)
 // Card-like appearance with RTL support
+// Mobile-first design with no horizontal scroll at 375px
 // ===================================
 
 // Main topic list container
 table.topic-list {
-  border-spacing: 0;
+  border-spacing: 0 0.5rem;
   margin-block-end: 1.5rem;
 }
 
-// Topic row - card-like appearance
+// Topic row - subtle card-like appearance
 tr.topic-list-item {
   border: 1px solid var(--primary-low);
   border-radius: 8px;
@@ -41,7 +42,7 @@ tr.topic-list-item {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
   
-  // Additional spacing for better card feel
+  // Comfortable spacing for better card feel
   td {
     padding-block: 0.875rem;
     padding-inline: 0.75rem;
@@ -49,17 +50,17 @@ tr.topic-list-item {
   }
 }
 
-// Main content cell - better hierarchy
+// Main content cell - better spacing
 td.main-link.clearfix.topic-list-data {
   padding-inline-start: 1rem;
   padding-inline-end: 1rem;
 }
 
-// Topic title - clear hierarchy
+// Topic title - clear hierarchy for Arabic readability
 a.title {
   font-size: var(--font-up-1);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--primary);
   display: block;
   margin-block-end: 0.5rem;
@@ -69,7 +70,7 @@ a.title {
   }
 }
 
-// RTL-specific title alignment
+// RTL-specific title alignment - right-aligned for Arabic
 html[dir="rtl"] a.title {
   text-align: start;
 }
@@ -89,7 +90,7 @@ div.link-top-line {
   flex-wrap: wrap;
 }
 
-// Bottom line (category, tags, metadata)
+// Bottom line (category, tags, metadata) - better spacing
 div.link-bottom-line {
   display: flex;
   align-items: center;
@@ -112,13 +113,13 @@ span.badge-category {
   font-size: var(--font-down-1);
 }
 
-// Topic excerpt
+// Topic excerpt - improved spacing
 div.topic-excerpt {
   margin-block-start: 0.5rem;
   padding-inline-start: 1rem;
   color: var(--primary-medium);
   font-size: var(--font-down-1);
-  line-height: 1.5;
+  line-height: 1.6;
   border-inline-start: 2px solid var(--primary-low);
 }
 
@@ -134,21 +135,22 @@ td.num {
   color: var(--primary-medium);
   white-space: nowrap;
   
-  button.posts-map {
+  // Posts map button - using correct selector from allowlist
+  button.btn-link.posts-map {
     font-weight: 600;
   }
 }
 
-// Heatmap styling
-button.posts-map.heatmap-high {
+// Heatmap styling - using correct selectors from allowlist
+button.btn-link.posts-map.badge-posts.heatmap-high {
   color: var(--danger);
 }
 
-button.posts-map.heatmap-med {
+button.btn-link.posts-map.badge-posts.heatmap-med {
   color: var(--tertiary);
 }
 
-button.posts-map.heatmap-low {
+button.btn-link.posts-map.badge-posts.heatmap-low {
   color: var(--primary-medium);
 }
 
@@ -165,19 +167,19 @@ td.num.topic-list-data.age.activity {
   }
 }
 
-// Topic status icons
+// Topic status icons - compact display
 div.topic-statuses {
   display: inline-flex;
   gap: 0.25rem;
   align-items: center;
   
-  svg.d-icon {
+  svg.fa.d-icon {
     width: 0.875em;
     height: 0.875em;
   }
 }
 
-// Pinned topics highlight
+// Pinned topics highlight with border accent
 tr.topic-list-item.pinned,
 tr.topic-list-item.globally-pinned {
   border-inline-start: 3px solid var(--tertiary);
@@ -188,7 +190,7 @@ tr.topic-list-item.closed {
   opacity: 0.7;
 }
 
-// Tags styling
+// Tags styling - clean pill design
 div.discourse-tags {
   display: inline-flex;
   gap: 0.5rem;
@@ -208,7 +210,7 @@ div.discourse-tags {
   }
 }
 
-// Mobile-first responsive design
+// Mobile-first responsive design - reduce clutter at <768px
 @media screen and (max-width: $mza-mobile-breakpoint) {
   // Reset table layout for mobile
   table.topic-list {
@@ -268,7 +270,7 @@ div.discourse-tags {
     padding-inline: 0.5rem;
   }
   
-  // Hide bulk select on mobile
+  // Hide bulk select on mobile to reduce clutter
   td.bulk-select.topic-list-data {
     display: none;
   }
@@ -285,7 +287,7 @@ div.discourse-tags {
   }
 }
 
-// Extra small devices - ensure no horizontal scroll
+// Extra small devices - ensure no horizontal scroll at 375px
 @media screen and (max-width: 375px) {
   tr.topic-list-item {
     td {
