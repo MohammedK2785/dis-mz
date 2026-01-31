@@ -834,6 +834,7 @@ html[data-theme="dark"] {
   .post-controls .actions button.liked,
   .post-controls .actions button.toggled {
     color: var(--love);
+    background-color: var(--love-low); /* Fallback for browsers without color-mix support */
     background-color: color-mix(in srgb, var(--love) 10%, transparent);
   }
 

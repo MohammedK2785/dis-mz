@@ -633,6 +633,9 @@ div.discourse-tags {
   // Enhanced blockquote - subtle tinted background, border-inline-start
   blockquote,
   aside.quote {
+    background: var(
+      --mza-surface-2
+    ); // Fallback for browsers without color-mix support
     background: color-mix(in srgb, var(--tertiary) 5%, var(--mza-surface-2));
     border-inline-start: 4px solid var(--tertiary-low);
     border-radius: 8px;
@@ -805,6 +808,9 @@ div.discourse-tags {
   }
 
   .topic-body {
+    background-color: var(
+      --mza-surface-2
+    ); // Fallback for browsers without color-mix support
     background-color: color-mix(
       in srgb,
       var(--tertiary) 3%,
