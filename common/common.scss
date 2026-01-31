@@ -1237,15 +1237,8 @@ body:not(.admin-interface) {
   }
 }
 
-// RTL-specific adjustments for sidebar icons
-html[dir="rtl"] {
-  .sidebar-section-link-wrapper {
-    .sidebar-section-link-prefix {
-      margin-inline-end: 0.5rem;
-      margin-inline-start: 0;
-    }
-  }
-}
+// Note: RTL is automatically handled by logical properties (margin-inline-end)
+// No explicit RTL overrides needed for sidebar icons
 
 // ===================================
 // Compact Topic Stats Column (Sprint V8)
