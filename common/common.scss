@@ -3,7 +3,8 @@
 // ===================================
 
 // Import Tailwind compiled utilities
-// @import "mza-tailwind"; // Temporarily commented out - Discourse server Node version too old to build Tailwind
+// Note: Tailwind is built locally or via CI (pnpm build:css), not on the Discourse server.
+@import "mza-tailwind";
 
 // Mza3et custom styles (migrated from legacy styles.scss)
 // TODO: Refine and organize these styles
@@ -334,20 +335,19 @@ div.discourse-tags {
   }
 }
 
-// Header styling - now using sky blue gradient
+// Header styling - transparent to avoid gradient duplication with .mza-topbar
 .d-header {
-  background: linear-gradient(to left, $mza-sky, $mza-sky-dark);
+  background: transparent;
 }
 
 // ===================================
 // Custom Top Header Bar (.mza-topbar)
-// Slim sky blue gradient bar with minimal design
-// RTL-first and mobile-first
+// Core styles are in Tailwind layers (mza-tailwind-input.css)
+// Below: Gradient fallback and RTL-specific overrides
 // ===================================
 .mza-topbar {
   // Gradient fallback for browsers without Tailwind
   background: linear-gradient(to left, $mza-sky, $mza-sky-dark);
-  color: white;
 }
 
 // RTL-specific styles for topbar
@@ -355,135 +355,19 @@ html[dir="rtl"] .mza-topbar-inner {
   direction: rtl;
 }
 
-// Logo styling - now handled mostly by Tailwind utilities
-.mza-logo {
-  a {
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
-  }
-}
-
-// Main navigation - RTL support
+// RTL-specific styles for main navigation
 html[dir="rtl"] .mza-main-nav {
   direction: rtl;
 }
 
 // ===================================
-// Section Tabs - Minimal text with colored bottom borders
+// Section Tabs - RTL overrides
+// Core styles are in Tailwind layers (mza-tailwind-input.css)
 // ===================================
-.mza-section-tabs {
-  width: 100%;
-  background-color: white;
-  border-bottom: 1px solid var(--primary-low);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 1rem;
-
-  // Subtle scrollbar for mobile
-  &::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 0, 0, 0.15);
-    border-radius: 2px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-}
-
-// Inner container for tabs with RTL support
-.mza-section-tabs-inner {
-  display: flex;
-  gap: 0;
-  flex-wrap: nowrap;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-// RTL-specific styles for section tabs
 html[dir="rtl"] .mza-section-tabs {
   direction: rtl;
 }
 
 html[dir="rtl"] .mza-section-tabs-inner {
   justify-content: flex-start;
-}
-
-.mza-section-tab {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  color: var(--primary-high);
-  font-weight: 500;
-  font-size: $mza-font-size-nav;
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  border-bottom: 3px solid transparent;
-  transition:
-    border-bottom-color 0.2s ease,
-    color 0.2s ease;
-
-  &:hover,
-  &:focus {
-    color: var(--primary);
-    text-decoration: none;
-  }
-}
-
-// Tab color variants - using colored bottom borders
-.mza-section-tab--offers {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-orange;
-  }
-}
-
-.mza-section-tab--cars {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-green;
-  }
-}
-
-.mza-section-tab--reports {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-blue;
-  }
-}
-
-.mza-section-tab--questions {
-  &:hover,
-  &:focus {
-    border-bottom-color: $mza-accent-purple;
-  }
-}
-
-// ===================================
-// Mobile Responsive Styles
-// ===================================
-@media (max-width: $mza-mobile-breakpoint) {
-  // Mobile-specific tabs styling
-  .mza-section-tabs {
-    padding: 0 0.75rem;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    overscroll-behavior-x: contain;
-  }
-
-  .mza-section-tabs-inner {
-    max-width: none;
-    margin: 0;
-  }
-
-  .mza-section-tab {
-    padding: 0.625rem 0.875rem;
-    font-size: 0.875rem;
-  }
 }

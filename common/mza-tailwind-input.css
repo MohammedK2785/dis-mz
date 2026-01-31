@@ -10,3 +10,145 @@
     background: linear-gradient(to left, theme('colors.mza-sky'), theme('colors.mza-sky-dark'));
   }
 }
+
+/* Mza3et Component Layer - Custom Header and Section Tabs */
+@layer components {
+  /* Custom Top Header Bar */
+  .mza-topbar {
+    @apply text-white;
+  }
+
+  .mza-topbar-inner {
+    @apply flex items-center justify-between px-4 py-2 max-w-screen-xl mx-auto;
+  }
+
+  /* Logo styling */
+  .mza-logo {
+    @apply text-white font-semibold text-base;
+  }
+
+  .mza-logo a {
+    @apply text-white no-underline;
+  }
+
+  .mza-logo a:hover,
+  .mza-logo a:focus {
+    @apply opacity-90;
+    text-decoration: none;
+  }
+
+  /* Main navigation */
+  .mza-main-nav {
+    @apply flex gap-4;
+  }
+
+  @media (min-width: 768px) {
+    .mza-main-nav {
+      @apply gap-5;
+    }
+  }
+
+  .mza-main-nav a {
+    @apply text-white no-underline text-sm py-1 border-b-2 border-transparent transition-colors;
+  }
+
+  @media (min-width: 768px) {
+    .mza-main-nav a {
+      @apply text-base;
+    }
+  }
+
+  .mza-main-nav a:hover,
+  .mza-main-nav a:focus {
+    border-color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+  }
+
+  /* Section Tabs Container */
+  .mza-section-tabs {
+    @apply w-full bg-white overflow-x-auto;
+    border-bottom: 1px solid var(--primary-low, #e5e5e5);
+    padding-inline: 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mza-section-tabs::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .mza-section-tabs::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+  }
+
+  .mza-section-tabs::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  /* Section Tabs Inner Container */
+  .mza-section-tabs-inner {
+    @apply flex max-w-screen-xl mx-auto;
+    gap: 0;
+    flex-wrap: nowrap;
+  }
+
+  /* Individual Section Tab */
+  .mza-section-tab {
+    @apply inline-flex items-center whitespace-nowrap;
+    padding: 0.75rem 1rem;
+    color: var(--primary-high, #333);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    flex-shrink: 0;
+    border-bottom: 3px solid transparent;
+    transition: border-bottom-color 0.2s ease, color 0.2s ease;
+  }
+
+  .mza-section-tab:hover,
+  .mza-section-tab:focus {
+    color: var(--primary, #000);
+    text-decoration: none;
+  }
+
+  /* Tab accent color variants */
+  .mza-section-tab--offers:hover,
+  .mza-section-tab--offers:focus {
+    border-bottom-color: #ff9800;
+  }
+
+  .mza-section-tab--cars:hover,
+  .mza-section-tab--cars:focus {
+    border-bottom-color: #4caf50;
+  }
+
+  .mza-section-tab--reports:hover,
+  .mza-section-tab--reports:focus {
+    border-bottom-color: #2196f3;
+  }
+
+  .mza-section-tab--questions:hover,
+  .mza-section-tab--questions:focus {
+    border-bottom-color: #9c27b0;
+  }
+
+  /* Mobile responsive styles */
+  @media (max-width: 768px) {
+    .mza-section-tabs {
+      padding-inline: 0.75rem;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      overscroll-behavior-x: contain;
+    }
+
+    .mza-section-tabs-inner {
+      max-width: none;
+      margin: 0;
+    }
+
+    .mza-section-tab {
+      padding: 0.625rem 0.875rem;
+      font-size: 0.875rem;
+    }
+  }
+}
