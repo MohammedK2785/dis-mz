@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ===================================
-   Mza3et Design Tokens (V2 - Soft UI)
+   Mza3et Design Tokens (V3 - Soft UI + Glass)
    ================================== */
 :root {
   /* Brand colors - using CSS variables for easier theming */
@@ -15,7 +15,7 @@
   --mza-border: #e2e8f0;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.07);
-  --mza-radius: 0.5rem;
+  --mza-radius: 1rem; /* Updated to 1rem for rounded-2xl feel */
   --mza-text: var(--primary, #1e293b);
 }
 
@@ -38,7 +38,7 @@ html[data-theme="dark"] {
 }
 
 /* ===================================
-   Base Layer - Typography & Focus
+   Base Layer - Typography & Focus (V3 - Cairo Optimized)
    ================================== */
 @layer base {
   /* Apply Cairo font globally */
@@ -47,40 +47,44 @@ html[data-theme="dark"] {
     font-family: theme('fontFamily.mza-sans');
   }
   
-  /* Arabic typography defaults */
+  /* Arabic typography defaults - leading-relaxed for long text */
   html {
-    line-height: 1.7; /* Better readability for Arabic */
+    line-height: 1.75; /* leading-relaxed for better Arabic readability */
   }
   
-  /* Typography for main content area */
+  /* Typography for main content area - tracking-tight for headings */
   #main-outlet h1 {
     @apply text-3xl mb-4;
     font-weight: 700; /* Bold for Arabic */
+    letter-spacing: -0.025em; /* tracking-tight */
     color: var(--primary);
   }
   
   #main-outlet h2 {
     @apply text-2xl mb-3;
     font-weight: 600; /* Semi-bold for Arabic */
+    letter-spacing: -0.025em; /* tracking-tight */
     color: var(--primary);
   }
   
   #main-outlet h3 {
     @apply text-xl mb-2;
     font-weight: 600; /* Semi-bold for Arabic */
+    letter-spacing: -0.025em; /* tracking-tight */
     color: var(--primary);
   }
   
   #main-outlet h4 {
     @apply text-lg mb-2;
     font-weight: 500; /* Medium for Arabic */
+    letter-spacing: -0.025em; /* tracking-tight */
     color: var(--primary);
   }
   
-  /* Paragraph spacing */
+  /* Paragraph spacing with leading-relaxed */
   #main-outlet p {
     @apply mb-4;
-    line-height: 1.7;
+    line-height: 1.75; /* leading-relaxed */
   }
   
   /* Link behavior */
@@ -127,14 +131,14 @@ html[data-theme="dark"] {
     background-color: var(--primary-very-low);
   }
 
-  /* Post body - improved typography for reading */
+  /* Post body - improved typography for reading with leading-relaxed */
   .topic-body {
-    line-height: 1.7;
+    line-height: 1.75; /* leading-relaxed */
   }
 
   .topic-body .cooked {
     font-size: var(--font-0);
-    line-height: 1.75;
+    line-height: 1.75; /* leading-relaxed for long text */
     color: var(--primary);
   }
 
@@ -293,15 +297,21 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     Header Components (Soft UI V2)
-     Modern, readable header with soft surfaces
+     Header Components (Soft UI V3)
+     Glass header with blur effect and perfect readability
      ================================== */
   
-  /* Custom Top Header Bar - Soft UI styling */
+  /* Custom Top Header Bar - Glass styling to match .d-header */
   .mza-topbar {
-    background: var(--mza-surface);
+    background: rgb(255 255 255 / 0.8);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--mza-border);
     box-shadow: var(--mza-shadow-sm);
+  }
+  
+  /* Dark mode glass topbar */
+  html[data-theme="dark"] .mza-topbar {
+    background: rgb(30 41 59 / 0.85);
   }
 
   .mza-topbar-inner {
@@ -697,7 +707,7 @@ textarea {
   font-weight: 600;
 }
 
-/* Nav Pills - Soft UI rounded pills with surface/border/shadow */
+/* Nav Pills - Soft UI V3: Fully rounded pills with subtle backgrounds */
 .nav-pills {
   @apply flex mb-4;
   gap: 0.5rem;
@@ -710,14 +720,14 @@ textarea {
   color: var(--mza-text);
   text-decoration: none;
   font-weight: 500;
-  background-color: var(--mza-surface);
+  background-color: var(--mza-surface-2); /* Subtle light neutral background */
   border: 1px solid var(--mza-border);
   box-shadow: var(--mza-shadow-sm);
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nav-pills a:hover {
-  background-color: var(--mza-surface-2);
+  background-color: var(--mza-surface); /* Subtle change on hover */
   color: var(--tertiary);
   box-shadow: var(--mza-shadow-md);
   text-decoration: none;
@@ -740,7 +750,7 @@ textarea {
 .list-controls .nav-pills > li > a {
   padding: 0.5rem 1rem;
   border-radius: 9999px;
-  background-color: var(--mza-surface);
+  background-color: var(--mza-surface-2);
   border: 1px solid var(--mza-border);
   box-shadow: var(--mza-shadow-sm);
   color: var(--mza-text);
@@ -749,7 +759,7 @@ textarea {
 }
 
 .list-controls .nav-pills > li > a:hover {
-  background-color: var(--mza-surface-2);
+  background-color: var(--mza-surface);
   box-shadow: var(--mza-shadow-md);
   color: var(--tertiary);
 }

@@ -18,8 +18,8 @@ $mza-bg: #f8fafc;
 $mza-border: #e2e8f0;
 
 // ===================================
-// Soft UI Design Tokens (Sprint V2)
-// Light surfaces, subtle borders, soft shadows
+// Soft UI Design Tokens (Sprint V3)
+// Light surfaces, subtle borders, soft shadows, glassmorphism
 // ===================================
 :root {
   --mza-surface: #fff;
@@ -27,7 +27,7 @@ $mza-border: #e2e8f0;
   --mza-border: #e2e8f0;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.07);
-  --mza-radius: 0.5rem;
+  --mza-radius: 1rem; // Updated to 1rem for rounded-2xl feel (16px)
   --mza-text: var(--primary);
 }
 
@@ -38,6 +38,11 @@ html[data-theme="dark"] {
   --mza-border: #334155;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.3);
+}
+
+// Page background - slate-like surface for modern look (non-admin pages only)
+body:not(.admin-interface) {
+  background: #f8fafc; // slate-50
 }
 
 // Legacy accent colors for section tabs
@@ -56,14 +61,15 @@ $mza-mobile-breakpoint: 768px;
 // and loaded via head_tag.html - no override needed here
 
 // ===================================
-// Topic List Polish (T3 + Sprint V2)
+// Topic List Polish (T3 + Sprint V3)
 // Card-like appearance with RTL support
 // Mobile-first design with no horizontal scroll at 375px
+// Modern soft UI with increased whitespace and card borders
 // ===================================
 
 // Main topic list container
 table.topic-list {
-  border-spacing: 0 0.5rem;
+  border-spacing: 0 0.75rem; // Increased spacing from 0.5rem to 0.75rem for breathing room
   margin-block-end: 1.5rem;
   table-layout: fixed;
   width: 100%;
@@ -115,23 +121,29 @@ tr.topic-list-header {
   }
 }
 
-// Topic row - soft card styling (Soft UI Sprint)
-// Light surfaces, subtle borders, soft shadows
+// Topic row - soft card styling (Soft UI Sprint V3)
+// Light surfaces, subtle borders, soft shadows with rounded-2xl feel
+// Increased whitespace and subtle hover effects
 // Note: We do NOT use display:table on tr.topic-list-item to maintain column alignment with the header
 tr.topic-list-item {
   transition:
     background 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 
-  &:hover td {
-    background: var(--mza-surface-2);
-    box-shadow: var(--mza-shadow-md);
+  &:hover {
+    transform: translateY(-1px); // Subtle lift on hover
+
+    td {
+      background: var(--mza-surface-2);
+      box-shadow: var(--mza-shadow-md);
+    }
   }
 
-  // Comfortable spacing for better card feel
+  // Comfortable spacing for better card feel with increased padding
   td {
-    padding-block: 1rem;
-    padding-inline: 0.875rem;
+    padding-block: 1.5rem; // Increased from 1rem to 1.5rem (p-6)
+    padding-inline: 1.25rem; // Increased from 0.875rem to 1.25rem (p-5)
     vertical-align: middle;
     background: var(--mza-surface);
     border-top: 1px solid var(--mza-border);
@@ -143,17 +155,18 @@ tr.topic-list-item {
   }
 
   // First cell gets left border + left border-radius (RTL: inline-start)
+  // Using larger radius for rounded-2xl feel (1rem = 16px)
   td:first-child {
     border-inline-start: 1px solid var(--mza-border);
-    border-start-start-radius: var(--mza-radius);
-    border-end-start-radius: var(--mza-radius);
+    border-start-start-radius: var(--mza-radius); // 1rem
+    border-end-start-radius: var(--mza-radius); // 1rem
   }
 
   // Last cell gets right border + right border-radius (RTL: inline-end)
   td:last-child {
     border-inline-end: 1px solid var(--mza-border);
-    border-start-end-radius: var(--mza-radius);
-    border-end-end-radius: var(--mza-radius);
+    border-start-end-radius: var(--mza-radius); // 1rem
+    border-end-end-radius: var(--mza-radius); // 1rem
   }
 }
 
@@ -163,12 +176,14 @@ td.main-link.clearfix.topic-list-data {
   padding-inline-end: 1.25rem;
 }
 
-// Topic title - consistent sizing for readability
+// Topic title - consistent sizing for readability with Cairo font optimization
 // Scoped to table.topic-list to prevent unintended large titles elsewhere
+// Sprint V3: tracking-tight, font-weight 700 for strong headings
 table.topic-list a.title {
   font-size: var(--font-0);
-  font-weight: 600;
+  font-weight: 700; // Bold for strong emphasis (changed from 600)
   line-height: 1.5;
+  letter-spacing: -0.025em; // tracking-tight for Cairo
   color: var(--mza-text);
   display: block;
   margin-block-end: 0.5rem;
@@ -235,14 +250,15 @@ span.badge-category {
 }
 
 // Topic excerpt - enhanced spacing and styling
+// Sprint V3: text-sm, muted color, leading-relaxed for readability
 div.topic-excerpt {
   margin-block-start: 0.625rem;
   padding-inline-start: 1rem;
   padding-inline-end: 0.5rem;
   padding-block: 0.5rem;
   color: var(--primary-medium);
-  font-size: var(--font-down-1);
-  line-height: 1.65;
+  font-size: var(--font-down-1); // text-sm
+  line-height: 1.75; // leading-relaxed (changed from 1.65)
   border-inline-start: 3px solid var(--primary-low-mid);
   background-color: var(--primary-very-low);
   border-radius: 4px;
@@ -749,34 +765,68 @@ div.discourse-tags {
   }
 }
 
-// Header styling - transparent to avoid gradient duplication with .mza-topbar
+// ===================================
+// Glassmorphism Header (Sprint V3)
+// Sticky glass header with blur effect and perfect readability
+// ===================================
 .d-header {
-  background: transparent;
+  background: rgb(255 255 255 / 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--mza-border);
+  box-shadow: var(--mza-shadow-sm);
+
+  // Ensure text readability in glass header
+  .header-title,
+  .title,
+  a {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  a:hover {
+    color: var(--tertiary);
+  }
+
+  // Focus accessibility
+  a:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+// Dark mode glass header
+html[data-theme="dark"] .d-header {
+  background: rgb(30 41 59 / 0.85); // slate-800 with transparency
+  border-bottom-color: var(--mza-border);
 }
 
 // ===================================
 // Compact Topic List on /categories page
 // Reduces padding and font-size for latest topics section
-// Soft UI Sprint: Consistent density, prevents oversized latest section
+// Soft UI Sprint V3: Consistent density, prevents oversized latest section
 // Note: Uses smaller font and tighter padding while maintaining soft UI shadows
+// Matches base font size to prevent enlargement
 // ===================================
 .categories-and-latest table.topic-list {
   // Reduce table cell padding for compact look
   td {
-    padding-block: 0.5rem;
-    padding-inline: 0.5rem;
+    padding-block: 0.75rem; // Slightly increased from 0.5rem for better breathing
+    padding-inline: 0.75rem; // Slightly increased from 0.5rem
   }
 
-  // Reduce title font-size to base size for consistency with the page
+  // Keep title font-size at base size - NO larger than standard
+  // This prevents the "bigger titles on categories page" issue
   a.title {
-    font-size: var(--font-0);
+    font-size: var(--font-0); // Same as main topic list
     margin-block-end: 0.25rem;
-    font-weight: 500;
+    font-weight: 600; // Reduced from 700 to differentiate from main topics
+    letter-spacing: -0.025em; // tracking-tight
   }
 
   // Reduce main-link padding
   td.main-link.clearfix.topic-list-data {
-    padding-inline-start: 0.75rem;
-    padding-inline-end: 0.75rem;
+    padding-inline-start: 1rem; // Slightly increased from 0.75rem
+    padding-inline-end: 1rem;
   }
 }
