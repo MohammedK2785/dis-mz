@@ -18,7 +18,7 @@ $mza-bg: #f8fafc;
 $mza-border: #e2e8f0;
 
 // ===================================
-// Soft UI Design Tokens (Sprint V3 + V6)
+// Soft UI Design Tokens (Sprint V3 + V6 + V9 Card System)
 // Light surfaces, subtle borders, soft shadows, glassmorphism
 // ===================================
 :root {
@@ -28,8 +28,18 @@ $mza-border: #e2e8f0;
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.07);
   --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.04);
+
+  // V9: Extended radius tokens for unified card system
+  --mza-radius-sm: 0.5rem;
+  --mza-radius-md: 0.75rem;
   --mza-radius: 1rem;
+  --mza-radius-lg: 1rem;
   --mza-radius-3xl: 1.5rem;
+
+  // V9: Gap/spacing tokens
+  --mza-gap-2: 0.5rem;
+  --mza-gap-3: 0.75rem;
+  --mza-gap-4: 1rem;
   --mza-text: var(--primary);
   --mza-avatar-ring: #f1f5f9;
   --mza-glass-bg: rgb(255 255 255 / 0.75);
@@ -47,6 +57,8 @@ html[data-theme="dark"] {
   --mza-avatar-ring: #475569;
   --mza-glass-bg: rgb(30 41 59 / 0.75);
   --mza-glass-bg-solid: rgb(30 41 59 / 0.92);
+
+  // V9: Radius and gap tokens remain same in dark mode
 }
 
 // Page background - slate-like surface for modern look (non-admin pages only)
