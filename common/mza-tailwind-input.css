@@ -117,10 +117,482 @@ html[data-theme="dark"] {
    ================================== */
 @layer components {
   /* ===================================
-     Topic Page Components
+     V4 Topic Cards (CSS-only card visuals)
+     Individual card-like rows with rounded-2xl, border, shadow
      ================================== */
   
-  /* Post stream container improvements */
+  /* Topic list table - card spacing */
+  table.topic-list {
+    border-spacing: 0 0.875rem; /* Increased spacing between cards */
+    margin-block-end: 1.5rem;
+    table-layout: fixed;
+    width: 100%;
+
+    /* Column widths */
+    th.posters,
+    td.posters {
+      width: 7.5rem;
+      white-space: nowrap;
+    }
+
+    th.num,
+    td.num {
+      width: 4.5rem;
+      white-space: nowrap;
+    }
+
+    th.activity,
+    td.activity {
+      width: 5rem;
+      white-space: nowrap;
+    }
+  }
+
+  /* Table header - minimal, not card-like */
+  tr.topic-list-header {
+    th {
+      padding-block: 0.75rem;
+      padding-inline: 1rem;
+      font-size: var(--font-down-1);
+      font-weight: 600;
+      color: var(--primary-medium);
+      text-align: start;
+      border-bottom: 1px solid var(--mza-border);
+      background: transparent;
+    }
+
+    th.num,
+    th.activity {
+      text-align: center;
+    }
+
+    th.sortable {
+      cursor: pointer;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: var(--primary);
+      }
+    }
+  }
+
+  /* Topic row - V4 card visuals with rounded-2xl */
+  tr.topic-list-item {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+
+      td {
+        background: var(--mza-surface);
+        box-shadow: var(--mza-shadow-md);
+      }
+    }
+
+    /* Card cells - desktop spacing p-6 */
+    td {
+      padding-block: 1.5rem;
+      padding-inline: 1.5rem;
+      vertical-align: middle;
+      background: var(--mza-surface);
+      border-top: 1px solid var(--mza-border);
+      border-bottom: 1px solid var(--mza-border);
+      box-shadow: var(--mza-shadow-sm);
+      transition: box-shadow 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    /* First cell - left border + rounded-2xl start (1rem = 16px) */
+    td:first-child {
+      border-inline-start: 1px solid var(--mza-border);
+      border-start-start-radius: 1rem;
+      border-end-start-radius: 1rem;
+    }
+
+    /* Last cell - right border + rounded-2xl end */
+    td:last-child {
+      border-inline-end: 1px solid var(--mza-border);
+      border-start-end-radius: 1rem;
+      border-end-end-radius: 1rem;
+    }
+  }
+
+  /* Main content cell */
+  td.main-link.clearfix.topic-list-data {
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
+  }
+
+  /* Topic title - V4 bold, tracking-tight, controlled size */
+  table.topic-list a.title {
+    font-size: 1rem; /* var(--font-0) equivalent, explicitly set */
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.025em;
+    color: var(--primary);
+    display: block;
+    margin-block-end: 0.5rem;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--tertiary);
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--tertiary);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  /* RTL title alignment */
+  html[dir="rtl"] table.topic-list a.title {
+    text-align: start;
+  }
+
+  /* Topic details */
+  div.topic-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Top line (title and badges) */
+  div.link-top-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* Bottom line - enhanced spacing */
+  div.link-bottom-line {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+    font-size: var(--font-down-1);
+    color: var(--primary-medium);
+  }
+
+  /* Category badge */
+  a.badge-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding-inline-end: 0.5rem;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  span.badge-category {
+    font-weight: 600;
+    font-size: var(--font-down-1);
+  }
+
+  /* ===================================
+     V4 Pastel Category Pills
+     Soft, readable category badges with pastel backgrounds
+     ================================== */
+  
+  /* Category badge with pastel background using color-mix */
+  .badge-category,
+  span.badge-category__wrapper,
+  .category-badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px; /* fully rounded pill */
+    border: 1px solid var(--mza-border);
+    font-weight: 500;
+    font-size: var(--font-down-1);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  /* Use color-mix for pastel background if category color is available */
+  .badge-category[style*="--category-badge-color"],
+  span.badge-category__wrapper[style*="--category-badge-color"] {
+    background: color-mix(in srgb, var(--category-badge-color) 12%, transparent) !important;
+    color: var(--category-badge-color) !important;
+    border-color: color-mix(in srgb, var(--category-badge-color) 20%, transparent);
+  }
+
+  /* Fallback for badges without category color */
+  .badge-category:not([style*="--category-badge-color"]),
+  span.badge-category__wrapper:not([style*="--category-badge-color"]) {
+    background: var(--mza-surface-2);
+    color: var(--primary);
+  }
+
+  /* Hover - subtle background change */
+  .badge-category:hover,
+  span.badge-category__wrapper:hover,
+  .category-badge:hover {
+    background: color-mix(in srgb, var(--category-badge-color, var(--mza-border)) 18%, transparent) !important;
+  }
+
+  /* Badge bullet/color indicator */
+  .badge-category__color,
+  .badge-category .badge-category__color {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+
+  /* Topic excerpt - V4 text-sm, muted, leading-relaxed */
+  div.topic-excerpt {
+    margin-block-start: 0.625rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 0.5rem;
+    padding-block: 0.5rem;
+    color: var(--primary-medium);
+    font-size: 0.875rem; /* text-sm */
+    line-height: 1.75; /* leading-relaxed */
+    border-inline-start: 3px solid var(--primary-low-mid);
+    background-color: var(--primary-very-low);
+    border-radius: 4px;
+  }
+
+  html[dir="rtl"] div.topic-excerpt {
+    text-align: start;
+  }
+
+  /* ===================================
+     V4 Minimal Stats (Phase 1: CSS-only)
+     Reduce visual weight of stats columns
+     ================================== */
+  
+  /* Stats columns - subtle, smaller, centered */
+  td.num {
+    text-align: center;
+    font-size: 0.8125rem; /* Smaller than var(--font-down-1) */
+    color: var(--primary-medium);
+    white-space: nowrap;
+    min-width: 3.5rem;
+    padding-inline: 0.75rem;
+
+    /* Posts map button */
+    button.btn-link.posts-map.badge-posts {
+      font-weight: 500; /* Reduced from 600 */
+      color: var(--primary-medium); /* More subtle */
+      transition: color 0.15s ease, transform 0.1s ease;
+
+      &:hover {
+        color: var(--tertiary);
+        transform: scale(1.05);
+      }
+    }
+
+    /* Number display */
+    span.number {
+      font-weight: 400; /* Reduced from 500 */
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  /* Reduce heatmap intensity */
+  button.btn-link.posts-map.badge-posts.heatmap-high {
+    color: var(--primary); /* Reduced from danger */
+    font-weight: 500; /* Reduced from 700 */
+  }
+
+  button.btn-link.posts-map.badge-posts.heatmap-med {
+    color: var(--primary-medium); /* Reduced from tertiary */
+    font-weight: 500; /* Reduced from 600 */
+  }
+
+  button.btn-link.posts-map.badge-posts.heatmap-low {
+    color: var(--primary-medium);
+    font-weight: 400; /* Reduced from 500 */
+  }
+
+  /* Activity cell - subtle */
+  td.num.topic-list-data.age.activity {
+    font-size: 0.8125rem;
+
+    a.post-activity {
+      color: var(--primary-medium);
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: var(--tertiary);
+        text-decoration: none;
+      }
+    }
+
+    span.relative-date {
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  /* Views column - subtle */
+  td.num.views.topic-list-data {
+    color: var(--primary-medium);
+
+    span.number {
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  /* Topic status icons */
+  div.topic-statuses {
+    display: inline-flex;
+    gap: 0.375rem;
+    align-items: center;
+    margin-inline-end: 0.5rem;
+
+    svg.fa.d-icon {
+      width: 1em;
+      height: 1em;
+      transition: transform 0.15s ease;
+    }
+
+    svg.fa.d-icon.d-icon-thumbtack {
+      color: var(--tertiary);
+    }
+
+    svg.fa.d-icon.d-icon-lock {
+      color: var(--primary-medium);
+    }
+  }
+
+  /* Pinned topics - enhanced with border accent */
+  tr.topic-list-item.pinned,
+  tr.topic-list-item.globally-pinned {
+    td {
+      background: linear-gradient(to right, var(--tertiary-very-low), var(--mza-surface));
+    }
+
+    td:first-child {
+      border-inline-start-color: var(--tertiary);
+      border-inline-start-width: 4px;
+    }
+
+    &:hover td {
+      background: linear-gradient(to right, var(--tertiary-low), var(--primary-very-low));
+    }
+  }
+
+  /* RTL pinned topics */
+  html[dir="rtl"] tr.topic-list-item.pinned,
+  html[dir="rtl"] tr.topic-list-item.globally-pinned {
+    td {
+      background: linear-gradient(to left, var(--tertiary-very-low), var(--mza-surface));
+    }
+
+    &:hover td {
+      background: linear-gradient(to left, var(--tertiary-low), var(--primary-very-low));
+    }
+  }
+
+  /* Closed topics - subtle */
+  tr.topic-list-item.closed {
+    td {
+      opacity: 0.65;
+    }
+
+    a.title {
+      color: var(--primary-medium);
+    }
+  }
+
+  /* Tags - enhanced pill design */
+  div.discourse-tags {
+    display: inline-flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+
+    a.discourse-tag {
+      font-size: var(--font-down-2);
+      padding: 0.25rem 0.625rem;
+      border-radius: 4px;
+      background: var(--primary-low);
+      color: var(--primary-high);
+      font-weight: 500;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+      text-decoration: none;
+
+      &:hover {
+        background: var(--primary-low-mid);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* Mobile responsive - reduce to p-4 */
+  @media screen and (max-width: 768px) {
+    tr.topic-list-item td {
+      padding-block: 1rem;
+      padding-inline: 1rem;
+    }
+
+    td.main-link.clearfix.topic-list-data {
+      padding-inline-start: 1rem;
+      padding-inline-end: 1rem;
+    }
+  }
+
+  /* ===================================
+     V4 Compact Topic Stats (Phase 2: Optional with theme setting)
+     Inline stats with icons, hide standard columns when enabled
+     ================================== */
+  
+  /* Inline compact stats container */
+  .mza-compact-stats {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+    margin-inline-start: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--primary-medium);
+  }
+
+  .mza-stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    svg.d-icon {
+      width: 0.875em;
+      height: 0.875em;
+      opacity: 0.7;
+    }
+
+    span {
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  /* Hide standard stats columns when compact stats are enabled */
+  /* This will be applied when the compact_topic_stats setting is true */
+  body.compact-topic-stats-enabled {
+    .topic-list th.num,
+    .topic-list td.num,
+    .topic-list th.activity,
+    .topic-list td.activity,
+    .topic-list th.posters,
+    .topic-list td.posters {
+      display: none;
+    }
+  }
+
+
+  /* ===================================
+     Topic Page Components (Post Stream)
+     ================================== */
+  
   .topic-post {
     @apply mb-4;
     border-bottom: 1px solid var(--primary-low);
@@ -297,21 +769,21 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     Header Components (Soft UI V3)
+     Header Components (Soft UI V3 + V4 Glass Header)
      Glass header with blur effect and perfect readability
      ================================== */
   
-  /* Custom Top Header Bar - Glass styling to match .d-header */
+  /* Custom Top Header Bar - Soft secondary styling (no heavy gradient) */
   .mza-topbar {
-    background: rgb(255 255 255 / 0.8);
-    backdrop-filter: blur(12px);
+    background: rgb(255 255 255 / 0.65);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--mza-border);
-    box-shadow: var(--mza-shadow-sm);
+    box-shadow: none;
   }
   
   /* Dark mode glass topbar */
   html[data-theme="dark"] .mza-topbar {
-    background: rgb(30 41 59 / 0.85);
+    background: rgb(30 41 59 / 0.7);
   }
 
   .mza-topbar-inner {
@@ -475,6 +947,103 @@ html[data-theme="dark"] {
       padding: 0.625rem 0.875rem;
       font-size: 0.875rem;
     }
+  }
+
+  /* ===================================
+     V4 Glass Header (Discourse Core .d-header)
+     Sticky glassmorphism with excellent readability
+     ================================== */
+  
+  .d-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--mza-border);
+    box-shadow: var(--mza-shadow-sm);
+  }
+
+  /* Dark mode glass header */
+  html[data-theme="dark"] .d-header {
+    background: rgba(30, 41, 59, 0.75) !important;
+    border-bottom-color: var(--mza-border);
+  }
+
+  /* Header links - improved readability and elegance */
+  .d-header .header-title a,
+  .d-header .title a,
+  .d-header a.icon {
+    color: var(--primary) !important;
+    font-weight: 500;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .d-header a:hover,
+  .d-header a.icon:hover {
+    color: var(--tertiary) !important;
+    opacity: 1;
+  }
+
+  .d-header a:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Icons in header */
+  .d-header .icon {
+    opacity: 0.8;
+  }
+
+  .d-header .icon:hover {
+    opacity: 1;
+  }
+
+  /* Search panel improvements - V4 modern search styling */
+  .d-header .search-menu,
+  .d-header .panel {
+    background: var(--mza-surface);
+    border: 1px solid var(--mza-border);
+    box-shadow: var(--mza-shadow-md);
+    border-radius: 0.75rem;
+  }
+
+  /* Search input - slate-100 surface with modern focus */
+  .d-header input[type="text"].search-input,
+  .d-header .search-input input,
+  #search-term {
+    background-color: #f1f5f9 !important; /* slate-100 */
+    border: 1px solid var(--mza-border);
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Dark mode search input */
+  html[data-theme="dark"] .d-header input[type="text"].search-input,
+  html[data-theme="dark"] .d-header .search-input input,
+  html[data-theme="dark"] #search-term {
+    background-color: var(--mza-surface-2) !important;
+  }
+
+  /* Search input focus - white bg with subtle ring */
+  .d-header input[type="text"].search-input:focus,
+  .d-header .search-input input:focus,
+  #search-term:focus {
+    background-color: var(--mza-surface) !important;
+    border-color: var(--tertiary);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.08);
+    outline: none;
+  }
+
+  /* Focus-visible for accessibility */
+  .d-header input[type="text"].search-input:focus-visible,
+  .d-header .search-input input:focus-visible,
+  #search-term:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
   }
 }
 
