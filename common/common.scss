@@ -101,6 +101,7 @@ tr.topic-list-item {
 
   &:hover td {
     background: var(--primary-very-low);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
   }
 
   // Comfortable spacing for better card feel
@@ -111,6 +112,7 @@ tr.topic-list-item {
     background: var(--secondary);
     border-top: 1px solid var(--primary-low);
     border-bottom: 1px solid var(--primary-low);
+    transition: box-shadow 0.2s ease;
   }
 
   // First cell gets left border + left border-radius (RTL: inline-start)
@@ -321,9 +323,11 @@ div.topic-statuses {
 }
 
 // Pinned topics highlight with enhanced border accent (cell-based card)
+// Note: Gradient flows from accent color on inline-start to neutral on inline-end
 tr.topic-list-item.pinned,
 tr.topic-list-item.globally-pinned {
   td {
+    // LTR: gradient flows left (accent) to right (neutral)
     background: linear-gradient(
       to right,
       var(--tertiary-very-low),
@@ -339,6 +343,27 @@ tr.topic-list-item.globally-pinned {
   &:hover td {
     background: linear-gradient(
       to right,
+      var(--tertiary-low),
+      var(--primary-very-low)
+    );
+  }
+}
+
+// RTL override for pinned topics gradient
+html[dir="rtl"] tr.topic-list-item.pinned,
+html[dir="rtl"] tr.topic-list-item.globally-pinned {
+  td {
+    // RTL: gradient flows right (accent) to left (neutral)
+    background: linear-gradient(
+      to left,
+      var(--tertiary-very-low),
+      var(--secondary)
+    );
+  }
+
+  &:hover td {
+    background: linear-gradient(
+      to left,
       var(--tertiary-low),
       var(--primary-very-low)
     );
