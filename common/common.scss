@@ -13,6 +13,9 @@ $mza-accent-blue: #2196f3;
 $mza-accent-purple: #9c27b0;
 $mza-bg-light: #f5f5f5;
 
+// Typography
+$mza-font-size-nav: 0.9375rem; // 15px
+
 // Breakpoints
 $mza-mobile-breakpoint: 768px;
 
@@ -378,7 +381,7 @@ html[dir="rtl"] .mza-topbar-inner {
     display: inline-block;
     border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
-    font-size: 0.9375rem;
+    font-size: $mza-font-size-nav;
     
     &:hover,
     &:focus {
@@ -443,18 +446,17 @@ html[dir="rtl"] .mza-section-tabs-inner {
   padding: 0.75rem 1rem;
   color: var(--primary-high);
   font-weight: 500;
-  font-size: 0.9375rem;
+  font-size: $mza-font-size-nav;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
   border-bottom: 3px solid transparent;
-  transition: border-bottom-color 0.2s ease, font-weight 0.2s ease;
+  transition: border-bottom-color 0.2s ease, color 0.2s ease;
   
   &:hover,
   &:focus {
     color: var(--primary);
     text-decoration: none;
-    font-weight: 600;
   }
 }
 
