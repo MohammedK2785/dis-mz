@@ -110,6 +110,72 @@ html[data-theme="dark"] {
     outline: 2px solid var(--tertiary);
     outline-offset: 2px;
   }
+
+  /* ===================================
+     V5 Premium Typography - .cooked content
+     Cairo-optimized, leading-loose for Arabic readability
+     ================================== */
+  
+  /* Post content typography - enhanced line-height for Arabic */
+  .cooked {
+    line-height: 1.95; /* leading-loose for premium Arabic readability */
+    
+    /* Paragraph spacing */
+    p {
+      margin-block-end: 1.25rem;
+      line-height: 1.95;
+    }
+    
+    /* Heading hierarchy with tracking-tight and stronger weights */
+    h1, h2, h3, h4, h5, h6 {
+      letter-spacing: -0.025em; /* tracking-tight */
+      margin-block-start: 1.75rem;
+      margin-block-end: 0.875rem;
+      line-height: 1.35;
+    }
+    
+    h1 {
+      font-weight: 800;
+      font-size: 1.875rem; /* text-3xl */
+    }
+    
+    h2 {
+      font-weight: 700;
+      font-size: 1.5rem; /* text-2xl */
+    }
+    
+    h3 {
+      font-weight: 700;
+      font-size: 1.25rem; /* text-xl */
+    }
+    
+    h4 {
+      font-weight: 600;
+      font-size: 1.125rem; /* text-lg */
+    }
+    
+    h5, h6 {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    
+    /* Lists with comfortable spacing */
+    ul, ol {
+      margin-block: 1rem;
+      padding-inline-start: 1.75rem;
+      line-height: 1.85;
+      
+      li {
+        margin-block-end: 0.625rem;
+      }
+      
+      /* Nested lists */
+      ul, ol {
+        margin-block-start: 0.5rem;
+        margin-block-end: 0.5rem;
+      }
+    }
+  }
 }
 
 /* ===================================
@@ -709,7 +775,69 @@ html[data-theme="dark"] {
     color: var(--primary-medium);
   }
 
-  /* Post action buttons */
+  /* ===================================
+     V5 Action Bar - Subtle with hover reveal
+     Semi-transparent by default, full opacity on hover/focus-within
+     Rounded-full buttons with soft hover bg
+     ================================== */
+  
+  /* Topic post action bar - subtle by default */
+  .topic-post .actions,
+  .topic-post .post-menu-area,
+  .post-controls .actions {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+  }
+
+  .topic-post:hover .actions,
+  .topic-post:hover .post-menu-area,
+  .topic-post:focus-within .actions,
+  .topic-post:focus-within .post-menu-area,
+  .post-controls:hover .actions,
+  .post-controls:focus-within .actions {
+    opacity: 1;
+  }
+
+  /* Action buttons - rounded-full with soft hover */
+  .topic-post .actions button,
+  .post-controls .actions button,
+  .post-menu-area button {
+    @apply inline-flex items-center justify-center gap-1;
+    padding: 0.5rem 0.875rem;
+    border-radius: 9999px; /* rounded-full */
+    font-size: var(--font-down-1);
+    color: var(--primary-medium);
+    background-color: transparent;
+    border: none;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  }
+
+  .topic-post .actions button:hover,
+  .post-controls .actions button:hover,
+  .post-menu-area button:hover {
+    background-color: var(--primary-low);
+    color: var(--primary);
+    transform: scale(1.02);
+  }
+
+  .topic-post .actions button:focus-visible,
+  .post-controls .actions button:focus-visible,
+  .post-menu-area button:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+    background-color: var(--primary-low);
+  }
+
+  /* Liked/toggled state */
+  .topic-post .actions button.liked,
+  .topic-post .actions button.toggled,
+  .post-controls .actions button.liked,
+  .post-controls .actions button.toggled {
+    color: var(--love);
+    background-color: color-mix(in srgb, var(--love) 10%, transparent);
+  }
+
+  /* Legacy post-actions fallback */
   .post-actions {
     @apply flex gap-2 items-center;
     margin-block-start: 1rem;
@@ -718,7 +846,7 @@ html[data-theme="dark"] {
   .post-actions button {
     @apply inline-flex items-center gap-1;
     padding: 0.375rem 0.75rem;
-    border-radius: 4px;
+    border-radius: 9999px;
     font-size: var(--font-down-1);
     color: var(--primary-medium);
     background-color: transparent;
@@ -1570,3 +1698,51 @@ html[dir="rtl"] .sidebar-wrapper {
 .topic-list td.main-link {
   overflow: hidden;
 }
+
+
+/* ===================================
+   V5 Reading Progress Bar
+   Thin progress indicator at top of topic pages
+   ================================== */
+
+/* Reading progress bar container */
+.mza-reading-progress {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Progress bar fill */
+.mza-reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    var(--tertiary) 0%,
+    var(--tertiary-hover, var(--tertiary)) 100%
+  );
+  border-radius: 0 2px 2px 0;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
+}
+
+/* RTL support - gradient flows from right */
+html[dir="rtl"] .mza-reading-progress-bar {
+  background: linear-gradient(
+    270deg,
+    var(--tertiary) 0%,
+    var(--tertiary-hover, var(--tertiary)) 100%
+  );
+  border-radius: 2px 0 0 2px;
+}
+
+/* Hide on non-topic pages (JS controls visibility) */
+.mza-reading-progress.hidden {
+  display: none;
+}
+
