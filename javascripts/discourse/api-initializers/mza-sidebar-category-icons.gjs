@@ -36,16 +36,23 @@ const CATEGORY_ICONS = {
 const DEFAULT_ICON = "folder";
 
 export default apiInitializer("1.34", (api) => {
-  // Decorate sidebar category section links with icons
-  api.decorateCategorySectionLink((category, args) => {
-    if (!category?.slug) {
+  // Get all categories from the site model
+  const site = api.container.lookup("service:site");
+  const categories = site?.categories || [];
+
+  // Register custom prefix for each category using the modern API
+  categories.forEach((category) => {
+    if (!category?.id || !category?.slug) {
       return;
     }
 
     const iconName = CATEGORY_ICONS[category.slug] || DEFAULT_ICON;
 
-    // Add icon prefix to the category link
-    args.prefixType = "icon";
-    args.prefixValue = iconName;
+    // Use the modern registerCustomCategorySectionLinkPrefix API
+    api.registerCustomCategorySectionLinkPrefix({
+      categoryId: category.id,
+      prefixType: "icon",
+      prefixValue: iconName,
+    });
   });
 });
