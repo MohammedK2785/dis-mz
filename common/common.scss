@@ -3,7 +3,7 @@
 // ===================================
 
 // Import Tailwind compiled utilities
-@import "mza-tailwind";
+// @import "mza-tailwind"; // Temporarily commented out - Discourse server Node version too old to build Tailwind
 
 // Mza3et custom styles (migrated from legacy styles.scss)
 // TODO: Refine and organize these styles
