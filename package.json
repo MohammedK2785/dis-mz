@@ -14,8 +14,8 @@
     "tailwindcss": "3.4.17"
   },
   "scripts": {
-    "build:css": "tailwindcss -c tailwind.config.cjs -i ./common/mza-tailwind-input.css -o ./common/mza-tailwind.scss --minify",
-    "watch:css": "tailwindcss -c tailwind.config.cjs -i ./common/mza-tailwind-input.css -o ./common/mza-tailwind.scss --watch",
+    "build:css": "tailwindcss -c tailwind.config.cjs -i ./common/mza-tailwind-input.css -o ./scss/mza-tailwind.scss --minify",
+    "watch:css": "tailwindcss -c tailwind.config.cjs -i ./common/mza-tailwind-input.css -o ./scss/mza-tailwind.scss --watch",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\"",
     "lint:css": "pnpm stylelint {javascripts,desktop,mobile,common,scss}/**/*.scss --allow-empty-input",
