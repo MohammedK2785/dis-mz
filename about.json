@@ -1,0 +1,10 @@
+{
+  "name": "Mza3et Theme",
+  "theme_version": "0.1",
+  "about_url": "https://mza3et.com",
+  "license_url": "https://github.com/MohammedK2785/discourse-theme/blob/main/LICENSE",
+  "authors": "MohammedK2785",
+  "theme_fields": {
+    "common": ["styles.scss", "head_tag.html", "body_tag.html"]
+  }
+}
