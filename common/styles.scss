@@ -2,7 +2,12 @@
 $mza-primary-red: #d32f2f;
 $mza-accent-green: #4caf50;
 $mza-accent-orange: #ff9800;
+$mza-accent-blue: #2196f3;
+$mza-accent-purple: #9c27b0;
 $mza-bg-light: #f5f5f5;
+
+// Breakpoints
+$mza-mobile-breakpoint: 768px;
 
 // Arabic-friendly font stack
 body {
@@ -12,4 +17,220 @@ body {
 // Header styling
 .d-header {
   background-color: $mza-primary-red;
+}
+
+// ===================================
+// Custom Top Header Bar (.mza-topbar)
+// ===================================
+.mza-topbar {
+  background-color: $mza-primary-red;
+  color: white;
+  padding: 1rem 1.5rem;
+}
+
+.mza-topbar__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  direction: rtl;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Logo styling
+.mza-topbar__logo {
+  margin: 0;
+}
+
+.mza-logo-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  
+  &:hover,
+  &:focus {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+// Main navigation
+.mza-topbar__nav {
+  display: block;
+}
+
+.mza-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  direction: rtl;
+  gap: 1.5rem;
+}
+
+.mza-nav-item {
+  margin: 0;
+}
+
+.mza-nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+  
+  &:hover,
+  &:focus {
+    color: white;
+    border-bottom-color: white;
+  }
+}
+
+// Hamburger menu toggle
+.mza-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  
+  &:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+}
+
+.mza-menu-toggle__icon {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+  }
+  
+  &::before {
+    top: -8px;
+  }
+  
+  &::after {
+    bottom: -8px;
+  }
+}
+
+// ===================================
+// Section Tabs
+// ===================================
+.mza-section-tabs {
+  padding: 1rem 1.5rem;
+  background-color: $mza-bg-light;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mza-section-tabs__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  direction: rtl;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+.mza-section-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  border-radius: 999px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  
+  &:hover,
+  &:focus {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    color: white;
+    text-decoration: none;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Tab color variants
+.mza-section-tab--offers {
+  background-color: $mza-accent-orange;
+}
+
+.mza-section-tab--cars {
+  background-color: $mza-accent-green;
+}
+
+.mza-section-tab--reports {
+  background-color: $mza-accent-blue;
+}
+
+.mza-section-tab--questions {
+  background-color: $mza-accent-purple;
+}
+
+// ===================================
+// Mobile Responsive Styles
+// ===================================
+@media (max-width: $mza-mobile-breakpoint) {
+  // Show hamburger menu button
+  .mza-menu-toggle {
+    display: block;
+  }
+  
+  // Hide main navigation by default
+  .mza-topbar__nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: $mza-primary-red;
+    padding: 1rem 1.5rem;
+    z-index: 1000;
+    
+    // Show when is-open class is added
+    &.is-open {
+      display: block;
+    }
+  }
+  
+  // Make nav list vertical on mobile
+  .mza-nav-list {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  // Adjust nav links for vertical layout
+  .mza-nav-link {
+    display: block;
+    padding: 0.75rem 0;
+  }
+  
+  // Make topbar position relative for absolute nav positioning
+  .mza-topbar {
+    position: relative;
+  }
 }
