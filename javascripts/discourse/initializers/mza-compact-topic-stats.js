@@ -10,6 +10,9 @@ function initializeCompactTopicStats(api) {
     return;
   }
 
+  // Add body class to enable compact stats CSS
+  document.body.classList.add("compact-topic-stats-enabled");
+
   api.decorateWidget("topic-list-item:after", (helper) => {
     try {
       const topic = helper.attrs.topic;
