@@ -1024,12 +1024,18 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     Header Components (Soft UI V3 + V4 Glass Header)
-     Glass header with blur effect and perfect readability
+     Header Components - Scoped to .mza-header
+     All custom header/nav styles are contained within .mza-header wrapper
+     to prevent global leaks affecting icons elsewhere (topic list, composer)
      ================================== */
   
+  /* Header wrapper - isolates all custom header styling */
+  .mza-header {
+    /* No special styling needed, just a scoping container */
+  }
+
   /* Custom Top Header Bar - Soft secondary styling (no heavy gradient) */
-  .mza-topbar {
+  .mza-header .mza-topbar {
     background: rgb(255 255 255 / 0.65);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--mza-border);
@@ -1037,67 +1043,107 @@ html[data-theme="dark"] {
   }
   
   /* Dark mode glass topbar */
-  html[data-theme="dark"] .mza-topbar {
+  html[data-theme="dark"] .mza-header .mza-topbar {
     background: rgb(30 41 59 / 0.7);
   }
 
-  .mza-topbar-inner {
+  .mza-header .mza-topbar-inner {
     @apply flex items-center justify-between py-3;
   }
 
   /* High-specificity override to ensure header links are visible */
-  #main-outlet .mza-topbar a {
+  .mza-header .mza-topbar a {
     color: var(--mza-text);
     text-decoration: none;
   }
 
-  #main-outlet .mza-topbar a:hover,
-  #main-outlet .mza-topbar a:focus {
+  .mza-header .mza-topbar a:hover,
+  .mza-header .mza-topbar a:focus {
     color: var(--tertiary);
     text-decoration: none;
   }
 
-  #main-outlet .mza-topbar a:focus-visible {
+  .mza-header .mza-topbar a:focus-visible {
     outline: 2px solid var(--tertiary);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
   /* Logo styling - Soft UI */
-  .mza-logo {
+  .mza-header .mza-logo {
     font-weight: 600;
     font-size: 1rem;
     color: var(--mza-text);
   }
 
-  .mza-logo a {
+  .mza-header .mza-logo a {
     color: var(--mza-text);
     text-decoration: none;
   }
 
-  .mza-logo a:hover,
-  .mza-logo a:focus {
+  .mza-header .mza-logo a:hover,
+  .mza-header .mza-logo a:focus {
     color: var(--tertiary);
     text-decoration: none;
   }
 
   /* Main navigation - Pill-like nav links */
-  .mza-main-nav {
+  .mza-header .mza-main-nav {
     @apply flex gap-4;
   }
 
   @media (min-width: 768px) {
-    .mza-main-nav {
+    .mza-header .mza-main-nav {
       @apply gap-5;
     }
   }
 
-  .mza-main-nav a {
+  /* Navigation link styling - mobile-optimized sizing */
+  .mza-header .mza-nav-link {
+    @apply inline-flex items-center justify-center;
     color: var(--mza-text);
     text-decoration: none;
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-    border-radius: var(--mza-radius);
+    font-size: 0.8125rem; /* Slightly smaller on mobile */
+    padding: 0.375rem 0.75rem; /* Reduced padding for mobile */
+    border-radius: var(--mza-radius-sm);
+    background-color: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    box-shadow: var(--mza-shadow-sm);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+    /* Prevent oversized buttons on iPhone */
+    min-height: 36px;
+    max-height: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .mza-header .mza-nav-link {
+      font-size: 0.9375rem;
+      padding: 0.5rem 1rem;
+      min-height: 40px;
+      max-height: 44px;
+    }
+  }
+
+  .mza-header .mza-nav-link:hover,
+  .mza-header .mza-nav-link:focus {
+    background-color: var(--mza-surface);
+    box-shadow: var(--mza-shadow-md);
+    color: var(--tertiary);
+    text-decoration: none;
+  }
+
+  .mza-header .mza-nav-link:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+
+  /* Legacy .mza-main-nav a support (if used directly) */
+  .mza-header .mza-main-nav a:not(.mza-nav-link) {
+    color: var(--mza-text);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--mza-radius-sm);
     background-color: var(--mza-surface-2);
     border: 1px solid var(--mza-border);
     box-shadow: var(--mza-shadow-sm);
@@ -1105,102 +1151,104 @@ html[data-theme="dark"] {
   }
 
   @media (min-width: 768px) {
-    .mza-main-nav a {
+    .mza-header .mza-main-nav a:not(.mza-nav-link) {
       font-size: 1rem;
     }
   }
 
-  .mza-main-nav a:hover,
-  .mza-main-nav a:focus {
+  .mza-header .mza-main-nav a:not(.mza-nav-link):hover,
+  .mza-header .mza-main-nav a:not(.mza-nav-link):focus {
     background-color: var(--mza-surface);
     box-shadow: var(--mza-shadow-md);
     color: var(--tertiary);
     text-decoration: none;
   }
 
-  .mza-main-nav a:focus-visible {
+  .mza-header .mza-main-nav a:not(.mza-nav-link):focus-visible {
     outline: 2px solid var(--tertiary);
     outline-offset: 2px;
   }
 
   /* Section Tabs Container */
-  .mza-section-tabs {
+  .mza-header .mza-section-tabs {
     @apply w-full bg-white overflow-x-auto;
     border-bottom: 1px solid var(--primary-low, #e5e5e5);
     -webkit-overflow-scrolling: touch;
   }
 
-  .mza-section-tabs::-webkit-scrollbar {
+  .mza-header .mza-section-tabs::-webkit-scrollbar {
     height: 4px;
   }
 
-  .mza-section-tabs::-webkit-scrollbar-thumb {
+  .mza-header .mza-section-tabs::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 2px;
   }
 
-  .mza-section-tabs::-webkit-scrollbar-track {
+  .mza-header .mza-section-tabs::-webkit-scrollbar-track {
     background-color: transparent;
   }
 
   /* Section Tabs Inner Container */
-  .mza-section-tabs-inner {
+  .mza-header .mza-section-tabs-inner {
     @apply flex;
     gap: 0;
     flex-wrap: nowrap;
   }
 
-  /* Individual Section Tab */
-  .mza-section-tab {
+  /* Individual Section Tab - mobile-optimized sizing */
+  .mza-header .mza-section-tab {
     @apply inline-flex items-center whitespace-nowrap;
-    padding: 0.75rem 1rem;
+    padding: 0.625rem 0.875rem;
     color: var(--primary-high, #333);
     font-weight: 500;
-    font-size: 0.9375rem;
+    font-size: 0.8125rem; /* Smaller on mobile */
     text-decoration: none;
     flex-shrink: 0;
     border-bottom: 3px solid transparent;
     transition: border-bottom-color 0.2s ease, color 0.2s ease;
   }
 
-  .mza-section-tab:hover,
-  .mza-section-tab:focus {
+  @media (min-width: 768px) {
+    .mza-header .mza-section-tab {
+      padding: 0.75rem 1rem;
+      font-size: 0.9375rem;
+    }
+  }
+
+  .mza-header .mza-section-tab:hover,
+  .mza-header .mza-section-tab:focus {
     color: var(--primary, #000);
     text-decoration: none;
   }
 
   /* Tab accent color variants */
-  .mza-section-tab--offers:hover,
-  .mza-section-tab--offers:focus {
+  .mza-header .mza-section-tab--offers:hover,
+  .mza-header .mza-section-tab--offers:focus {
     border-bottom-color: #ff9800;
   }
 
-  .mza-section-tab--cars:hover,
-  .mza-section-tab--cars:focus {
+  .mza-header .mza-section-tab--cars:hover,
+  .mza-header .mza-section-tab--cars:focus {
     border-bottom-color: #4caf50;
   }
 
-  .mza-section-tab--reports:hover,
-  .mza-section-tab--reports:focus {
+  .mza-header .mza-section-tab--reports:hover,
+  .mza-header .mza-section-tab--reports:focus {
     border-bottom-color: #2196f3;
   }
 
-  .mza-section-tab--questions:hover,
-  .mza-section-tab--questions:focus {
+  .mza-header .mza-section-tab--questions:hover,
+  .mza-header .mza-section-tab--questions:focus {
     border-bottom-color: #9c27b0;
   }
 
-  /* Mobile responsive styles */
+  /* Mobile responsive styles for section tabs */
   @media (max-width: 768px) {
-    .mza-section-tabs {
+    .mza-header .mza-section-tabs {
       overflow-y: hidden;
       scroll-behavior: smooth;
       overscroll-behavior-x: contain;
-    }
-
-    .mza-section-tab {
-      padding: 0.625rem 0.875rem;
-      font-size: 0.875rem;
     }
   }
 

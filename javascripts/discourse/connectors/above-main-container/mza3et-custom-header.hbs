@@ -1,32 +1,54 @@
-<!-- Mza3et Theme - Custom Top Header Bar (Sky Blue) -->
-<header class="mza-topbar bg-mza-sky-gradient">
-  <div class="wrap">
-    <div class="mza-topbar-inner">
-      <!-- Logo element (RTL start side) -->
-      <div class="mza-logo">
-        <a href="/">مزاعيط المغرب</a>
+{{!-- Mza3et Theme - Custom Header Bar with Section Tabs --}}
+{{!-- All header/nav styling is scoped to .mza-header to avoid global leaks --}}
+<div class="mza-header">
+  {{!-- Top Header Bar (Sky Blue Gradient) --}}
+  <header class="mza-topbar bg-mza-sky-gradient">
+    <div class="wrap">
+      <div class="mza-topbar-inner">
+        {{!-- Logo element (RTL start side) --}}
+        <div class="mza-logo">
+          <a href="{{theme-setting 'nav_home_url'}}">مزاعيط المغرب</a>
+        </div>
+        
+        {{!-- Main navigation - links from theme settings --}}
+        <nav class="mza-main-nav" aria-label="التنقل الرئيسي">
+          {{#if (theme-setting "nav_home_url")}}
+            <a href="{{theme-setting 'nav_home_url'}}" class="mza-nav-link">{{theme-setting "nav_home_label"}}</a>
+          {{/if}}
+          {{#if (theme-setting "nav_morocco_url")}}
+            <a href="{{theme-setting 'nav_morocco_url'}}" class="mza-nav-link">{{theme-setting "nav_morocco_label"}}</a>
+          {{/if}}
+          {{#if (theme-setting "nav_world_url")}}
+            <a href="{{theme-setting 'nav_world_url'}}" class="mza-nav-link">{{theme-setting "nav_world_label"}}</a>
+          {{/if}}
+          {{#if (theme-setting "nav_reports_url")}}
+            <a href="{{theme-setting 'nav_reports_url'}}" class="mza-nav-link hidden md:inline-flex">{{theme-setting "nav_reports_label"}}</a>
+          {{/if}}
+          {{#if (theme-setting "nav_questions_url")}}
+            <a href="{{theme-setting 'nav_questions_url'}}" class="mza-nav-link hidden md:inline-flex">{{theme-setting "nav_questions_label"}}</a>
+          {{/if}}
+        </nav>
       </div>
-      
-      <!-- Main navigation -->
-      <nav class="mza-main-nav" aria-label="التنقل الرئيسي">
-        <a href="/">الرئيسية</a>
-        <a href="#morocco">بوابة المغرب</a>
-        <a href="#world">بوابة العالم</a>
-        <a href="#reports" class="hidden md:inline-block">التقارير</a>
-        <a href="#questions" class="hidden md:inline-block">الاستفسارات</a>
-      </nav>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- Horizontal Section Tabs Bar - Full-width under header -->
-<div class="mza-section-tabs" aria-label="الأقسام الرئيسية">
-  <div class="wrap">
-    <div class="mza-section-tabs-inner">
-      <a href="#offers" class="mza-section-tab mza-section-tab--offers">العروض والحجوزات</a>
-      <a href="#cars" class="mza-section-tab mza-section-tab--cars">السيارات</a>
-      <a href="#reports" class="mza-section-tab mza-section-tab--reports">التقارير</a>
-      <a href="#questions" class="mza-section-tab mza-section-tab--questions">الاستفسارات</a>
+  {{!-- Horizontal Section Tabs Bar - Full-width under header --}}
+  <div class="mza-section-tabs" aria-label="الأقسام الرئيسية">
+    <div class="wrap">
+      <div class="mza-section-tabs-inner">
+        {{#if (theme-setting "nav_offers_url")}}
+          <a href="{{theme-setting 'nav_offers_url'}}" class="mza-section-tab mza-section-tab--offers">{{theme-setting "nav_offers_label"}}</a>
+        {{/if}}
+        {{#if (theme-setting "nav_cars_url")}}
+          <a href="{{theme-setting 'nav_cars_url'}}" class="mza-section-tab mza-section-tab--cars">{{theme-setting "nav_cars_label"}}</a>
+        {{/if}}
+        {{#if (theme-setting "nav_reports_url")}}
+          <a href="{{theme-setting 'nav_reports_url'}}" class="mza-section-tab mza-section-tab--reports">{{theme-setting "nav_reports_label"}}</a>
+        {{/if}}
+        {{#if (theme-setting "nav_questions_url")}}
+          <a href="{{theme-setting 'nav_questions_url'}}" class="mza-section-tab mza-section-tab--questions">{{theme-setting "nav_questions_label"}}</a>
+        {{/if}}
+      </div>
     </div>
   </div>
 </div>
