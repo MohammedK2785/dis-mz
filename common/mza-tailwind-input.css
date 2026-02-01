@@ -2936,11 +2936,41 @@ html[dir="rtl"] {
    ================================== */
 @layer components {
   @media (max-width: 768px) {
-    body.category:has(.subcategories) #list-area,
-    body.category:has(.subcategories) .topic-list { @apply hidden; }
+    /* Hide topic list blocks on category pages - scoped to body.category and .category-page */
+    body.category #list-area,
+    body.category .topic-list,
+    body.category .topic-list-header,
+    body.category .topic-list-body,
+    body.category .topic-list-footer,
+    body.category .category-featured-topics,
+    .category-page #list-area,
+    .category-page .topic-list,
+    .category-page .topic-list-header,
+    .category-page .topic-list-body,
+    .category-page .topic-list-footer,
+    .category-page .category-featured-topics {
+      @apply hidden;
+    }
 
-    body.category:has(.subcategories) .subcategories { @apply grid gap-3 mt-3; grid-template-columns: 1fr; }
-    body.category:has(.subcategories) .subcategories > * { @apply rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm p-4; }
+    /* Ensure subcategory containers remain visible and styled as grid cards */
+    body.category .subcategories,
+    body.category .subcategory-list,
+    .category-page .subcategories,
+    .category-page .subcategory-list {
+      @apply block;
+    }
+
+    /* Style subcategories as grid cards for app-like UX */
+    body.category .subcategories,
+    .category-page .subcategories {
+      @apply grid gap-3 mt-3;
+      grid-template-columns: 1fr;
+    }
+
+    body.category .subcategories > *,
+    .category-page .subcategories > * {
+      @apply rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm p-4;
+    }
   }
 }
 
