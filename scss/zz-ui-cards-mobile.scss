@@ -611,7 +611,7 @@ div.link-bottom-line {
 .mza-excerpt-content {
   margin-block-end: 0.5rem;
   transition: all 0.3s ease;
-  
+
   // Graceful degradation: show full excerpt if Alpine fails to load
   // This ensures content is accessible even without JavaScript
 }
@@ -700,7 +700,7 @@ div.link-bottom-line {
 // Drawer body with consistent spacing
 .menu-panel .panel-body {
   padding: 1rem;
-  
+
   // Vertical spacing for content sections
   > * + * {
     margin-block-start: 0.75rem;
