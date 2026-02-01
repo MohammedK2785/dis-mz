@@ -1137,38 +1137,6 @@ html[data-theme="dark"] {
     outline-offset: 2px;
   }
 
-  /* Legacy .mza-main-nav a support (if used directly) */
-  .mza-header .mza-main-nav a:not(.mza-nav-link) {
-    color: var(--mza-text);
-    text-decoration: none;
-    font-size: 0.8125rem;
-    padding: 0.375rem 0.75rem;
-    border-radius: var(--mza-radius-sm);
-    background-color: var(--mza-surface-2);
-    border: 1px solid var(--mza-border);
-    box-shadow: var(--mza-shadow-sm);
-    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
-  }
-
-  @media (min-width: 768px) {
-    .mza-header .mza-main-nav a:not(.mza-nav-link) {
-      font-size: 1rem;
-    }
-  }
-
-  .mza-header .mza-main-nav a:not(.mza-nav-link):hover,
-  .mza-header .mza-main-nav a:not(.mza-nav-link):focus {
-    background-color: var(--mza-surface);
-    box-shadow: var(--mza-shadow-md);
-    color: var(--tertiary);
-    text-decoration: none;
-  }
-
-  .mza-header .mza-main-nav a:not(.mza-nav-link):focus-visible {
-    outline: 2px solid var(--tertiary);
-    outline-offset: 2px;
-  }
-
   /* Section Tabs Container */
   .mza-header .mza-section-tabs {
     @apply w-full bg-white overflow-x-auto;
