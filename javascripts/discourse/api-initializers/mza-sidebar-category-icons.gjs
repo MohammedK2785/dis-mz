@@ -36,16 +36,25 @@ const CATEGORY_ICONS = {
 const DEFAULT_ICON = "folder";
 
 export default apiInitializer("1.34", (api) => {
-  // Decorate sidebar category section links with icons
-  api.decorateCategorySectionLink((category, args) => {
-    if (!category?.slug) {
+  try {
+    // Guard: ensure decorateCategorySectionLink is available
+    if (typeof api.decorateCategorySectionLink !== "function") {
       return;
     }
 
-    const iconName = CATEGORY_ICONS[category.slug] || DEFAULT_ICON;
+    // Decorate sidebar category section links with icons
+    api.decorateCategorySectionLink((category, args) => {
+      if (!category?.slug) {
+        return;
+      }
 
-    // Add icon prefix to the category link
-    args.prefixType = "icon";
-    args.prefixValue = iconName;
-  });
+      const iconName = CATEGORY_ICONS[category.slug] || DEFAULT_ICON;
+
+      // Add icon prefix to the category link
+      args.prefixType = "icon";
+      args.prefixValue = iconName;
+    });
+  } catch (error) {
+    console.warn("[mza-theme] mza-sidebar-category-icons initializer failed", error);
+  }
 });

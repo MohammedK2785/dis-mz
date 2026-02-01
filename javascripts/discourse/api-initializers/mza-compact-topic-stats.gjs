@@ -25,32 +25,42 @@ const CompactStatsItemCell = <template>
 </template>;
 
 export default apiInitializer("1.34", (api) => {
-  const siteSettings = api.container.lookup("service:site-settings");
+  try {
+    // Guard: ensure api.container.lookup is available
+    const siteSettings = api.container?.lookup?.("service:site-settings");
 
-  // Only proceed if the setting is enabled
-  if (!siteSettings.compact_topic_stats) {
-    return;
+    // Only proceed if the setting is enabled (and siteSettings exists)
+    if (!siteSettings?.compact_topic_stats) {
+      return;
+    }
+
+    // Guard: ensure registerValueTransformer is available
+    if (typeof api.registerValueTransformer !== "function") {
+      return;
+    }
+
+    // Add body class to enable compact stats CSS
+    document.body.classList.add("compact-topic-stats-enabled");
+
+    // Use the modern transformer API to customize topic list columns
+    api.registerValueTransformer("topic-list-columns", ({ value: columns }) => {
+      // Remove the default stats columns to replace with compact version
+      columns.delete("replies");
+      columns.delete("views");
+
+      // Add our compact stats column after "activity"
+      columns.add(
+        "compact-stats",
+        {
+          header: CompactStatsHeaderCell,
+          item: CompactStatsItemCell,
+        },
+        { before: "activity" }
+      );
+
+      return columns;
+    });
+  } catch (error) {
+    console.warn("[mza-theme] mza-compact-topic-stats initializer failed", error);
   }
-
-  // Add body class to enable compact stats CSS
-  document.body.classList.add("compact-topic-stats-enabled");
-
-  // Use the modern transformer API to customize topic list columns
-  api.registerValueTransformer("topic-list-columns", ({ value: columns }) => {
-    // Remove the default stats columns to replace with compact version
-    columns.delete("replies");
-    columns.delete("views");
-
-    // Add our compact stats column after "activity"
-    columns.add(
-      "compact-stats",
-      {
-        header: CompactStatsHeaderCell,
-        item: CompactStatsItemCell,
-      },
-      { before: "activity" }
-    );
-
-    return columns;
-  });
 });
