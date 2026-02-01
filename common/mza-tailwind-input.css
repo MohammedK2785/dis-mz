@@ -98,6 +98,53 @@ html[data-theme="dark"] {
   overflow: hidden;
 }
 
+/* ===================================
+   Discourse Header Button Styles (Tailwind v4 Components Layer)
+   Specific selectors to avoid leaking to .icon containers
+   ================================== */
+@layer components {
+  /* Desktop header buttons - pill style with subtle background */
+  .d-header .header-buttons .btn-flat,
+  .d-header .header-buttons .header-dropdown-toggle,
+  .d-header .header-icons button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    background-color: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    color: var(--primary-high);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+  }
+
+  .d-header .header-buttons .btn-flat:hover,
+  .d-header .header-buttons .header-dropdown-toggle:hover,
+  .d-header .header-icons button:hover {
+    background-color: var(--mza-surface);
+    box-shadow: var(--mza-shadow-md);
+    color: var(--tertiary);
+  }
+
+  .d-header .header-buttons .btn-flat:focus-visible,
+  .d-header .header-buttons .header-dropdown-toggle:focus-visible,
+  .d-header .header-icons button:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+
+  /* Mobile header buttons - larger hit area for touch */
+  @media screen and (max-width: 768px) {
+    .d-header .header-buttons .btn-flat,
+    .d-header .header-buttons .header-dropdown-toggle,
+    .d-header .header-icons button {
+      padding: 0.625rem;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+}
+
 /* Mza3et Sky Blue Gradient Utility */
 /* Note: "to left" direction is intentional for RTL-first design - 
    gradient flows from light (RTL start/right) to dark (RTL end/left) */

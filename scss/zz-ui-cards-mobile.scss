@@ -52,10 +52,10 @@
     gap: 0.375rem;
   }
 
-  // Pill-style header buttons
-  .icon,
-  .header-dropdown-toggle,
-  .btn-flat {
+  // Pill-style header buttons (specific selectors to avoid leakage)
+  .header-buttons .btn-flat,
+  .header-buttons .header-dropdown-toggle,
+  .header-icons button {
     padding: 0.5rem 0.75rem;
     border-radius: 9999px;
     background: var(--mza-surface-2);
@@ -540,9 +540,9 @@ div.link-bottom-line {
   .d-header {
     padding-block: 0.5rem;
 
-    .icon,
-    .header-dropdown-toggle,
-    .btn-flat {
+    .header-buttons .btn-flat,
+    .header-buttons .header-dropdown-toggle,
+    .header-icons button {
       padding: 0.625rem;
       min-width: 44px;
       min-height: 44px;
