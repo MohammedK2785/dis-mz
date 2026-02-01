@@ -1873,30 +1873,33 @@ html[dir="rtl"] .sidebar-wrapper {
   font-weight: 600;
 }
 
-/* Categories Page Polish - Enhanced spacing, typography, and mobile support */
+/* Categories Page Polish - V8 Modern card-like styling */
 /* Category rows */
 .category-list .category-list-item,
 .category-list .category-row {
-  margin-bottom: 1rem;
-  padding: 1rem;
+  margin-bottom: 0.875rem; /* Match topic list spacing */
+  padding: 1.25rem; /* Slightly more than 1rem for breathing room */
   background-color: var(--mza-surface);
   border: 1px solid var(--mza-border);
-  border-radius: var(--mza-radius);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 1rem; /* Match topic list rounded-2xl */
+  box-shadow: var(--mza-shadow-sm); /* Add subtle shadow like topic cards */
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .category-list .category-list-item:hover,
 .category-list .category-row:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--mza-shadow-md); /* Match topic list hover */
   border-color: var(--primary-low-mid);
+  transform: translateY(-1px); /* Subtle lift on hover */
 }
 
-/* Category title */
+/* Category title - V8 enhanced hierarchy */
 .category-list .category-name,
 .category-list .category-title-link {
-  font-size: 1.125rem; /* 18px */
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: 1rem; /* Match topic list title size */
+  font-weight: 700; /* Bolder for hierarchy */
+  letter-spacing: -0.025em; /* Tracking-tight like topic titles */
+  margin-bottom: 0.375rem; /* Tighter spacing */
   color: var(--primary);
   line-height: 1.4;
 }
@@ -1904,21 +1907,23 @@ html[dir="rtl"] .sidebar-wrapper {
 .category-list .category-name:hover,
 .category-list .category-title-link:hover {
   color: var(--tertiary);
+  text-decoration: none; /* Clean hover */
 }
 
-/* Category description */
+/* Category description - V8 meta style */
 .category-list .category-description {
-  font-size: 0.875rem; /* 14px */
-  margin-bottom: 0.75rem;
+  font-size: 0.8125rem; /* 13px - slightly smaller */
+  margin-bottom: 0.5rem; /* Tighter */
   color: var(--primary-medium);
-  line-height: 1.6;
+  line-height: 1.5; /* Tighter line-height */
 }
 
-/* Category stats and metadata */
+/* Category stats and metadata - V8 minimal style */
 .category-list .category-stat,
 .category-list .category-meta {
-  font-size: 0.875rem;
+  font-size: 0.75rem; /* Smaller, like topic list stats */
   color: var(--primary-medium);
+  font-variant-numeric: tabular-nums; /* Better number alignment */
 }
 
 /* Stats spacing with logical properties */
@@ -1941,10 +1946,15 @@ html[dir="rtl"] .sidebar-wrapper {
   line-height: 1.2;
 }
 
-/* Latest topics in category view */
+/* Latest topics in category view - V8 cleaner separation */
 .category-list .latest-topic-list-item {
-  padding: 0.75rem 0;
+  padding: 0.625rem 0; /* Slightly less padding */
   border-bottom: 1px solid var(--primary-very-low);
+  transition: background-color 0.15s ease;
+}
+
+.category-list .latest-topic-list-item:hover {
+  background-color: var(--primary-very-low); /* Subtle hover effect */
 }
 
 .category-list .latest-topic-list-item:last-child {
@@ -1955,13 +1965,13 @@ html[dir="rtl"] .sidebar-wrapper {
 @media (max-width: 768px) {
   .category-list .category-list-item,
   .category-list .category-row {
-    padding: 0.75rem;
+    padding: 1rem; /* Reduced from 1.25rem */
     margin-bottom: 0.75rem;
   }
   
   .category-list .category-name,
   .category-list .category-title-link {
-    font-size: 1rem;
+    font-size: 0.9375rem; /* 15px */
   }
   
   .category-list .category-description {
@@ -1978,13 +1988,13 @@ html[dir="rtl"] .sidebar-wrapper {
 @media (max-width: 480px) {
   .category-list .category-list-item,
   .category-list .category-row {
-    padding: 0.625rem;
+    padding: 0.75rem; /* Further reduced */
     margin-bottom: 0.625rem;
   }
   
   .category-list .category-name,
   .category-list .category-title-link {
-    font-size: 0.9375rem; /* 15px */
+    font-size: 0.875rem; /* 14px */
   }
   
   .category-list .category-description {
