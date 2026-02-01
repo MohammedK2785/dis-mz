@@ -2412,6 +2412,20 @@ body[class*="category-عروض"],
    ================================== */
 
 @layer components {
+  /* Hide/reduce Discourse default welcome banner on discovery pages */
+  body.navigation-topics .full-width-wrap,
+  body.discovery-list .full-width-wrap,
+  .discovery-list .full-width-wrap {
+    display: none !important;
+  }
+  
+  /* Also hide default welcome/search hero if it exists */
+  .below-site-header .hero-wrapper,
+  .above-main-container .hero-wrapper,
+  .discovery-list-container-top .hero-wrapper {
+    display: none !important;
+  }
+  
   /* Hero container - only on discovery pages */
   .mza-hero {
     @apply w-full;
