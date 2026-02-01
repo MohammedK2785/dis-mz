@@ -115,47 +115,71 @@ html[data-theme="dark"] {
 
 /* ===================================
    Discourse Header Button Styles (Tailwind v4 Components Layer)
-   Specific selectors to avoid leaking to .icon containers
+   Pill buttons for login/signup only - NOT for header icons
    ================================== */
 @layer components {
   /* Desktop header buttons - pill style with subtle background */
   .d-header .header-buttons .btn-flat,
-  .d-header .header-buttons .header-dropdown-toggle,
-  .d-header .header-icons button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 0.75rem;
-    border-radius: 9999px;
-    background-color: var(--mza-surface-2);
-    border: 1px solid var(--mza-border);
-    color: var(--primary-high);
-    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+  .d-header .header-buttons .header-dropdown-toggle {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--mza-border)] bg-[var(--mza-surface-2)] px-4 py-2 text-sm font-semibold text-[var(--primary-high)] transition;
   }
 
   .d-header .header-buttons .btn-flat:hover,
-  .d-header .header-buttons .header-dropdown-toggle:hover,
-  .d-header .header-icons button:hover {
-    background-color: var(--mza-surface);
-    box-shadow: var(--mza-shadow-md);
-    color: var(--tertiary);
+  .d-header .header-buttons .header-dropdown-toggle:hover {
+    @apply bg-[var(--mza-surface)] shadow-md;
   }
 
   .d-header .header-buttons .btn-flat:focus-visible,
-  .d-header .header-buttons .header-dropdown-toggle:focus-visible,
-  .d-header .header-icons button:focus-visible {
+  .d-header .header-buttons .header-dropdown-toggle:focus-visible {
     outline: 2px solid var(--tertiary);
     outline-offset: 2px;
   }
+}
 
-  /* Mobile header buttons - larger hit area for touch */
+/* ===================================
+   Discourse Header Layout (Tailwind v4 Components Layer)
+   Proper spacing and flex layout for header elements
+   ================================== */
+@layer components {
+  /* Header contents wrapper - proper flex layout */
+  .d-header .wrap .contents {
+    @apply flex items-center justify-between gap-2 md:gap-3;
+  }
+
+  /* Title/logo area - allow growth and prevent overlaps */
+  .d-header .title {
+    @apply flex items-center min-w-0 flex-1;
+  }
+
+  /* Login/Signup button container - don't shrink */
+  .d-header .header-buttons {
+    @apply flex items-center gap-2 shrink-0;
+  }
+
+  /* Icons container (notifications, messages, avatar) - don't shrink */
+  .d-header .header-icons {
+    @apply flex items-center gap-1 md:gap-2 shrink-0;
+  }
+}
+
+/* ===================================
+   Discourse Header Icon Buttons (Tailwind v4 Components Layer)
+   Circular icon buttons for notifications/messages/avatar - NOT pill buttons
+   ================================== */
+@layer components {
+  /* Desktop header icons - circular buttons */
+  .d-header .header-icons button {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-full transition;
+  }
+
+  .d-header .header-icons button:hover {
+    @apply bg-[var(--mza-surface-2)];
+  }
+
+  /* Mobile header icons - larger hit area (44px minimum) */
   @media screen and (max-width: 768px) {
-    .d-header .header-buttons .btn-flat,
-    .d-header .header-buttons .header-dropdown-toggle,
     .d-header .header-icons button {
-      padding: 0.625rem;
-      min-width: 44px;
-      min-height: 44px;
+      @apply w-11 h-11;
     }
   }
 }
@@ -2370,47 +2394,5 @@ body[class*="category-عروض"],
   }
 }
 
-/* ===================================
-   Minimal Discourse Header Styling (Tailwind v4 Components)
-   Glass background, subtle border - scoped only to real header buttons
-   ================================== */
-@layer components {
-  /* Header glass background and border */
-  .d-header {
-    background: var(--mza-glass-bg-solid);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-block-end: 1px solid var(--mza-border);
-    box-shadow: var(--mza-shadow-sm);
-  }
 
-  /* Header layout */
-  .d-header .wrap {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  /* Header buttons pill styling - scoped to specific buttons only */
-  .d-header .header-buttons .btn-flat,
-  .d-header .header-buttons .header-dropdown-toggle {
-    padding: 0.5rem 0.75rem;
-    border-radius: 9999px;
-    background: var(--mza-surface-2);
-    border: 1px solid var(--mza-border);
-    transition: background-color 0.15s ease, box-shadow 0.15s ease;
-  }
-
-  .d-header .header-buttons .btn-flat:hover,
-  .d-header .header-buttons .header-dropdown-toggle:hover {
-    background: var(--mza-surface);
-    box-shadow: var(--mza-shadow-md);
-  }
-
-  /* Dark mode */
-  html[data-theme="dark"] .d-header {
-    background: var(--mza-glass-bg-solid);
-    border-block-end-color: var(--mza-border);
-  }
-}
 
