@@ -2790,6 +2790,33 @@ body[class*="category-عروض"],
   }
 }
 
+/* Homepage plugin search input styling - targeting actual plugin DOM classes */
+@layer components {
+  /* Search input wrapper - constrain width and add top margin */
+  body.navigation-topics #main-outlet .search-input-wrapper,
+  body.categories #main-outlet .search-input-wrapper {
+    @apply max-w-2xl mx-auto mt-4;
+  }
+
+  /* Search input container - relative positioning, rounded corners, border and shadow */
+  body.navigation-topics #main-outlet .search-input-wrapper .search-input,
+  body.categories #main-outlet .search-input-wrapper .search-input {
+    @apply relative rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm;
+  }
+
+  /* Search input field - full width with responsive height and padding to prevent icon overlap */
+  body.navigation-topics #main-outlet .search-input-wrapper input.search-term__input,
+  body.categories #main-outlet .search-input-wrapper input.search-term__input {
+    @apply w-full h-11 md:h-12 rounded-2xl text-base px-12;
+  }
+
+  /* Search icon (svg.fa) - absolute positioning, vertically centered, right aligned for RTL */
+  body.navigation-topics #main-outlet .search-input-wrapper svg.fa,
+  body.categories #main-outlet .search-input-wrapper svg.fa {
+    @apply absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none;
+  }
+}
+
 /* ===================================
    V10 Very Small Mobile Breakpoint (320-375px)
    Critical fixes to prevent horizontal scrolling
