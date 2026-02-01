@@ -6,6 +6,7 @@ RSpec.describe "Mza3et Theme Header" do
   # Arabic aria-label matches the template's hardcoded value
   # This is intentional for an Arabic-focused theme
   let(:subnav_selector) { 'nav[aria-label="التنقل الرئيسي"]' }
+  let(:mobile_portal_nav_selector) { 'nav.mza-mobile-portal-nav[aria-label="بوابات الموقع"]' }
 
   before { upload_theme_or_component }
 
@@ -18,6 +19,19 @@ RSpec.describe "Mza3et Theme Header" do
     # Assert at least one navigation link is present
     within subnav_selector do
       expect(page).to have_css("a", minimum: 1)
+    end
+  end
+
+  it "renders the mobile-only portal navigation" do
+    visit "/"
+
+    # Assert presence of mobile portal nav
+    expect(page).to have_css(mobile_portal_nav_selector)
+
+    # The mobile nav should have md:hidden class for mobile-only visibility
+    within mobile_portal_nav_selector do
+      # Mobile nav should be present in the DOM
+      expect(page).to have_css("div.wrap")
     end
   end
 
