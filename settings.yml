@@ -76,3 +76,14 @@ nav_questions_label:
   type: string
   default: "الاستفسارات"
   description: "Label for the Questions navigation link"
+
+# Homepage Hero Settings
+hero_title:
+  type: string
+  default: "بوابتك لتجارب السفر الواقعية"
+  description: "Main hero title displayed on homepage"
+
+hero_subtitle:
+  type: string
+  default: "ابحث عن تقارير، عروض، ونصائح من أعضاء مزاعيط"
+  description: "Hero subtitle displayed below the main title"
