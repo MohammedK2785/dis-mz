@@ -5,3 +5,74 @@ compact_topic_stats:
   type: bool
   default: false
   description: "Enable compact inline topic stats (hides standard stats columns and shows minimal inline stats under topic titles)"
+
+# Navigation URL Settings
+nav_home_url:
+  type: string
+  default: "/"
+  description: "URL for the Home navigation link (الرئيسية)"
+
+nav_home_label:
+  type: string
+  default: "الرئيسية"
+  description: "Label for the Home navigation link"
+
+nav_morocco_url:
+  type: string
+  default: ""
+  description: "URL for the Morocco section (بوابة المغرب). Leave empty to hide."
+
+nav_morocco_label:
+  type: string
+  default: "بوابة المغرب"
+  description: "Label for the Morocco navigation link"
+
+nav_world_url:
+  type: string
+  default: ""
+  description: "URL for the World section (بوابة العالم). Leave empty to hide."
+
+nav_world_label:
+  type: string
+  default: "بوابة العالم"
+  description: "Label for the World navigation link"
+
+nav_reports_url:
+  type: string
+  default: ""
+  description: "URL for the Reports section (التقارير). Leave empty to hide."
+
+nav_reports_label:
+  type: string
+  default: "التقارير"
+  description: "Label for the Reports navigation link"
+
+nav_offers_url:
+  type: string
+  default: ""
+  description: "URL for the Offers section (العروض والحجوزات). Leave empty to hide."
+
+nav_offers_label:
+  type: string
+  default: "العروض والحجوزات"
+  description: "Label for the Offers navigation link"
+
+nav_cars_url:
+  type: string
+  default: ""
+  description: "URL for the Cars section (السيارات). Leave empty to hide."
+
+nav_cars_label:
+  type: string
+  default: "السيارات"
+  description: "Label for the Cars navigation link"
+
+nav_questions_url:
+  type: string
+  default: ""
+  description: "URL for the Questions section (الاستفسارات). Leave empty to hide."
+
+nav_questions_label:
+  type: string
+  default: "الاستفسارات"
+  description: "Label for the Questions navigation link"
