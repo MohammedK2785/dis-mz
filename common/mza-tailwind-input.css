@@ -381,8 +381,16 @@ html[data-theme="dark"] {
    ================================== */
 @layer components {
   /* ===================================
-     V4 Topic Cards (CSS-only card visuals)
-     Individual card-like rows with rounded-2xl, border, shadow
+     V8 Topic & Category Lists - Clean Modern Design
+     
+     Changes from V7:
+     - Simplified borders: single border per row instead of per-cell
+     - Reduced visual noise: 1px avatar rings, cleaner excerpt styling
+     - Enhanced pinned indicators: 6px border + 3% amber tint
+     - Improved mobile breakpoints: tablet (768-1024px), small mobile (<480px)
+     - Unified card styling across topic and category lists
+     - Better typography hierarchy with tracking-tight titles
+     - RTL-safe using logical properties throughout
      ================================== */
   
   /* Topic list table - card spacing */
