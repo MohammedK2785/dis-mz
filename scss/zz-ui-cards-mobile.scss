@@ -792,3 +792,114 @@ html[dir="rtl"] {
     text-align: start;
   }
 }
+
+// ===================================
+// SECTION 9: Mobile Portal Navigation
+// Mobile-only navigation bar for Morocco & World portals
+// Displayed only on mobile view using {{#if site.mobileView}} + md:hidden
+// ===================================
+
+.mza-mobile-portal-nav {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-block-end: 1px solid var(--mza-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  // Container wrapper
+  .wrap {
+    max-width: 100%;
+    padding-inline: 0;
+  }
+
+  // Links container with horizontal scroll
+  .mza-mobile-portal-links {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-block: 0.75rem;
+    padding-inline: 1rem;
+    scroll-behavior: smooth;
+
+    // Smooth scrollbar styling
+    &::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--primary-low);
+      border-radius: 2px;
+    }
+
+    // Firefox scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-low) transparent;
+  }
+}
+
+// Mobile portal link styling (pill-style with shadow)
+.mza-mobile-portal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0.625rem;
+  padding-inline: 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--mza-surface);
+  border: 1px solid var(--mza-border);
+  color: var(--primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--mza-surface-2);
+    border-color: var(--tertiary);
+    color: var(--tertiary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Mobile-specific optimizations
+@media screen and (width <= 768px) {
+  .mza-mobile-portal-nav {
+    // Ensure it appears above content
+    position: sticky;
+    top: 0;
+
+    .mza-mobile-portal-links {
+      // Optimize for smaller screens
+      padding-inline: 0.75rem;
+      gap: 0.375rem;
+    }
+  }
+
+  .mza-mobile-portal-link {
+    // Touch-friendly sizing
+    min-height: 44px;
+    padding-inline: 1rem;
+    font-size: 0.8125rem;
+  }
+}
