@@ -2964,11 +2964,31 @@ html[dir="rtl"] {
    ================================== */
 @layer components {
   @media (max-width: 768px) {
-    body.category:has(.subcategories) #list-area,
-    body.category:has(.subcategories) .topic-list { @apply hidden; }
+    /* Hide topic list blocks on category pages - scoped to body.category and .category-page */
+    :is(body.category, .category-page) #list-area,
+    :is(body.category, .category-page) .topic-list,
+    :is(body.category, .category-page) .topic-list-header,
+    :is(body.category, .category-page) .topic-list-body,
+    :is(body.category, .category-page) .topic-list-footer,
+    :is(body.category, .category-page) .category-featured-topics {
+      @apply hidden;
+    }
 
-    body.category:has(.subcategories) .subcategories { @apply grid gap-3 mt-3; grid-template-columns: 1fr; }
-    body.category:has(.subcategories) .subcategories > * { @apply rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm p-4; }
+    /* Ensure subcategory containers remain visible and styled as grid cards */
+    :is(body.category, .category-page) .subcategories,
+    :is(body.category, .category-page) .subcategory-list {
+      @apply block;
+    }
+
+    /* Style subcategories as grid cards for app-like UX */
+    :is(body.category, .category-page) .subcategories {
+      @apply grid gap-3 mt-3;
+      grid-template-columns: 1fr;
+    }
+
+    :is(body.category, .category-page) .subcategories > * {
+      @apply rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm p-4;
+    }
   }
 }
 
