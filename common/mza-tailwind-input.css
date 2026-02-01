@@ -484,7 +484,7 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Topic row - V8 simplified card with single border */
+  /* Topic row - V10 modernized card with full-row clickability feel */
   tr.topic-list-item {
     transition: transform 0.2s ease;
 
@@ -497,21 +497,28 @@ html[data-theme="dark"] {
       }
     }
 
-    /* Card cells - desktop spacing p-6, single border per row */
+    /* Card cells - V10: reduced padding py-3 px-3 md:px-4 */
     td {
-      padding-block: 1.5rem;
-      padding-inline: 1.5rem;
+      padding-block: 0.75rem; /* py-3 = 12px */
+      padding-inline: 0.75rem; /* px-3 = 12px (base mobile padding) */
       vertical-align: middle;
       background: var(--mza-surface);
       box-shadow: var(--mza-shadow-sm);
       transition: box-shadow 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
-    /* First cell - left border + rounded-2xl start (1rem = 16px) */
+    /* Desktop: increase inline padding to px-4 */
+    @media (min-width: 768px) {
+      td {
+        padding-inline: 1rem; /* px-4 = 16px on desktop */
+      }
+    }
+
+    /* First cell - left border + rounded-xl start (0.75rem = 12px) */
     td:first-child {
       border-inline-start: 1px solid var(--mza-border);
-      border-start-start-radius: 1rem;
-      border-end-start-radius: 1rem;
+      border-start-start-radius: 0.75rem; /* rounded-xl */
+      border-end-start-radius: 0.75rem;
       border-top: 1px solid var(--mza-border);
       border-bottom: 1px solid var(--mza-border);
     }
@@ -522,32 +529,46 @@ html[data-theme="dark"] {
       border-bottom: 1px solid var(--mza-border);
     }
 
-    /* Last cell - right border + rounded-2xl end */
+    /* Last cell - right border + rounded-xl end */
     td:last-child {
       border-inline-end: 1px solid var(--mza-border);
-      border-start-end-radius: 1rem;
-      border-end-end-radius: 1rem;
+      border-start-end-radius: 0.75rem; /* rounded-xl */
+      border-end-end-radius: 0.75rem;
       border-top: 1px solid var(--mza-border);
       border-bottom: 1px solid var(--mza-border);
     }
   }
 
-  /* Main content cell */
+  /* Main content cell - V10 modernized padding */
   td.main-link.clearfix.topic-list-data {
-    padding-inline-start: 1.5rem;
-    padding-inline-end: 1.5rem;
+    padding-inline-start: 0.75rem;
+    padding-inline-end: 0.75rem;
   }
 
-  /* Topic title - V4 bold, tracking-tight, controlled size */
+  @media (min-width: 768px) {
+    td.main-link.clearfix.topic-list-data {
+      padding-inline-start: 1rem;
+      padding-inline-end: 1rem;
+    }
+  }
+
+  /* Topic title - V10: text-base md:text-lg font-semibold, tracking-tight */
   table.topic-list a.title {
-    font-size: 1rem; /* var(--font-0) equivalent, explicitly set */
-    font-weight: 700;
+    font-size: 1rem; /* text-base = 16px */
+    font-weight: 600; /* font-semibold */
     line-height: 1.5;
     letter-spacing: -0.025em;
     color: var(--primary);
     display: block;
     margin-block-end: 0.5rem;
     transition: color 0.15s ease;
+    
+    /* V10: Line clamp for mobile - 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
 
     &:hover {
       color: var(--tertiary);
@@ -558,6 +579,14 @@ html[data-theme="dark"] {
       outline: 2px solid var(--tertiary);
       outline-offset: 2px;
       border-radius: 2px;
+    }
+  }
+
+  /* Desktop: larger title - text-lg */
+  @media (min-width: 768px) {
+    table.topic-list a.title {
+      font-size: 1.125rem; /* text-lg = 18px */
+      -webkit-line-clamp: unset; /* Allow more lines on desktop */
     }
   }
 
@@ -581,14 +610,23 @@ html[data-theme="dark"] {
     flex-wrap: wrap;
   }
 
-  /* Bottom line - enhanced spacing */
+  /* Bottom line - V10: meta info smaller, muted, single line */
   div.link-bottom-line {
     display: flex;
     align-items: center;
-    gap: 0.875rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    font-size: var(--font-down-1);
+    font-size: 0.75rem; /* text-xs = 12px, smaller */
     color: var(--primary-medium);
+    line-height: 1.4;
+    
+    /* V10: Single line with ellipsis on mobile */
+    @media (max-width: 767px) {
+      flex-wrap: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   /* Category badge */
@@ -682,37 +720,40 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     V7 Minimal Stats (Phase A: CSS-only)
-     Reduce visual weight of stats columns
+     V10 Noise Reduction: Stats Columns
+     De-emphasize counts - keep them but smaller and aligned
      ================================== */
   
-  /* Stats columns - V7: smaller font, muted, no backgrounds */
+  /* Stats columns - V10: de-emphasized, smaller, muted */
   td.num {
     text-align: center;
-    font-size: 0.75rem; /* V7: even smaller for minimal weight */
-    color: var(--primary-medium);
+    font-size: 0.6875rem; /* 11px - even smaller */
+    color: var(--primary-low-mid); /* More muted */
     white-space: nowrap;
-    min-width: 3.5rem;
-    padding-inline: 0.75rem;
-    background: transparent; /* V7: remove any background shading */
+    min-width: 3rem; /* Reduced from 3.5rem */
+    padding-inline: 0.5rem;
+    background: transparent;
+    opacity: 0.85; /* Slightly faded */
 
     /* Posts map button */
     button.btn-link.posts-map.badge-posts {
-      font-weight: 400; /* V7: lighter weight */
-      color: var(--primary-medium); /* V7: muted color */
+      font-weight: 400;
+      font-size: 0.6875rem; /* Match cell size */
+      color: var(--primary-low-mid);
       transition: color 0.15s ease, transform 0.1s ease;
 
       &:hover {
         color: var(--tertiary);
-        transform: scale(1.05);
+        opacity: 1;
       }
     }
 
-    /* Number display */
+    /* Number display - smaller, lighter */
     span.number {
-      font-weight: 400; /* V7: light weight */
+      font-weight: 400;
+      font-size: 0.6875rem;
       font-variant-numeric: tabular-nums;
-      color: var(--primary-medium);
+      color: var(--primary-low-mid);
     }
   }
 
@@ -732,17 +773,18 @@ html[data-theme="dark"] {
     font-weight: 400;
   }
 
-  /* Activity cell - V7: minimal styling */
+  /* Activity cell - V10: de-emphasized, smaller */
   td.num.topic-list-data.age.activity {
-    font-size: 0.75rem; /* V7: smaller */
+    font-size: 0.6875rem;
+    opacity: 0.85;
 
     a.post-activity {
-      color: var(--primary-medium);
+      color: var(--primary-low-mid);
       transition: color 0.15s ease;
 
       &:hover {
         color: var(--tertiary);
-        text-decoration: none;
+        opacity: 1;
       }
     }
 
@@ -751,27 +793,29 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Views column - V7: minimal styling */
+  /* Views column - V10: de-emphasized, smaller */
   td.num.views.topic-list-data {
-    color: var(--primary-medium);
-    font-size: 0.75rem; /* V7: smaller */
+    color: var(--primary-low-mid);
+    font-size: 0.6875rem;
+    opacity: 0.85;
 
     span.number {
       font-variant-numeric: tabular-nums;
     }
   }
 
-  /* Topic status icons */
+  /* Topic status icons - V10: consistent sizing, not oversized */
   div.topic-statuses {
     display: inline-flex;
-    gap: 0.375rem;
+    gap: 0.25rem; /* Reduced gap */
     align-items: center;
-    margin-inline-end: 0.5rem;
+    margin-inline-end: 0.375rem;
 
     svg.fa.d-icon {
-      width: 1em;
-      height: 1em;
+      width: 0.875em; /* Slightly smaller */
+      height: 0.875em;
       transition: transform 0.15s ease;
+      opacity: 0.8; /* Slightly muted */
     }
 
     svg.fa.d-icon.d-icon-thumbtack {
@@ -783,34 +827,34 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Pinned topics - V8: enhanced amber stripe + subtle background */
+  /* Pinned topics - V10: subtle indicator, not oversized */
   tr.topic-list-item.pinned,
   tr.topic-list-item.globally-pinned {
     td {
-      /* V8: Subtle amber tint for better visibility */
-      background: color-mix(in srgb, #f59e0b 3%, var(--mza-surface));
+      /* V10: Very subtle amber tint */
+      background: color-mix(in srgb, #f59e0b 2%, var(--mza-surface));
     }
 
     td:first-child {
-      /* V8: Increased amber stripe width for better visibility */
-      border-inline-start-color: #f59e0b; /* amber-500 */
-      border-inline-start-width: 6px; /* Increased from 4px */
+      /* V10: Thinner amber stripe (4px, reduced from 6px) */
+      border-inline-start-color: #f59e0b;
+      border-inline-start-width: 4px;
     }
 
     &:hover td {
-      background: color-mix(in srgb, #f59e0b 5%, var(--mza-surface-2));
+      background: color-mix(in srgb, #f59e0b 4%, var(--mza-surface-2));
     }
   }
 
-  /* RTL pinned topics - V8: same styling with background tint */
+  /* RTL pinned topics - V10: same subtle styling */
   html[dir="rtl"] tr.topic-list-item.pinned,
   html[dir="rtl"] tr.topic-list-item.globally-pinned {
     td {
-      background: color-mix(in srgb, #f59e0b 3%, var(--mza-surface));
+      background: color-mix(in srgb, #f59e0b 2%, var(--mza-surface));
     }
 
     &:hover td {
-      background: color-mix(in srgb, #f59e0b 5%, var(--mza-surface-2));
+      background: color-mix(in srgb, #f59e0b 4%, var(--mza-surface-2));
     }
   }
 
@@ -1878,57 +1922,79 @@ html[dir="rtl"] .sidebar-wrapper {
   font-weight: 600;
 }
 
-/* Categories Page Polish - V8 Modern card-like styling */
-/* Category rows */
+/* Categories Page Polish - V10 Modern card-like styling matching topic list */
+/* Category rows - V10: rounded-xl, consistent padding */
 .category-list .category-list-item,
 .category-list .category-row {
-  margin-bottom: 0.875rem; /* Match topic list spacing */
-  padding: 1.25rem; /* Slightly more than 1rem for breathing room */
+  margin-bottom: 0.75rem; /* Reduced to match topic list spacing */
+  padding-block: 0.75rem; /* py-3 = 12px */
+  padding-inline: 0.75rem; /* px-3 = 12px on mobile */
   background-color: var(--mza-surface);
   border: 1px solid var(--mza-border);
-  border-radius: 1rem; /* Match topic list rounded-2xl */
-  box-shadow: var(--mza-shadow-sm); /* Add subtle shadow like topic cards */
+  border-radius: 0.75rem; /* rounded-xl = 12px */
+  box-shadow: var(--mza-shadow-sm);
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Desktop: larger inline padding */
+@media (min-width: 768px) {
+  .category-list .category-list-item,
+  .category-list .category-row {
+    padding-inline: 1rem; /* px-4 = 16px on desktop */
+  }
 }
 
 .category-list .category-list-item:hover,
 .category-list .category-row:hover {
-  box-shadow: var(--mza-shadow-md); /* Match topic list hover */
+  box-shadow: var(--mza-shadow-md);
   border-color: var(--primary-low-mid);
-  transform: translateY(-1px); /* Subtle lift on hover */
+  transform: translateY(-1px);
 }
 
-/* Category title - V8 enhanced hierarchy */
+/* Category title - V10: text-base md:text-lg font-semibold */
 .category-list .category-name,
 .category-list .category-title-link {
-  font-size: 1rem; /* Match topic list title size */
-  font-weight: 700; /* Bolder for hierarchy */
-  letter-spacing: -0.025em; /* Tracking-tight like topic titles */
-  margin-bottom: 0.375rem; /* Tighter spacing */
+  font-size: 1rem; /* text-base = 16px */
+  font-weight: 600; /* font-semibold */
+  letter-spacing: -0.025em;
+  margin-bottom: 0.375rem;
   color: var(--primary);
   line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .category-list .category-name,
+  .category-list .category-title-link {
+    font-size: 1.125rem; /* text-lg = 18px on desktop */
+  }
 }
 
 .category-list .category-name:hover,
 .category-list .category-title-link:hover {
   color: var(--tertiary);
-  text-decoration: none; /* Clean hover */
+  text-decoration: none;
 }
 
-/* Category description - V8 meta style */
+/* Category description - V10: smaller, muted meta style */
 .category-list .category-description {
-  font-size: 0.8125rem; /* 13px - slightly smaller */
-  margin-bottom: 0.5rem; /* Tighter */
+  font-size: 0.75rem; /* 12px - smaller */
+  margin-bottom: 0.5rem;
   color: var(--primary-medium);
-  line-height: 1.5; /* Tighter line-height */
+  line-height: 1.5;
+  /* V10: 2-line clamp for cleaner look */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Category stats and metadata - V8 minimal style */
+/* Category stats and metadata - V10: de-emphasized to match topic list */
 .category-list .category-stat,
 .category-list .category-meta {
-  font-size: 0.75rem; /* Smaller, like topic list stats */
-  color: var(--primary-medium);
-  font-variant-numeric: tabular-nums; /* Better number alignment */
+  font-size: 0.6875rem; /* 11px - match topic list stats */
+  color: var(--primary-low-mid);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
 }
 
 /* Stats spacing with logical properties */
@@ -1966,12 +2032,13 @@ html[dir="rtl"] .sidebar-wrapper {
   border-bottom: none;
 }
 
-/* Mobile responsive adjustments - V8 enhanced */
+/* Mobile responsive adjustments - V10 enhanced */
 @media (max-width: 768px) {
   .category-list .category-list-item,
   .category-list .category-row {
-    padding: 1rem; /* Reduced from 1.25rem */
-    margin-bottom: 0.75rem;
+    padding-block: 0.625rem;
+    padding-inline: 0.625rem;
+    margin-bottom: 0.625rem;
   }
   
   .category-list .category-name,
@@ -1980,8 +2047,8 @@ html[dir="rtl"] .sidebar-wrapper {
   }
   
   .category-list .category-description {
-    font-size: 0.8125rem;
-    /* V8: Single-line clamp on mobile for cleaner look */
+    font-size: 0.75rem;
+    /* V10: 2-line clamp on mobile */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1989,30 +2056,41 @@ html[dir="rtl"] .sidebar-wrapper {
   }
 }
 
-/* Small mobile: < 480px - tighter spacing */
+/* Small mobile: < 480px - tighter spacing, no horizontal overflow */
 @media (max-width: 480px) {
   .category-list .category-list-item,
   .category-list .category-row {
-    padding: 0.75rem; /* Further reduced */
-    margin-bottom: 0.625rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+    margin-bottom: 0.5rem;
+    /* V10: Prevent horizontal overflow */
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .category-list .category-name,
   .category-list .category-title-link {
     font-size: 0.875rem; /* 14px */
+    /* V10: Line clamp for overflow prevention */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
   }
   
   .category-list .category-description {
-    font-size: 0.75rem; /* 12px */
+    font-size: 0.6875rem; /* 11px */
     line-height: 1.5;
     /* Single-line clamp on small mobile */
     -webkit-line-clamp: 1;
   }
   
-  /* Hide or condense stats on very small screens */
+  /* V10: Further de-emphasize stats on very small screens */
   .category-list .category-stat,
   .category-list .category-meta {
-    font-size: 0.6875rem; /* 11px */
+    font-size: 0.625rem; /* 10px */
+    opacity: 0.75;
   }
 }
 
@@ -2623,5 +2701,172 @@ body[class*="category-عروض"],
   }
 }
 
+/* ===================================
+   V10 Very Small Mobile Breakpoint (320-375px)
+   Critical fixes to prevent horizontal scrolling
+   ================================== */
+@media screen and (max-width: 375px) {
+  /* Prevent body/html horizontal overflow - use clip to preserve focus indicators */
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+  
+  /* Topic list - extreme mobile optimization */
+  table.topic-list {
+    border-spacing: 0 0.375rem;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  /* Hide all non-essential columns on very small screens */
+  .topic-list th.posters,
+  .topic-list td.posters,
+  .topic-list th.views,
+  .topic-list td.views,
+  .topic-list th.activity,
+  .topic-list td.activity,
+  .topic-list th.num,
+  .topic-list td.num {
+    display: none;
+  }
+  
+  /* Topic row - minimal padding */
+  tr.topic-list-item td {
+    padding-block: 0.5rem;
+    padding-inline: 0.375rem;
+  }
+  
+  /* Main link cell - full width */
+  td.main-link.clearfix.topic-list-data {
+    padding-inline: 0.375rem;
+    width: 100%;
+  }
+  
+  /* Topic title - compact and clamped */
+  table.topic-list a.title {
+    font-size: 0.8125rem; /* 13px */
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word; /* Prefer word boundaries over arbitrary breaks */
+  }
+  
+  /* Bottom line meta - single line, ellipsis */
+  div.link-bottom-line {
+    gap: 0.5rem;
+    font-size: 0.625rem; /* 10px */
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Category badge - smaller */
+  a.badge-wrapper {
+    font-size: 0.625rem;
+    padding: 0.125rem 0.375rem;
+  }
+  
+  /* Tags - wrap and smaller */
+  div.discourse-tags {
+    gap: 0.25rem;
+  }
+  
+  div.discourse-tags a.discourse-tag {
+    font-size: 0.625rem;
+    padding: 0.125rem 0.375rem;
+  }
+  
+  /* Topic excerpt - hide on very small screens */
+  div.topic-excerpt {
+    display: none;
+  }
+  
+  /* Category list - extreme mobile */
+  .category-list .category-list-item,
+  .category-list .category-row {
+    padding-block: 0.375rem;
+    padding-inline: 0.375rem;
+    margin-bottom: 0.375rem;
+    border-radius: 0.5rem; /* Smaller radius */
+  }
+  
+  .category-list .category-name,
+  .category-list .category-title-link {
+    font-size: 0.8125rem; /* 13px */
+    -webkit-line-clamp: 1;
+  }
+  
+  .category-list .category-description {
+    display: none; /* Hide on very small */
+  }
+  
+  /* Stats hidden on very small screens */
+  .category-list .category-stat,
+  .category-list .category-meta {
+    display: none;
+  }
+}
+
+/* ===================================
+   V10 RTL Additional Safety
+   Ensure RTL layout works on all mobile breakpoints
+   ================================== */
+html[dir="rtl"] {
+  /* All logical properties are RTL-safe already */
+  
+  /* Category list RTL */
+  .category-list .category-list-item,
+  .category-list .category-row {
+    text-align: start;
+  }
+  
+  /* Topic list RTL */
+  table.topic-list a.title {
+    text-align: start;
+  }
+  
+  /* Meta info RTL alignment */
+  div.link-bottom-line {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+
+/* RTL mobile-specific fixes */
+@media screen and (max-width: 768px) {
+  html[dir="rtl"] {
+    /* Ensure proper text alignment in RTL mobile */
+    .topic-list td.main-link {
+      text-align: start;
+    }
+    
+    /* Category list RTL mobile */
+    .category-list .category-name,
+    .category-list .category-title-link {
+      text-align: start;
+    }
+    
+    /* Meta elements row direction */
+    div.link-bottom-line,
+    div.link-top-line {
+      flex-direction: row;
+    }
+    
+    /* Badge spacing RTL */
+    a.badge-wrapper {
+      margin-inline-end: 0.25rem;
+      margin-inline-start: 0;
+    }
+  }
+}
 
 
