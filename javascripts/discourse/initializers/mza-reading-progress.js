@@ -2,13 +2,18 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 
 const PLUGIN_ID = "mza-reading-progress";
 
-// Throttle function using requestAnimationFrame
+// Throttle function using requestAnimationFrame (with fallback)
 function rafThrottle(callback) {
   let ticking = false;
+  const raf =
+    typeof requestAnimationFrame === "function"
+      ? requestAnimationFrame
+      : (fn) => setTimeout(fn, 16);
+
   return function (...args) {
     if (!ticking) {
       ticking = true;
-      requestAnimationFrame(() => {
+      raf(() => {
         callback.apply(this, args);
         ticking = false;
       });
@@ -72,71 +77,82 @@ function hideProgressBar() {
 }
 
 function initializeReadingProgress(api) {
-  let scrollHandler = null;
-  let resizeHandler = null;
-  let isTopicPage = false;
+  try {
+    // Guard: ensure api and required methods exist
+    if (!api || typeof api.onPageChange !== "function") {
+      return;
+    }
 
-  // Create progress bar on initialization
-  createProgressBar();
-  hideProgressBar(); // Hidden by default
+    let scrollHandler = null;
+    let resizeHandler = null;
+    let isTopicPage = false;
 
-  // Check if current route is a topic page
-  function checkIfTopicPage(routeName) {
-    return routeName && routeName.startsWith("topic");
+    // Create progress bar on initialization
+    createProgressBar();
+    hideProgressBar(); // Hidden by default
+
+    // Check if current route is a topic page
+    function checkIfTopicPage(routeName) {
+      return routeName && routeName.startsWith("topic");
+    }
+
+    // Setup scroll/resize listeners
+    function setupListeners() {
+      if (scrollHandler) {
+        return; // Already setup
+      }
+
+      scrollHandler = rafThrottle(updateProgressBar);
+      resizeHandler = rafThrottle(updateProgressBar);
+
+      window.addEventListener("scroll", scrollHandler, { passive: true });
+      window.addEventListener("resize", resizeHandler, { passive: true });
+
+      // Initial update
+      updateProgressBar();
+    }
+
+    // Remove listeners
+    function teardownListeners() {
+      if (scrollHandler) {
+        window.removeEventListener("scroll", scrollHandler);
+        scrollHandler = null;
+      }
+      if (resizeHandler) {
+        window.removeEventListener("resize", resizeHandler);
+        resizeHandler = null;
+      }
+    }
+
+    // Route change handler
+    api.onPageChange((url, routeName) => {
+      const wasTopicPage = isTopicPage;
+      isTopicPage = checkIfTopicPage(routeName);
+
+      if (isTopicPage) {
+        showProgressBar();
+        setupListeners();
+        // Update after a small delay to ensure DOM is ready
+        setTimeout(updateProgressBar, 100);
+      } else if (wasTopicPage) {
+        hideProgressBar();
+        teardownListeners();
+      }
+    });
+
+    // Cleanup on app destroy (if available)
+    if (typeof api.cleanupStream === "function") {
+      api.cleanupStream(() => {
+        teardownListeners();
+        const container = document.querySelector(".mza-reading-progress");
+        if (container) {
+          container.remove();
+        }
+      });
+    }
+  } catch (error) {
+    console.warn("[mza-theme] mza-reading-progress initializer failed", error);
   }
-
-  // Setup scroll/resize listeners
-  function setupListeners() {
-    if (scrollHandler) {
-      return; // Already setup
-    }
-
-    scrollHandler = rafThrottle(updateProgressBar);
-    resizeHandler = rafThrottle(updateProgressBar);
-
-    window.addEventListener("scroll", scrollHandler, { passive: true });
-    window.addEventListener("resize", resizeHandler, { passive: true });
-
-    // Initial update
-    updateProgressBar();
-  }
-
-  // Remove listeners
-  function teardownListeners() {
-    if (scrollHandler) {
-      window.removeEventListener("scroll", scrollHandler);
-      scrollHandler = null;
-    }
-    if (resizeHandler) {
-      window.removeEventListener("resize", resizeHandler);
-      resizeHandler = null;
-    }
-  }
-
-  // Route change handler
-  api.onPageChange((url, routeName) => {
-    const wasTopicPage = isTopicPage;
-    isTopicPage = checkIfTopicPage(routeName);
-
-    if (isTopicPage) {
-      showProgressBar();
-      setupListeners();
-      // Update after a small delay to ensure DOM is ready
-      setTimeout(updateProgressBar, 100);
-    } else if (wasTopicPage) {
-      hideProgressBar();
-      teardownListeners();
-    }
-  });
-
-  // Cleanup on app destroy (if available)
-  api.cleanupStream(() => {
-    teardownListeners();
-    const container = document.querySelector(".mza-reading-progress");
-    if (container) {
-      container.remove();
-    }
-  });
 }
 
 export default {
