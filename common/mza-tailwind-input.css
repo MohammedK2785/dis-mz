@@ -2930,4 +2930,18 @@ html[dir="rtl"] {
   }
 }
 
+/* ===================================
+   V10 Mobile Category Page - App-like UX
+   Hide topic list when subcategories exist
+   ================================== */
+@layer components {
+  @media (max-width: 768px) {
+    body.category:has(.subcategories) #list-area,
+    body.category:has(.subcategories) .topic-list { @apply hidden; }
+
+    body.category:has(.subcategories) .subcategories { @apply grid gap-3 mt-3; grid-template-columns: 1fr; }
+    body.category:has(.subcategories) .subcategories > * { @apply rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm p-4; }
+  }
+}
+
 
