@@ -242,7 +242,7 @@ html[data-theme="dark"] {
   
   /* Typography for main content area - tracking-tight for headings */
   #main-outlet h1 {
-    @apply text-3xl mb-4;
+    @apply text-2xl md:text-3xl mb-3;
     font-weight: 700; /* Bold for Arabic */
     letter-spacing: -0.025em; /* tracking-tight */
     color: var(--primary);
@@ -2477,6 +2477,35 @@ body[class*="category-عروض"],
   body.archetype-regular .mza-hero,
   body.topic-page .mza-hero {
     display: none;
+  }
+}
+
+/* Homepage-scoped UI refinements for welcome heading and search */
+@layer components {
+  /* Make the homepage welcome heading smaller and centered */
+  body.navigation-topics #main-outlet h1,
+  body.categories #main-outlet h1 {
+    @apply text-xl md:text-2xl font-extrabold tracking-tight text-center;
+  }
+
+  /* Constrain and center the search menu on homepage */
+  body.navigation-topics #main-outlet .search-menu,
+  body.categories #main-outlet .search-menu {
+    @apply max-w-2xl mx-auto mt-4;
+  }
+
+  /* Style the search input wrapper with rounded corners, border and shadow */
+  body.navigation-topics #main-outlet .search-menu .search-input,
+  body.categories #main-outlet .search-menu .search-input {
+    @apply rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm;
+  }
+
+  /* Control height and padding of the search input element itself */
+  body.navigation-topics #main-outlet .search-menu input[type='search'],
+  body.navigation-topics #main-outlet .search-menu input[type='text'],
+  body.categories #main-outlet .search-menu input[type='search'],
+  body.categories #main-outlet .search-menu input[type='text'] {
+    @apply h-11 md:h-12 px-4 text-base;
   }
 }
 
