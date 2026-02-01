@@ -308,28 +308,9 @@ span.badge-category {
 
 // Topic excerpt - enhanced spacing and styling
 // Sprint V7: single-line clamp, text-sm, muted color
+// NOTE: Hidden when Alpine excerpt component is present (topic-list-after-title connector)
 div.topic-excerpt {
-  margin-block-start: 0.625rem;
-  padding-inline-start: 1rem;
-  padding-inline-end: 0.5rem;
-  padding-block: 0.5rem;
-  color: var(--primary-medium);
-  font-size: var(--font-down-1); // text-sm
-  line-height: 1.5;
-  border-inline-start: 3px solid var(--primary-low-mid);
-  background-color: var(--primary-very-low);
-  border-radius: 4px;
-
-  // V7: Single-line clamp for clean appearance
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-// RTL excerpt alignment
-html[dir="rtl"] div.topic-excerpt {
-  text-align: start;
+  display: none; // Hidden in favor of Alpine-powered excerpt component
 }
 
 // Meta columns (posts, views, activity) - V7 minimal visual weight
