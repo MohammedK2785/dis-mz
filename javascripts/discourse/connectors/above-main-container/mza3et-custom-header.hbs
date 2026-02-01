@@ -1,54 +1,44 @@
-{{!-- Mza3et Theme - Custom Header Bar with Section Tabs --}}
-{{!-- All header/nav styling is scoped to .mza-header to avoid global leaks --}}
-<div class="mza-header">
-  {{!-- Top Header Bar (Sky Blue Gradient) --}}
-  <header class="mza-topbar bg-mza-sky-gradient">
-    <div class="wrap">
-      <div class="mza-topbar-inner">
-        {{!-- Logo element (RTL start side) --}}
-        <div class="mza-logo">
-          <a href="{{theme-setting 'nav_home_url'}}">مزاعيط المغرب</a>
-        </div>
-        
-        {{!-- Main navigation - links from theme settings --}}
-        <nav class="mza-main-nav" aria-label="التنقل الرئيسي">
-          {{#if (theme-setting "nav_home_url")}}
-            <a href="{{theme-setting 'nav_home_url'}}" class="mza-nav-link">{{theme-setting "nav_home_label"}}</a>
-          {{/if}}
-          {{#if (theme-setting "nav_morocco_url")}}
-            <a href="{{theme-setting 'nav_morocco_url'}}" class="mza-nav-link">{{theme-setting "nav_morocco_label"}}</a>
-          {{/if}}
-          {{#if (theme-setting "nav_world_url")}}
-            <a href="{{theme-setting 'nav_world_url'}}" class="mza-nav-link">{{theme-setting "nav_world_label"}}</a>
-          {{/if}}
-          {{#if (theme-setting "nav_reports_url")}}
-            <a href="{{theme-setting 'nav_reports_url'}}" class="mza-nav-link hidden md:inline-flex">{{theme-setting "nav_reports_label"}}</a>
-          {{/if}}
-          {{#if (theme-setting "nav_questions_url")}}
-            <a href="{{theme-setting 'nav_questions_url'}}" class="mza-nav-link hidden md:inline-flex">{{theme-setting "nav_questions_label"}}</a>
-          {{/if}}
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  {{!-- Horizontal Section Tabs Bar - Full-width under header --}}
-  <div class="mza-section-tabs" aria-label="الأقسام الرئيسية">
-    <div class="wrap">
-      <div class="mza-section-tabs-inner">
-        {{#if (theme-setting "nav_offers_url")}}
-          <a href="{{theme-setting 'nav_offers_url'}}" class="mza-section-tab mza-section-tab--offers">{{theme-setting "nav_offers_label"}}</a>
-        {{/if}}
-        {{#if (theme-setting "nav_cars_url")}}
-          <a href="{{theme-setting 'nav_cars_url'}}" class="mza-section-tab mza-section-tab--cars">{{theme-setting "nav_cars_label"}}</a>
-        {{/if}}
-        {{#if (theme-setting "nav_reports_url")}}
-          <a href="{{theme-setting 'nav_reports_url'}}" class="mza-section-tab mza-section-tab--reports">{{theme-setting "nav_reports_label"}}</a>
-        {{/if}}
-        {{#if (theme-setting "nav_questions_url")}}
-          <a href="{{theme-setting 'nav_questions_url'}}" class="mza-section-tab mza-section-tab--questions">{{theme-setting "nav_questions_label"}}</a>
-        {{/if}}
-      </div>
+{{!-- Mza3et Theme - Single Clean Subnav Bar --}}
+{{!-- One navigation bar under Discourse header using Tailwind v4 utilities --}}
+<nav class="w-full border-b backdrop-blur-md" style="background: rgba(255, 255, 255, 0.9); border-color: var(--mza-border);" aria-label="التنقل الرئيسي">
+  <div class="wrap">
+    <div class="flex gap-2 overflow-x-auto py-3 px-2 scrollbar-thin" style="scroll-behavior: smooth;">
+      {{!-- All navigation links from theme settings in one horizontal row --}}
+      {{#if (theme-setting "nav_home_url")}}
+        <a href="{{theme-setting 'nav_home_url'}}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all" style="background: var(--mza-surface-2); border: 1px solid var(--mza-border); color: var(--primary);">
+          {{theme-setting "nav_home_label"}}
+        </a>
+      {{/if}}
+      {{#if (theme-setting "nav_morocco_url")}}
+        <a href="{{theme-setting 'nav_morocco_url'}}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all" style="background: var(--mza-surface-2); border: 1px solid var(--mza-border); color: var(--primary);">
+          {{theme-setting "nav_morocco_label"}}
+        </a>
+      {{/if}}
+      {{#if (theme-setting "nav_world_url")}}
+        <a href="{{theme-setting 'nav_world_url'}}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all" style="background: var(--mza-surface-2); border: 1px solid var(--mza-border); color: var(--primary);">
+          {{theme-setting "nav_world_label"}}
+        </a>
+      {{/if}}
+      {{#if (theme-setting "nav_reports_url")}}
+        <a href="{{theme-setting 'nav_reports_url'}}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all" style="background: var(--mza-surface-2); border: 1px solid var(--mza-border); color: var(--primary);">
+          {{theme-setting "nav_reports_label"}}
+        </a>
+      {{/if}}
+      {{#if (theme-setting "nav_offers_url")}}
+        <a href="{{theme-setting 'nav_offers_url'}}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all" style="background: var(--mza-surface-2); border: 1px solid var(--mza-border); color: var(--primary);">
+          {{theme-setting "nav_offers_label"}}
+        </a>
+      {{/if}}
+      {{#if (theme-setting "nav_cars_url")}}
+        <a href="{{theme-setting 'nav_cars_url'}}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all" style="background: var(--mza-surface-2); border: 1px solid var(--mza-border); color: var(--primary);">
+          {{theme-setting "nav_cars_label"}}
+        </a>
+      {{/if}}
+      {{#if (theme-setting "nav_questions_url")}}
+        <a href="{{theme-setting 'nav_questions_url'}}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all" style="background: var(--mza-surface-2); border: 1px solid var(--mza-border); color: var(--primary);">
+          {{theme-setting "nav_questions_label"}}
+        </a>
+      {{/if}}
     </div>
   </div>
-</div>
+</nav>
