@@ -1173,16 +1173,16 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
-     V5 Action Bar - Subtle with hover reveal
-     Semi-transparent by default, full opacity on hover/focus-within
+     V5 Action Bar - Higher contrast with hover reveal
+     Visible by default, full opacity on hover/focus-within
      Rounded-full buttons with soft hover bg
      ================================== */
   
-  /* Topic post action bar - subtle by default */
+  /* Topic post action bar - visible by default, enhanced on hover */
   .topic-post .actions,
   .topic-post .post-menu-area,
   .post-controls .actions {
-    opacity: 0.5;
+    opacity: 0.75;
     transition: opacity 0.2s ease;
   }
 
@@ -1195,7 +1195,7 @@ html[data-theme="dark"] {
     opacity: 1;
   }
 
-  /* Action buttons - rounded-full with soft hover */
+  /* Action buttons - rounded-full with higher contrast colors */
   .topic-post .actions button,
   .post-controls .actions button,
   .post-menu-area button {
@@ -1203,7 +1203,7 @@ html[data-theme="dark"] {
     padding: 0.5rem 0.875rem;
     border-radius: 9999px; /* rounded-full */
     font-size: var(--font-down-1);
-    color: var(--primary-medium);
+    color: var(--primary-high);
     background-color: transparent;
     border: none;
     transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
@@ -1212,7 +1212,7 @@ html[data-theme="dark"] {
   .topic-post .actions button:hover,
   .post-controls .actions button:hover,
   .post-menu-area button:hover {
-    background-color: var(--primary-low);
+    background-color: var(--mza-surface-2);
     color: var(--primary);
     transform: scale(1.02);
   }
@@ -1220,19 +1220,34 @@ html[data-theme="dark"] {
   .topic-post .actions button:focus-visible,
   .post-controls .actions button:focus-visible,
   .post-menu-area button:focus-visible {
-    outline: 2px solid var(--tertiary);
-    outline-offset: 2px;
-    background-color: var(--primary-low);
+    @apply outline-none;
+    box-shadow: 0 0 0 2px var(--mza-surface), 0 0 0 4px var(--mza-border);
+    background-color: var(--mza-surface-2);
   }
 
-  /* Liked/toggled state */
+  /* Liked/toggled state - accent color for visibility */
   .topic-post .actions button.liked,
   .topic-post .actions button.toggled,
+  .topic-post .actions button.has-like,
+  .topic-post .actions button[aria-pressed="true"],
   .post-controls .actions button.liked,
-  .post-controls .actions button.toggled {
+  .post-controls .actions button.toggled,
+  .post-controls .actions button.has-like,
+  .post-controls .actions button[aria-pressed="true"] {
     color: var(--love);
     background-color: var(--love-low); /* Fallback for browsers without color-mix support */
     background-color: color-mix(in srgb, var(--love) 10%, transparent);
+  }
+
+  /* Toggle-like button specific states */
+  .topic-post .toggle-like.liked,
+  .topic-post .toggle-like.has-like,
+  .topic-post .toggle-like[aria-pressed="true"],
+  .post-controls .toggle-like.liked,
+  .post-controls .toggle-like.has-like,
+  .post-controls .toggle-like[aria-pressed="true"] {
+    color: var(--love);
+    opacity: 1;
   }
 
   /* Legacy post-actions fallback */
@@ -1246,16 +1261,28 @@ html[data-theme="dark"] {
     padding: 0.375rem 0.75rem;
     border-radius: 9999px;
     font-size: var(--font-down-1);
-    color: var(--primary-medium);
+    color: var(--primary-high);
     background-color: transparent;
     border: 1px solid transparent;
     transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
 
   .post-actions button:hover {
-    background-color: var(--primary-low);
+    background-color: var(--mza-surface-2);
     color: var(--primary);
-    border-color: var(--primary-low-mid);
+    border-color: var(--mza-border);
+  }
+
+  .post-actions button:focus-visible {
+    @apply outline-none;
+    box-shadow: 0 0 0 2px var(--mza-surface), 0 0 0 4px var(--mza-border);
+    background-color: var(--mza-surface-2);
+  }
+
+  .post-actions button.liked,
+  .post-actions button.has-like,
+  .post-actions button[aria-pressed="true"] {
+    color: var(--love);
   }
 
   /* Composer improvements */
