@@ -846,7 +846,27 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Mobile responsive - reduce to p-4 */
+  /* Mobile responsive - V8 enhanced breakpoints */
+  
+  /* Tablet: 768px - 1024px - reduce spacing slightly */
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    tr.topic-list-item td {
+      padding-block: 1.25rem;
+      padding-inline: 1.25rem;
+    }
+
+    td.main-link.clearfix.topic-list-data {
+      padding-inline-start: 1.25rem;
+      padding-inline-end: 1.25rem;
+    }
+    
+    /* Reduce title size on tablet */
+    table.topic-list a.title {
+      font-size: 0.9375rem; /* 15px */
+    }
+  }
+  
+  /* Mobile: < 768px - reduced padding */
   @media screen and (max-width: 768px) {
     tr.topic-list-item td {
       padding-block: 1rem;
@@ -856,6 +876,48 @@ html[data-theme="dark"] {
     td.main-link.clearfix.topic-list-data {
       padding-inline-start: 1rem;
       padding-inline-end: 1rem;
+    }
+    
+    /* Smaller gap between topic cards on mobile */
+    table.topic-list {
+      border-spacing: 0 0.625rem; /* Reduced from 0.875rem */
+    }
+  }
+  
+  /* Small mobile: < 480px - hide poster avatars, minimal spacing */
+  @media screen and (max-width: 480px) {
+    /* Hide poster column on small screens */
+    .topic-list th.posters,
+    .topic-list td.posters {
+      display: none;
+    }
+    
+    /* Further reduce padding */
+    tr.topic-list-item td {
+      padding-block: 0.875rem;
+      padding-inline: 0.875rem;
+    }
+    
+    td.main-link.clearfix.topic-list-data {
+      padding-inline-start: 0.875rem;
+      padding-inline-end: 0.875rem;
+    }
+    
+    /* Reduce title size */
+    table.topic-list a.title {
+      font-size: 0.875rem; /* 14px */
+      line-height: 1.4;
+    }
+    
+    /* Stack stats if visible */
+    td.num.topic-list-data,
+    td.activity.topic-list-data {
+      font-size: 0.6875rem; /* 11px - smaller */
+    }
+    
+    /* Tighter gap between cards */
+    table.topic-list {
+      border-spacing: 0 0.5rem;
     }
   }
 
@@ -1889,7 +1951,7 @@ html[dir="rtl"] .sidebar-wrapper {
   border-bottom: none;
 }
 
-/* Mobile responsive adjustments */
+/* Mobile responsive adjustments - V8 enhanced */
 @media (max-width: 768px) {
   .category-list .category-list-item,
   .category-list .category-row {
@@ -1904,6 +1966,38 @@ html[dir="rtl"] .sidebar-wrapper {
   
   .category-list .category-description {
     font-size: 0.8125rem;
+    /* V8: Single-line clamp on mobile for cleaner look */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Small mobile: < 480px - tighter spacing */
+@media (max-width: 480px) {
+  .category-list .category-list-item,
+  .category-list .category-row {
+    padding: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+  
+  .category-list .category-name,
+  .category-list .category-title-link {
+    font-size: 0.9375rem; /* 15px */
+  }
+  
+  .category-list .category-description {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.5;
+    /* Single-line clamp on small mobile */
+    -webkit-line-clamp: 1;
+  }
+  
+  /* Hide or condense stats on very small screens */
+  .category-list .category-stat,
+  .category-list .category-meta {
+    font-size: 0.6875rem; /* 11px */
   }
 }
 
