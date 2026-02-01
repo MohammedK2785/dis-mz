@@ -422,7 +422,7 @@ html[data-theme="dark"] {
       /* V8: Avatar ring styling - reduced to 1px for cleaner look */
       img.avatar {
         border-radius: 50%;
-        box-shadow: 0 0 0 1px var(--mza-avatar-ring); /* ring-1 for subtlety */
+        box-shadow: 0 0 0 1px var(--mza-avatar-ring); /* 1px ring for subtlety */
         transition: transform 0.15s ease, box-shadow 0.15s ease;
         position: relative; /* Required for z-index to work */
       }
@@ -864,8 +864,7 @@ html[data-theme="dark"] {
     }
 
     td.main-link.clearfix.topic-list-data {
-      padding-inline-start: 1.25rem;
-      padding-inline-end: 1.25rem;
+      padding-inline: 1.25rem;
     }
     
     /* Reduce title size on tablet */
@@ -882,8 +881,7 @@ html[data-theme="dark"] {
     }
 
     td.main-link.clearfix.topic-list-data {
-      padding-inline-start: 1rem;
-      padding-inline-end: 1rem;
+      padding-inline: 1rem;
     }
     
     /* Smaller gap between topic cards on mobile */
@@ -907,8 +905,7 @@ html[data-theme="dark"] {
     }
     
     td.main-link.clearfix.topic-list-data {
-      padding-inline-start: 0.875rem;
-      padding-inline-end: 0.875rem;
+      padding-inline: 0.875rem;
     }
     
     /* Reduce title size */
