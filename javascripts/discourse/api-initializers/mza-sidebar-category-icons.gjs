@@ -55,6 +55,9 @@ export default apiInitializer("1.34", (api) => {
       args.prefixValue = iconName;
     });
   } catch (error) {
-    console.warn("[mza-theme] mza-sidebar-category-icons initializer failed", error);
+    console.warn(
+      "[mza-theme] mza-sidebar-category-icons initializer failed",
+      error
+    );
   }
 });

@@ -2,11 +2,136 @@
 // UI Cards + Mobile (v1) - Sprint Styles
 // ===================================
 // This file contains modernized UI styles for:
+// - Subnav ribbon: clean pill-style navigation under main header
+// - Homepage hero: compact card above topic list
 // - Topic list row cards: border-spacing, rounded corners, pinned indicator
 // - Topic post cards: enhanced styling, better blockquote/code
 // - Mobile optimizations: no horizontal overflow, touch-friendly
 // Uses logical CSS properties for RTL/LTR support throughout
 // ===================================
+
+// ===================================
+// SECTION 1: Subnav Ribbon
+// Clean pill-style navigation bar under main header
+// Horizontal scroll on mobile, no page-level overflow
+// ===================================
+body:not(.admin-interface) nav[aria-label="التنقل الرئيسي"] {
+  position: relative;
+  z-index: 100;
+  background: var(--mza-glass-bg-solid);
+  border-block-end: 1px solid var(--mza-border);
+  backdrop-filter: blur(8px);
+
+  // Inner container with horizontal scroll
+  .wrap {
+    max-width: 100%;
+
+    > div {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-block: 0.75rem;
+      padding-inline: 0.5rem;
+      scroll-behavior: smooth;
+
+      // Hide scrollbar on WebKit browsers for cleaner look
+      &::-webkit-scrollbar {
+        height: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--primary-low);
+        border-radius: 1px;
+      }
+    }
+  }
+
+  // Pill-style navigation links
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    color: var(--primary);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--mza-surface);
+      border-color: var(--tertiary);
+      color: var(--tertiary);
+      box-shadow: var(--mza-shadow-sm);
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--tertiary);
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// ===================================
+// SECTION 2: Homepage Hero
+// Compact card above topic list on discovery routes
+// Displays hero_title and hero_subtitle from theme settings
+// ===================================
+.mza-hero {
+  background: var(--mza-surface);
+  border: 1px solid var(--mza-border);
+  border-radius: var(--mza-radius-lg);
+  box-shadow: var(--mza-shadow-sm);
+  padding-block: 1.5rem;
+  padding-inline: 1rem;
+  margin-block-end: 1.5rem;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    margin-block-end: 0.5rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--primary-medium);
+    text-align: center;
+    margin-block-end: 0;
+  }
+
+  // Medium screens and above
+  @media screen and (width >= 768px) {
+    padding-block: 2rem;
+
+    h1 {
+      font-size: 1.875rem;
+      margin-block-end: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
 
 // ===================================
 // SECTION 3: Topic List Row Cards
