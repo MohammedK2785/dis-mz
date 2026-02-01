@@ -589,7 +589,180 @@ div.link-bottom-line {
 }
 
 // ===================================
-// SECTION 6: RTL-Specific Refinements
+// SECTION 6: Alpine.js Excerpt Component
+// "Read More" toggle for long topic excerpts with graceful degradation
+// ===================================
+
+// Main container for Alpine excerpt component
+.topic-excerpt-alpine {
+  margin-block-start: 0.625rem;
+  padding-inline-start: 1rem;
+  padding-inline-end: 0.5rem;
+  padding-block: 0.5rem;
+  color: var(--primary-medium);
+  font-size: var(--font-down-1);
+  line-height: 1.5;
+  border-inline-start: 3px solid var(--primary-low-mid);
+  background-color: var(--primary-very-low);
+  border-radius: 4px;
+}
+
+// Excerpt content container
+.mza-excerpt-content {
+  margin-block-end: 0.5rem;
+  transition: all 0.3s ease;
+
+  // Graceful degradation: show full excerpt if Alpine fails to load
+  // This ensures content is accessible even without JavaScript
+}
+
+// Clamped state - only on mobile (max 3 lines)
+.mza-excerpt-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Desktop: Always show full excerpt (no clamping)
+@media screen and (width >= 768px) {
+  .mza-excerpt-clamped {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+}
+
+// Toggle button styling
+.mza-excerpt-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 0.75rem;
+  padding-block: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--tertiary);
+  background: var(--mza-surface);
+  border: 1px solid var(--mza-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--mza-surface-2);
+    border-color: var(--tertiary);
+    box-shadow: var(--mza-shadow-sm);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+}
+
+// ===================================
+// SECTION 7: Mobile Drawer Styling
+// Slide-in menu panel with rounded card appearance
+// ===================================
+
+// Main drawer panel
+.menu-panel {
+  background: var(--mza-surface);
+  border-radius: var(--mza-radius-lg);
+  box-shadow: var(--mza-shadow-xl);
+  overflow: hidden;
+
+  // Add rounded corners on the inner side (opposite of slide direction)
+  // For LTR: rounds left side, for RTL: rounds right side
+  @media screen and (width <= 768px) {
+    border-start-start-radius: var(--mza-radius-lg);
+    border-end-start-radius: var(--mza-radius-lg);
+  }
+}
+
+// Drawer header
+.menu-panel .panel-header {
+  padding: 1rem 1.25rem;
+  background: var(--mza-surface-2);
+  border-block-end: 1px solid var(--mza-border);
+
+  h3,
+  .title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+}
+
+// Drawer body with consistent spacing
+.menu-panel .panel-body {
+  padding: 1rem;
+
+  // Vertical spacing for content sections
+  > * + * {
+    margin-block-start: 0.75rem;
+  }
+}
+
+// Pill-style navigation links in drawer matching theme identity
+.menu-panel a,
+.menu-panel .menu-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.625rem;
+  padding-inline: 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: var(--mza-surface-2);
+  border: 1px solid var(--mza-border);
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--mza-surface);
+    border-color: var(--tertiary);
+    color: var(--tertiary);
+    box-shadow: var(--mza-shadow-sm);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+
+  // Active/selected state
+  &.active,
+  &[aria-current="page"] {
+    background: var(--tertiary-low);
+    border-color: var(--tertiary);
+    color: var(--tertiary);
+    font-weight: 600;
+  }
+}
+
+// List items in drawer
+.menu-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-block-end: 0.5rem;
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+}
+
+// ===================================
+// SECTION 8: RTL-Specific Refinements
 // Additional RTL adjustments for visual consistency
 // ===================================
 html[dir="rtl"] {
@@ -602,5 +775,20 @@ html[dir="rtl"] {
   tr.topic-list-item.pinned td:first-child,
   tr.topic-list-item.globally-pinned td:first-child {
     border-inline-start: 3px solid var(--tertiary);
+  }
+
+  // Drawer rounds on the correct side in RTL (right side)
+  .menu-panel {
+    @media screen and (width <= 768px) {
+      border-start-end-radius: var(--mza-radius-lg);
+      border-end-end-radius: var(--mza-radius-lg);
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+    }
+  }
+
+  // Topic excerpt alignment
+  .topic-excerpt-alpine {
+    text-align: start;
   }
 }
