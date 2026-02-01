@@ -1,0 +1,800 @@
+// ===================================
+// UI Cards + Mobile (v1) - Sprint Styles
+// ===================================
+// This file contains modernized UI styles for:
+// - Discourse header (glass background, pill buttons)
+// - Custom topbar/tabs (.mza-topbar): pills, smaller spacing, horizontal scroll
+// - Topic list row cards: border-spacing, rounded corners, pinned indicator
+// - Topic post cards: enhanced styling, better blockquote/code
+// - Mobile optimizations: no horizontal overflow, touch-friendly
+// Uses logical CSS properties for RTL/LTR support throughout
+// ===================================
+
+// ===================================
+// SECTION 1: Discourse Header Modernization
+// Glass background, subtle border, pill buttons
+// ===================================
+.d-header {
+  // Glass morphism background
+  background: var(--mza-glass-bg-solid);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-block-end: 1px solid var(--mza-border);
+  box-shadow: var(--mza-shadow-sm);
+
+  // Header inner wrapper
+  .d-header-wrap,
+  .wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  // Title/logo area (scoped to direct child to avoid matching other .title elements)
+  > .wrap > .title,
+  .d-header-wrap > .title {
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        color: var(--tertiary);
+      }
+    }
+  }
+
+  // Header icons container
+  .header-buttons,
+  .panel {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  // Pill-style header buttons
+  .icon,
+  .header-dropdown-toggle,
+  .btn-flat {
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    background: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    color: var(--primary-high);
+    transition:
+      background-color 0.15s ease,
+      box-shadow 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      background: var(--mza-surface);
+      box-shadow: var(--mza-shadow-md);
+      color: var(--tertiary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--tertiary);
+      outline-offset: 2px;
+    }
+
+    .d-icon {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+
+  // Search button pill
+  .search-dropdown,
+  .search-icon {
+    padding: 0.5rem 0.875rem;
+    border-radius: 9999px;
+    background: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    transition:
+      background-color 0.15s ease,
+      box-shadow 0.15s ease;
+
+    &:hover {
+      background: var(--mza-surface);
+      box-shadow: var(--mza-shadow-md);
+    }
+  }
+}
+
+// Dark mode header adjustments
+html[data-theme="dark"] .d-header {
+  background: var(--mza-glass-bg-solid);
+  border-block-end-color: var(--mza-border);
+}
+
+// ===================================
+// SECTION 2: Custom Topbar/Tabs Modernization (.mza-topbar)
+// Pill navigation, smaller spacing, horizontal scroll on mobile
+// ===================================
+.mza-topbar {
+  background: var(--mza-glass-bg-solid);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-block-end: 1px solid var(--mza-border);
+  box-shadow: var(--mza-shadow-sm);
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+
+  // Inner container with horizontal scroll support
+  .mza-topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block: 0.5rem;
+    padding-inline: 0;
+  }
+
+  // Navigation container - horizontal scroll on mobile
+  .mza-main-nav {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-low-mid) transparent;
+
+    // Hide scrollbar on WebKit but keep functionality
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--primary-low-mid);
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    // Pill-style nav links
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+      color: var(--mza-text);
+      background: var(--mza-surface-2);
+      border: 1px solid var(--mza-border);
+      box-shadow: var(--mza-shadow-sm);
+      text-decoration: none;
+      transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        color 0.15s ease;
+
+      &:hover {
+        background: var(--mza-surface);
+        box-shadow: var(--mza-shadow-md);
+        color: var(--tertiary);
+        text-decoration: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--tertiary);
+        outline-offset: 2px;
+      }
+
+      &.active,
+      &[aria-current="page"] {
+        background: var(--tertiary);
+        color: var(--secondary);
+        border-color: var(--tertiary);
+        box-shadow: var(--mza-shadow-md);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Section tabs styling (pills with horizontal scroll)
+.mza-section-tabs {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  background: var(--mza-surface);
+  border-block-end: 1px solid var(--mza-border);
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+
+  // Hide scrollbar on WebKit
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-low-mid);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .mza-section-tabs-inner {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+
+  .mza-section-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: var(--primary-high);
+    background: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      background: var(--mza-surface);
+      color: var(--tertiary);
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--tertiary);
+      outline-offset: 2px;
+    }
+
+    // Color variants for section tabs
+    &--offers:hover,
+    &--offers:focus {
+      border-color: #ff9800;
+      color: #ff9800;
+    }
+
+    &--cars:hover,
+    &--cars:focus {
+      border-color: #4caf50;
+      color: #4caf50;
+    }
+
+    &--reports:hover,
+    &--reports:focus {
+      border-color: #2196f3;
+      color: #2196f3;
+    }
+
+    &--questions:hover,
+    &--questions:focus {
+      border-color: #9c27b0;
+      color: #9c27b0;
+    }
+  }
+}
+
+// ===================================
+// SECTION 3: Topic List Row Cards
+// Enhanced card styling with border-spacing, rounded corners, pinned indicator
+// Uses logical properties for RTL/LTR support
+// ===================================
+table.topic-list {
+  border-spacing: 0 0.75rem;
+  border-collapse: separate;
+  margin-block-end: 1.5rem;
+  width: 100%;
+}
+
+// Topic row card styling
+tr.topic-list-item {
+  // Card-like appearance for each row
+  td {
+    background: var(--mza-surface);
+    border-block-start: 1px solid var(--mza-border);
+    border-block-end: 1px solid var(--mza-border);
+    box-shadow: var(--mza-shadow-sm);
+    padding-block: 1.25rem;
+    padding-inline: 1rem;
+    vertical-align: middle;
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  // First cell: inline-start border and radius
+  td:first-child {
+    border-inline-start: 1px solid var(--mza-border);
+    border-start-start-radius: var(--mza-radius-md);
+    border-end-start-radius: var(--mza-radius-md);
+  }
+
+  // Last cell: inline-end border and radius
+  td:last-child {
+    border-inline-end: 1px solid var(--mza-border);
+    border-start-end-radius: var(--mza-radius-md);
+    border-end-end-radius: var(--mza-radius-md);
+  }
+
+  // Hover state with subtle elevation
+  // Note: Hover is applied to td elements because table rows don't support
+  // border-radius/box-shadow directly in all browsers. Each cell needs styling.
+  &:hover td {
+    background: var(--mza-surface-2);
+    box-shadow: var(--mza-shadow-md);
+  }
+
+  // Pinned topic indicator using logical properties
+  &.pinned td:first-child,
+  &.globally-pinned td:first-child {
+    border-inline-start: 3px solid var(--tertiary);
+  }
+
+  // Closed topic indicator
+  &.closed {
+    td {
+      opacity: 0.8;
+    }
+
+    td:first-child {
+      border-inline-start: 3px solid var(--primary-medium);
+    }
+  }
+}
+
+// Topic title in row cards
+table.topic-list a.title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: var(--primary);
+  display: block;
+  margin-block-end: 0.375rem;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--tertiary);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+// Topic details container
+div.topic-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+// Bottom line meta (category, tags)
+div.link-bottom-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--primary-medium);
+}
+
+// ===================================
+// SECTION 4: Topic Post Cards
+// Enhanced card styling with border, radius, shadow, improved typography
+// ===================================
+.topic-post {
+  margin-block-end: 1.5rem;
+  background: var(--mza-surface);
+  border: 1px solid var(--mza-border);
+  border-radius: var(--mza-radius-lg);
+  box-shadow: var(--mza-shadow-md);
+  overflow: hidden;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--mza-shadow-xl);
+  }
+
+  // Post article inner content
+  article.boxed,
+  > article {
+    padding: 1.5rem;
+  }
+
+  // Topic body content
+  .topic-body {
+    padding-inline: 0.5rem;
+  }
+
+  // Post controls with glass effect
+  .post-controls {
+    margin-block-start: 1rem;
+    padding: 0.625rem 1rem;
+    background: var(--mza-glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 9999px;
+    border: 1px solid var(--mza-border);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+// Improved blockquote styling in posts
+.topic-body .cooked {
+  // Modern blockquotes with accent border
+  blockquote,
+  aside.quote {
+    background: var(--mza-surface-2);
+    border-inline-start: 4px solid var(--tertiary);
+    border-radius: var(--mza-radius-sm);
+    padding: 1rem 1.25rem;
+    margin-block: 1.25rem;
+    margin-inline: 0;
+    color: var(--primary-high);
+    font-style: normal;
+    box-shadow: var(--mza-shadow-sm);
+
+    .title {
+      font-weight: 600;
+      margin-block-end: 0.5rem;
+      color: var(--primary);
+    }
+
+    p {
+      margin-block-end: 0.5rem;
+
+      &:last-child {
+        margin-block-end: 0;
+      }
+    }
+  }
+
+  // Enhanced code blocks
+  pre {
+    background: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    border-radius: var(--mza-radius-sm);
+    padding: 1rem;
+    margin-block: 1.25rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+
+    code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+
+  // Inline code
+  code:not(pre code) {
+    background: var(--primary-low);
+    border-radius: 4px;
+    padding: 0.125rem 0.375rem;
+    font-size: 0.875em;
+    color: var(--primary);
+  }
+
+  // Typography improvements
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-block-start: 1.25rem;
+    margin-block-end: 0.75rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  p {
+    margin-block-end: 1rem;
+    line-height: 1.75;
+  }
+
+  ul,
+  ol {
+    margin-block: 0.75rem;
+    padding-inline-start: 1.5rem;
+    line-height: 1.65;
+
+    li {
+      margin-block-end: 0.375rem;
+    }
+  }
+}
+
+// ===================================
+// SECTION 5: Mobile Optimizations
+// No horizontal overflow, touch-friendly elements, readable stats
+// ===================================
+@media screen and (max-width: 768px) {
+  // Header mobile adjustments
+  .d-header {
+    padding-block: 0.5rem;
+
+    .icon,
+    .header-dropdown-toggle,
+    .btn-flat {
+      padding: 0.625rem;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+
+  // Topbar mobile: smaller spacing, full horizontal scroll
+  .mza-topbar {
+    padding-block: 0.375rem;
+    padding-inline: 0.5rem;
+
+    .mza-topbar-inner {
+      padding-block: 0.375rem;
+    }
+
+    .mza-main-nav {
+      gap: 0.375rem;
+      padding-inline-end: 1rem; // Extra padding for scroll indication
+
+      a {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8125rem;
+        min-height: 44px; // Touch target size
+      }
+    }
+  }
+
+  // Section tabs mobile
+  .mza-section-tabs {
+    padding-block: 0.375rem;
+    padding-inline: 0.5rem;
+
+    .mza-section-tabs-inner {
+      gap: 0.375rem;
+      padding-inline-end: 1rem;
+    }
+
+    .mza-section-tab {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8125rem;
+      min-height: 44px;
+    }
+  }
+
+  // Topic list mobile: stacked cards
+  table.topic-list {
+    display: block;
+    border-spacing: 0;
+
+    thead,
+    tr.topic-list-header {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+    }
+
+    tr.topic-list-item {
+      display: block;
+      margin-block-end: 1rem;
+      background: var(--mza-surface);
+      border: 1px solid var(--mza-border);
+      border-radius: var(--mza-radius-md);
+      box-shadow: var(--mza-shadow-sm);
+      overflow: hidden;
+
+      td {
+        display: block;
+        width: 100%;
+        padding-block: 0.625rem;
+        padding-inline: 1rem;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      td:first-child,
+      td:last-child {
+        border: none;
+        border-radius: 0;
+      }
+
+      // Pinned indicator on mobile
+      &.pinned,
+      &.globally-pinned {
+        border-inline-start: 3px solid var(--tertiary);
+      }
+
+      &.closed {
+        border-inline-start: 3px solid var(--primary-medium);
+      }
+    }
+  }
+
+  // Title sizing on mobile
+  table.topic-list a.title {
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  // Meta info stacked on mobile
+  div.link-bottom-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+  }
+
+  // Stats readable on mobile
+  td.num,
+  td.activity {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.625rem;
+    color: var(--primary-medium);
+
+    .number {
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  // Posters on mobile
+  td.posters {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+
+    img.avatar {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  // Hide bulk select on mobile
+  td.bulk-select.topic-list-data {
+    display: none;
+  }
+
+  // Post cards mobile
+  .topic-post {
+    border-radius: var(--mza-radius-md);
+    margin-block-end: 1rem;
+
+    article.boxed,
+    > article {
+      padding: 1rem;
+    }
+
+    .post-controls {
+      padding: 0.5rem 0.75rem;
+
+      button,
+      .btn {
+        min-height: 44px;
+        min-width: 44px;
+      }
+    }
+  }
+
+  // Cooked content on mobile
+  .topic-body .cooked {
+    font-size: 0.9375rem;
+
+    blockquote,
+    aside.quote {
+      padding: 0.875rem 1rem;
+      margin-block: 1rem;
+    }
+
+    pre {
+      padding: 0.875rem;
+      margin-block: 1rem;
+      font-size: 0.8125rem;
+    }
+  }
+}
+
+// Extra small screens (375px and below)
+@media screen and (max-width: 375px) {
+  // Prevent horizontal overflow
+  body {
+    overflow-x: hidden;
+  }
+
+  .mza-topbar,
+  .mza-section-tabs {
+    padding-inline: 0.375rem;
+  }
+
+  .mza-main-nav a,
+  .mza-section-tab {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  // Topic list extra small
+  table.topic-list {
+    tr.topic-list-item td {
+      padding-inline: 0.75rem;
+    }
+
+    a.title {
+      font-size: 0.875rem;
+      overflow-wrap: break-word;
+    }
+  }
+
+  // Post cards extra small
+  .topic-post {
+    article.boxed,
+    > article {
+      padding: 0.75rem;
+    }
+  }
+
+  .topic-body .cooked {
+    font-size: 0.875rem;
+
+    blockquote,
+    aside.quote {
+      padding: 0.75rem;
+    }
+
+    pre {
+      padding: 0.75rem;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+// ===================================
+// SECTION 6: RTL-Specific Refinements
+// Additional RTL adjustments for visual consistency
+// ===================================
+html[dir="rtl"] {
+  // Ensure proper text alignment in topic list
+  table.topic-list a.title {
+    text-align: start;
+  }
+
+  // Scrollbar positioning for RTL
+  .mza-main-nav,
+  .mza-section-tabs {
+    direction: rtl;
+  }
+
+  // Pinned indicator appears on inline-start (right in RTL)
+  tr.topic-list-item.pinned td:first-child,
+  tr.topic-list-item.globally-pinned td:first-child {
+    border-inline-start: 3px solid var(--tertiary);
+  }
+}

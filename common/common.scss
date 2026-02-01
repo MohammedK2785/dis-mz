@@ -1297,3 +1297,10 @@ body:not(.admin-interface) {
     }
   }
 }
+
+// ===================================
+// UI Cards + Mobile (v1) Styles
+// Modernized header, topbar, topic list cards, post cards, and mobile optimizations
+// Note: This file is separate and not part of Tailwind build
+// ===================================
+@import "zz-ui-cards-mobile";
