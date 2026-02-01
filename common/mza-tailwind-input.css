@@ -143,15 +143,26 @@ html[data-theme="dark"] {
 @layer components {
   /* Header contents wrapper - proper flex layout */
   .d-header .wrap .contents {
-    @apply flex items-center justify-between gap-2 md:gap-3;
+    @apply flex items-center gap-2 md:gap-3;
   }
 
-  /* Title/logo area - allow growth and prevent overlaps */
+  /* Title/logo area - flexible but not break */
   .d-header .title {
-    @apply flex items-center min-w-0 flex-1;
+    @apply flex items-center gap-2 min-w-0;
   }
 
-  /* Login/Signup button container - don't shrink */
+  /* Search container - expand and never collapse incorrectly */
+  .d-header .header-search {
+    @apply flex-1 min-w-0 max-w-[55vw] sm:max-w-none;
+  }
+
+  /* Search input - full width and never under other items */
+  .d-header .header-search input,
+  .d-header .search-input {
+    @apply w-full;
+  }
+
+  /* Login/Signup button container - never overlap, never shrink */
   .d-header .header-buttons {
     @apply flex items-center gap-2 shrink-0;
   }
