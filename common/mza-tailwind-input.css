@@ -411,17 +411,17 @@ html[data-theme="dark"] {
         }
       }
 
-      /* V7: Avatar ring styling for modern overlap look */
+      /* V8: Avatar ring styling - reduced to 1px for cleaner look */
       img.avatar {
         border-radius: 50%;
-        box-shadow: 0 0 0 2px var(--mza-avatar-ring); /* ring-2 ring-white */
+        box-shadow: 0 0 0 1px var(--mza-avatar-ring); /* ring-1 for subtlety */
         transition: transform 0.15s ease, box-shadow 0.15s ease;
         position: relative; /* Required for z-index to work */
       }
 
       a:hover img.avatar {
-        transform: scale(1.1);
-        box-shadow: 0 0 0 2px var(--mza-avatar-ring), 0 2px 4px rgb(0 0 0 / 0.1);
+        transform: scale(1.05); /* Reduced from 1.1 for subtlety */
+        box-shadow: 0 0 0 1px var(--mza-avatar-ring), 0 2px 4px rgb(0 0 0 / 0.1);
         z-index: 10;
       }
 
@@ -476,7 +476,7 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Topic row - V7 card visuals with rounded-2xl */
+  /* Topic row - V8 simplified card with single border */
   tr.topic-list-item {
     transition: transform 0.2s ease;
 
@@ -489,14 +489,12 @@ html[data-theme="dark"] {
       }
     }
 
-    /* Card cells - desktop spacing p-6 */
+    /* Card cells - desktop spacing p-6, single border per row */
     td {
       padding-block: 1.5rem;
       padding-inline: 1.5rem;
       vertical-align: middle;
       background: var(--mza-surface);
-      border-top: 1px solid var(--mza-border);
-      border-bottom: 1px solid var(--mza-border);
       box-shadow: var(--mza-shadow-sm);
       transition: box-shadow 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
@@ -506,6 +504,14 @@ html[data-theme="dark"] {
       border-inline-start: 1px solid var(--mza-border);
       border-start-start-radius: 1rem;
       border-end-start-radius: 1rem;
+      border-top: 1px solid var(--mza-border);
+      border-bottom: 1px solid var(--mza-border);
+    }
+
+    /* Middle cells - top and bottom borders only */
+    td:not(:first-child):not(:last-child) {
+      border-top: 1px solid var(--mza-border);
+      border-bottom: 1px solid var(--mza-border);
     }
 
     /* Last cell - right border + rounded-2xl end */
@@ -513,6 +519,8 @@ html[data-theme="dark"] {
       border-inline-end: 1px solid var(--mza-border);
       border-start-end-radius: 1rem;
       border-end-end-radius: 1rem;
+      border-top: 1px solid var(--mza-border);
+      border-bottom: 1px solid var(--mza-border);
     }
   }
 
@@ -645,19 +653,16 @@ html[data-theme="dark"] {
   }
 
 
-  /* Topic excerpt - V7 single-line clamp, text-sm, muted */
+  /* Topic excerpt - V8 simplified, just accent line */
   div.topic-excerpt {
-    margin-block-start: 0.625rem;
-    padding-inline-start: 1rem;
-    padding-inline-end: 0.5rem;
-    padding-block: 0.5rem;
+    margin-block-start: 0.5rem;
+    padding-inline-start: 0.75rem;
     color: var(--primary-medium);
     font-size: 0.875rem; /* text-sm */
     line-height: 1.5;
-    border-inline-start: 3px solid var(--primary-low-mid);
-    background-color: var(--primary-very-low);
-    border-radius: 4px;
-    /* V7: Single-line clamp for clean appearance */
+    border-inline-start: 2px solid var(--primary-low-mid); /* Reduced from 3px */
+    /* Removed background and border-radius for cleaner look */
+    /* V8: Single-line clamp for clean appearance */
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -770,34 +775,34 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Pinned topics - V7: subtle amber stripe, no full-row background */
+  /* Pinned topics - V8: enhanced amber stripe + subtle background */
   tr.topic-list-item.pinned,
   tr.topic-list-item.globally-pinned {
     td {
-      /* V7: Remove gradient, keep surface color for card consistency */
-      background: var(--mza-surface);
+      /* V8: Subtle amber tint for better visibility */
+      background: color-mix(in srgb, #f59e0b 3%, var(--mza-surface));
     }
 
     td:first-child {
-      /* V7: Warm amber stripe on inline-start side (RTL-safe) */
+      /* V8: Increased amber stripe width for better visibility */
       border-inline-start-color: #f59e0b; /* amber-500 */
-      border-inline-start-width: 4px;
+      border-inline-start-width: 6px; /* Increased from 4px */
     }
 
     &:hover td {
-      background: var(--mza-surface-2);
+      background: color-mix(in srgb, #f59e0b 5%, var(--mza-surface-2));
     }
   }
 
-  /* RTL pinned topics - V7: same surface background */
+  /* RTL pinned topics - V8: same styling with background tint */
   html[dir="rtl"] tr.topic-list-item.pinned,
   html[dir="rtl"] tr.topic-list-item.globally-pinned {
     td {
-      background: var(--mza-surface);
+      background: color-mix(in srgb, #f59e0b 3%, var(--mza-surface));
     }
 
     &:hover td {
-      background: var(--mza-surface-2);
+      background: color-mix(in srgb, #f59e0b 5%, var(--mza-surface-2));
     }
   }
 
