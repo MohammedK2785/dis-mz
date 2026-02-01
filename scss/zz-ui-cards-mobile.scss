@@ -11,6 +11,31 @@
 // ===================================
 
 // ===================================
+// SECTION 0: Layout Shell Wiring
+// Main discovery page container and layout structure
+// ===================================
+body:not(.admin-interface).navigation-topics,
+body:not(.admin-interface).navigation-latest,
+body:not(.admin-interface).navigation-categories {
+  background: var(--mza-surface-2);
+}
+
+#main-outlet {
+  min-height: 60vh;
+  padding-block: 1.5rem;
+}
+
+.discovery-container {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media screen and (width >= 768px) {
+    padding-inline: 1.5rem;
+  }
+}
+
+// ===================================
 // SECTION 1: Subnav Ribbon
 // Clean pill-style navigation bar under main header
 // Horizontal scroll on mobile, no page-level overflow
