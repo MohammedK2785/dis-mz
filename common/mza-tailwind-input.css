@@ -500,7 +500,7 @@ html[data-theme="dark"] {
     /* Card cells - V10: reduced padding py-3 px-3 md:px-4 */
     td {
       padding-block: 0.75rem; /* py-3 = 12px */
-      padding-inline: 0.75rem; /* px-3 = 12px on mobile */
+      padding-inline: 0.75rem; /* px-3 = 12px (base mobile padding) */
       vertical-align: middle;
       background: var(--mza-surface);
       box-shadow: var(--mza-shadow-sm);
@@ -836,7 +836,7 @@ html[data-theme="dark"] {
     }
 
     td:first-child {
-      /* V10: Thinner amber stripe (4px) */
+      /* V10: Thinner amber stripe (4px, reduced from 6px) */
       border-inline-start-color: #f59e0b;
       border-inline-start-width: 4px;
     }
@@ -2706,10 +2706,10 @@ body[class*="category-عروض"],
    Critical fixes to prevent horizontal scrolling
    ================================== */
 @media screen and (max-width: 375px) {
-  /* Prevent body/html horizontal overflow */
+  /* Prevent body/html horizontal overflow - use clip to preserve focus indicators */
   html,
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
   }
   
@@ -2756,7 +2756,7 @@ body[class*="category-عروض"],
     overflow: hidden;
     white-space: normal;
     word-break: break-word;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word; /* Prefer word boundaries over arbitrary breaks */
   }
   
   /* Bottom line meta - single line, ellipsis */
