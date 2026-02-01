@@ -152,7 +152,6 @@ div.link-bottom-line {
     padding: 0.625rem 1rem;
     background: var(--mza-glass-bg);
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     border-radius: 9999px;
     border: 1px solid var(--mza-border);
     display: flex;
@@ -253,7 +252,7 @@ div.link-bottom-line {
 // SECTION 5: Mobile Optimizations
 // No horizontal overflow, touch-friendly elements, readable stats
 // ===================================
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   // Topic list mobile: stacked cards
   table.topic-list {
     display: block;
@@ -391,7 +390,7 @@ div.link-bottom-line {
 }
 
 // Extra small screens (375px and below)
-@media screen and (max-width: 375px) {
+@media screen and (width <= 375px) {
   // Prevent horizontal overflow
   body {
     overflow-x: hidden;
