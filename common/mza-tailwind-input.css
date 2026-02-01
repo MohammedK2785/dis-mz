@@ -2353,3 +2353,47 @@ body[class*="category-عروض"],
   }
 }
 
+/* ===================================
+   Minimal Discourse Header Styling (Tailwind v4 Components)
+   Glass background, subtle border - scoped only to real header buttons
+   ================================== */
+@layer components {
+  /* Header glass background and border */
+  .d-header {
+    background: var(--mza-glass-bg-solid);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-block-end: 1px solid var(--mza-border);
+    box-shadow: var(--mza-shadow-sm);
+  }
+
+  /* Header layout */
+  .d-header .wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Header buttons pill styling - scoped to specific buttons only */
+  .d-header .header-buttons .btn-flat,
+  .d-header .header-buttons .header-dropdown-toggle {
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    background: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .d-header .header-buttons .btn-flat:hover,
+  .d-header .header-buttons .header-dropdown-toggle:hover {
+    background: var(--mza-surface);
+    box-shadow: var(--mza-shadow-md);
+  }
+
+  /* Dark mode */
+  html[data-theme="dark"] .d-header {
+    background: var(--mza-glass-bg-solid);
+    border-block-end-color: var(--mza-border);
+  }
+}
+
