@@ -2987,33 +2987,56 @@ html[dir="rtl"] {
 
 /* ===================================
    V10 Mobile Category Page - App-like UX
-   Hide topic list when subcategories exist
+   Hide topic list ONLY for directory categories (Morocco Gate + World Gate)
+   
+   ⚠️  CONFIGURATION REQUIRED ⚠️
+   The placeholder IDs below (TODO-MOROCCO-GATE-ID and TODO-WORLD-GATE-ID) must be 
+   replaced with actual numeric category IDs before these rules will take effect.
+   Until replaced, topic lists will be visible on ALL categories (desired safe default).
    ================================== */
 @layer components {
   @media (max-width: 768px) {
-    /* Hide topic list blocks on category pages - scoped to body.category and .category-page */
-    :is(body.category, .category-page) #list-area,
-    :is(body.category, .category-page) .topic-list,
-    :is(body.category, .category-page) .topic-list-header,
-    :is(body.category, .category-page) .topic-list-body,
-    :is(body.category, .category-page) .topic-list-footer,
-    :is(body.category, .category-page) .category-featured-topics {
+    /* IMPORTANT: Replace TODO-MOROCCO-GATE-ID and TODO-WORLD-GATE-ID with actual category IDs
+       To find IDs: Go to Admin > Categories, select the category, and check the URL or data-category-id attribute
+       Example: body.category[data-category-id="5"] for category with ID 5
+       
+       Morocco Gate (بوابة المغرب) - Replace TODO-MOROCCO-GATE-ID with actual numeric ID
+       World Gate (بوابة العالم) - Replace TODO-WORLD-GATE-ID with actual numeric ID
+    */
+    
+    /* Hide topic list blocks ONLY on directory category pages */
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] #list-area,
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .topic-list,
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .topic-list-header,
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .topic-list-body,
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .topic-list-footer,
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .category-featured-topics,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] #list-area,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .topic-list,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .topic-list-header,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .topic-list-body,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .topic-list-footer,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .category-featured-topics {
       @apply hidden;
     }
 
-    /* Ensure subcategory containers remain visible and styled as grid cards */
-    :is(body.category, .category-page) .subcategories,
-    :is(body.category, .category-page) .subcategory-list {
+    /* Ensure subcategory containers remain visible in directory categories */
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .subcategories,
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .subcategory-list,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .subcategories,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .subcategory-list {
       @apply block;
     }
 
-    /* Style subcategories as grid cards for app-like UX */
-    :is(body.category, .category-page) .subcategories {
+    /* Style subcategories as grid cards for app-like UX in directory categories */
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .subcategories,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .subcategories {
       @apply grid gap-3 mt-3;
       grid-template-columns: 1fr;
     }
 
-    :is(body.category, .category-page) .subcategories > * {
+    body.category[data-category-id="TODO-MOROCCO-GATE-ID"] .subcategories > *,
+    body.category[data-category-id="TODO-WORLD-GATE-ID"] .subcategories > * {
       @apply rounded-2xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm p-4;
     }
   }
