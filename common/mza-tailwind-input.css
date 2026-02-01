@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../tailwind.config.cjs";
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
 
 /* ===================================
    Mza3et Design Tokens (V6 - Premium Platform + V9 Card System)
@@ -98,6 +98,53 @@ html[data-theme="dark"] {
   overflow: hidden;
 }
 
+/* ===================================
+   Discourse Header Button Styles (Tailwind v4 Components Layer)
+   Specific selectors to avoid leaking to .icon containers
+   ================================== */
+@layer components {
+  /* Desktop header buttons - pill style with subtle background */
+  .d-header .header-buttons .btn-flat,
+  .d-header .header-buttons .header-dropdown-toggle,
+  .d-header .header-icons button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    background-color: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+    color: var(--primary-high);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+  }
+
+  .d-header .header-buttons .btn-flat:hover,
+  .d-header .header-buttons .header-dropdown-toggle:hover,
+  .d-header .header-icons button:hover {
+    background-color: var(--mza-surface);
+    box-shadow: var(--mza-shadow-md);
+    color: var(--tertiary);
+  }
+
+  .d-header .header-buttons .btn-flat:focus-visible,
+  .d-header .header-buttons .header-dropdown-toggle:focus-visible,
+  .d-header .header-icons button:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+
+  /* Mobile header buttons - larger hit area for touch */
+  @media screen and (max-width: 768px) {
+    .d-header .header-buttons .btn-flat,
+    .d-header .header-buttons .header-dropdown-toggle,
+    .d-header .header-icons button {
+      padding: 0.625rem;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+}
+
 /* Mza3et Sky Blue Gradient Utility */
 /* Note: "to left" direction is intentional for RTL-first design - 
    gradient flows from light (RTL start/right) to dark (RTL end/left) */
@@ -153,7 +200,7 @@ html[data-theme="dark"] {
   
   /* Paragraph spacing with leading-relaxed */
   #main-outlet p {
-    @apply mb-4;
+    margin-bottom: 1rem;
     line-height: 1.75; /* leading-relaxed */
   }
   
@@ -786,7 +833,7 @@ html[data-theme="dark"] {
      ================================== */
   
   .topic-post {
-    @apply mb-4;
+    margin-bottom: 1rem;
     border-bottom: 1px solid var(--primary-low);
     transition: background-color 0.2s ease;
   }
@@ -851,7 +898,10 @@ html[data-theme="dark"] {
   }
 
   .topic-body .cooked code:not(pre code) {
-    @apply px-1 py-0.5;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
     background-color: var(--primary-low);
     color: var(--primary);
     font-size: var(--font-down-1);
@@ -1019,7 +1069,10 @@ html[data-theme="dark"] {
   }
 
   .composer-action-buttons .btn {
-    @apply px-4 py-2;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     font-weight: 500;
   }
 
@@ -1344,7 +1397,12 @@ html[data-theme="dark"] {
 }
 
 .btn-primary {
-  @apply btn;
+  @apply inline-flex items-center justify-center font-medium transition-colors;
+  padding: 0.5rem 1rem;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
   background-color: var(--tertiary);
   color: var(--secondary);
 }
@@ -1358,7 +1416,12 @@ html[data-theme="dark"] {
 }
 
 .btn-default {
-  @apply btn;
+  @apply inline-flex items-center justify-center font-medium transition-colors;
+  padding: 0.5rem 1rem;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
   background-color: var(--primary-low);
   color: var(--primary);
   border-color: var(--primary-low-mid);
@@ -1374,7 +1437,12 @@ html[data-theme="dark"] {
 }
 
 .btn-link {
-  @apply btn;
+  @apply inline-flex items-center justify-center font-medium transition-colors;
+  padding: 0.5rem 1rem;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
   background: transparent;
   color: var(--tertiary);
   border: none;
@@ -1388,10 +1456,14 @@ html[data-theme="dark"] {
 }
 
 .btn-icon {
-  @apply btn;
+  @apply inline-flex items-center justify-center font-medium transition-colors;
   width: 2.5rem;
   height: 2.5rem;
   padding: 0;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 500;
   background-color: transparent;
   color: var(--primary-high);
 }
@@ -1501,7 +1573,11 @@ textarea {
 }
 
 .alert-info {
-  @apply alert;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  line-height: 1.5;
   background-color: var(--tertiary-very-low);
   border-color: var(--tertiary-low);
   color: var(--primary);
@@ -1513,7 +1589,11 @@ textarea {
 }
 
 .alert-error {
-  @apply alert;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  line-height: 1.5;
   background-color: var(--danger-low);
   border-color: var(--danger);
   color: var(--primary);
@@ -1525,7 +1605,11 @@ textarea {
 }
 
 .alert-warning {
-  @apply alert;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  line-height: 1.5;
   background-color: var(--primary-very-low);
   border-color: var(--primary-low);
   color: var(--primary);
@@ -1536,7 +1620,11 @@ textarea {
 }
 
 .alert-success {
-  @apply alert;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--mza-radius);
+  border: 1px solid transparent;
+  line-height: 1.5;
   background-color: var(--success-low);
   border-color: var(--success);
   color: var(--primary);
@@ -1549,7 +1637,8 @@ textarea {
 
 /* Nav Pills - Soft UI V3: Fully rounded pills with subtle backgrounds */
 .nav-pills {
-  @apply flex mb-4;
+  display: flex;
+  margin-bottom: 1rem;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
@@ -1624,7 +1713,11 @@ html[dir="rtl"] .sidebar-wrapper {
 }
 
 .sidebar-section-link {
-  @apply px-3 py-2 block;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: block;
   color: var(--primary-high);
   text-decoration: none;
   border-radius: calc(var(--mza-radius) * 0.75);
