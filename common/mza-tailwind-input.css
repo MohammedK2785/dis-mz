@@ -7,6 +7,23 @@
   /* Brand colors - using CSS variables for easier theming */
   --mza-brand: #0ea5e9; /* Sky blue */
   --mza-brand-dark: #0369a1; /* Darker sky blue */
+  
+  /* Tailwind-compatible color tokens for utility classes */
+  --color-sky-primary: #0284c7;
+  --color-sky-primary-dark: #0369a1;
+  --color-sky-accent: #38bdf8;
+  --color-mza-sky: #0ea5e9;
+  --color-mza-sky-dark: #0369a1;
+  --color-mza-sky-light: #7dd3fc;
+  --color-mza-accent: #06b6d4;
+  --color-mza-bg: #f8fafc;
+  --color-mza-border: #e2e8f0;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-700: #404040;
+  --color-neutral-900: #171717;
+  
   /* Soft UI tokens */
   --mza-surface: #fff;
   --mza-surface-2: #f8fafc;
