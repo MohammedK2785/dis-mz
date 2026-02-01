@@ -300,6 +300,26 @@ html[data-theme="dark"] {
   }
 
   /* ===================================
+     Transparent Main Outlet Wrappers
+     Allows page background (--mza-surface-2) to show through
+     ================================== */
+  body:not(.admin-interface) {
+    background: var(--mza-surface-2);
+  }
+
+  #main-outlet-wrapper {
+    background: transparent !important;
+  }
+
+  #main-outlet-wrapper > .wrap {
+    background: transparent !important;
+  }
+
+  #main-outlet {
+    background: transparent !important;
+  }
+
+  /* ===================================
      V6 Premium Typography - .cooked content
      Cairo-optimized, leading-loose (1.9-2.0) for Arabic readability
      Strong heading weights with tracking-tight for modern feel
@@ -1017,16 +1037,30 @@ html[data-theme="dark"] {
 
   /* ===================================
      Topic Page Components (Post Stream)
+     Card-based design with shadows and borders
      ================================== */
   
+  /* Topic post wrapper - spacing between cards */
   .topic-post {
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--primary-low);
-    transition: background-color 0.2s ease;
+    margin-block-end: 1.25rem;
   }
 
-  .topic-post:hover {
-    background-color: var(--primary-very-low);
+  /* Card styling on the article element */
+  .topic-post article.boxed,
+  .topic-post > article {
+    background: var(--mza-surface);
+    border: 1px solid var(--mza-border);
+    border-radius: var(--mza-radius);
+    box-shadow: var(--mza-shadow-sm);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  /* Hover lift effect on cards */
+  .topic-post:hover article.boxed,
+  .topic-post:hover > article {
+    box-shadow: var(--mza-shadow-md);
+    transform: translateY(-1px);
   }
 
   /* Post body - improved typography for reading with leading-relaxed */
