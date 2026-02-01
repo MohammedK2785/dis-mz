@@ -9,7 +9,7 @@
     {{!-- Excerpt container with conditional clamping --}}
     <div 
       class="mza-excerpt-content"
-      :class="{ 'mza-excerpt-clamped': !expanded }"
+      x-bind:class="{ 'mza-excerpt-clamped': !expanded }"
     >
       {{{@outletArgs.topic.excerpt}}}
     </div>
@@ -18,7 +18,7 @@
     <button 
       type="button"
       class="mza-excerpt-toggle md:hidden"
-      @click="expanded = !expanded"
+      x-on:click="expanded = !expanded"
       x-text="expanded ? 'إخفاء النص' : 'قراءة المزيد'"
     >
       قراءة المزيد

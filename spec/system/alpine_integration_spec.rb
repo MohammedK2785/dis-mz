@@ -32,11 +32,15 @@ RSpec.describe "Alpine.js Integration" do
 
     # Set mobile viewport
     page.driver.browser.manage.window.resize_to(375, 667)
-    
+
     visit "/"
 
-    # Check that the toggle button exists and has correct text
-    expect(page).to have_css(".mza-excerpt-toggle")
+    # Check that the toggle button exists, has correct text, and is visible
+    expect(page).to have_css(".mza-excerpt-toggle", visible: true)
     expect(page).to have_content("قراءة المزيد")
+
+    # Verify button is not hidden by the md:hidden class on mobile
+    button = page.find(".mza-excerpt-toggle")
+    expect(button).to be_visible
   end
 end

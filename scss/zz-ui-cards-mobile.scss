@@ -626,7 +626,7 @@ div.link-bottom-line {
 }
 
 // Desktop: Always show full excerpt (no clamping)
-@media screen and (width >= 768px) {
+@media screen and (min-width: 768px) {
   .mza-excerpt-clamped {
     display: block;
     -webkit-line-clamp: unset;
@@ -676,7 +676,7 @@ div.link-bottom-line {
 
   // Add rounded corners on the inner side (opposite of slide direction)
   // For LTR: rounds left side, for RTL: rounds right side
-  @media screen and (width <= 768px) {
+  @media screen and (max-width: 768px) {
     border-start-start-radius: var(--mza-radius-lg);
     border-end-start-radius: var(--mza-radius-lg);
   }
@@ -779,7 +779,7 @@ html[dir="rtl"] {
 
   // Drawer rounds on the correct side in RTL (right side)
   .menu-panel {
-    @media screen and (width <= 768px) {
+    @media screen and (max-width: 768px) {
       border-start-end-radius: var(--mza-radius-lg);
       border-end-end-radius: var(--mza-radius-lg);
       border-start-start-radius: 0;
