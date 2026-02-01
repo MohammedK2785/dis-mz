@@ -21,13 +21,16 @@ RSpec.describe "Mza3et Theme Header" do
     end
   end
 
-  it "renders the homepage hero section" do
+  it "renders the homepage hero section with compact styling" do
     visit "/"
 
-    # Assert presence of hero title
-    expect(page).to have_css(".mza-hero h1")
+    # Assert presence of hero with section-card class
+    expect(page).to have_css(".mza-hero.mza-section-card")
 
-    # Assert presence of hero subtitle
-    expect(page).to have_css(".mza-hero p")
+    # Assert presence of hero title with section-title class
+    expect(page).to have_css(".mza-hero .mza-section-title")
+
+    # Assert presence of hero subtitle with section-subtitle class
+    expect(page).to have_css(".mza-hero .mza-section-subtitle")
   end
 end

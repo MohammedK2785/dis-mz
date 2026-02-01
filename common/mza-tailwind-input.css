@@ -3042,4 +3042,65 @@ html[dir="rtl"] {
   }
 }
 
+/* ===================================
+   V11 Dense Topic Card Layout
+   Modern, compact topic cards for discovery pages
+   Flex-based layout with title+avatar on top, metadata on bottom
+   ================================== */
+@layer components {
+  /* Section card utility - for hero, categories sidebar */
+  .mza-section-card {
+    @apply rounded-xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm;
+  }
+
+  /* Section title utility */
+  .mza-section-title {
+    @apply font-bold tracking-tight text-[var(--primary)];
+  }
+
+  /* Section subtitle utility */
+  .mza-section-subtitle {
+    @apply text-[var(--primary-medium)];
+    opacity: 0.8;
+  }
+
+  /* Dense topic card */
+  .mza-topic-card {
+    @apply py-3 px-4 rounded-xl border border-[var(--mza-border)] bg-[var(--mza-surface)] shadow-sm;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .mza-topic-card:hover {
+    @apply shadow-md;
+    transform: translateY(-1px);
+  }
+
+  /* Topic card title - 1-2 line clamp */
+  .mza-topic-card__title {
+    @apply font-semibold text-base leading-snug tracking-tight text-[var(--primary)];
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    line-height: 1.4;
+  }
+
+  /* Topic card metadata row */
+  .mza-topic-card__meta {
+    @apply flex items-center gap-2 flex-wrap text-xs text-[var(--primary-medium)] mt-2;
+  }
+
+  /* Category chip in topic card */
+  .mza-topic-card__category {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+    background: var(--mza-surface-2);
+    border: 1px solid var(--mza-border);
+  }
+
+  /* Stats (replies, views, age) */
+  .mza-topic-card__stat {
+    @apply inline-flex items-center gap-1 text-xs;
+  }
+}
+
 
