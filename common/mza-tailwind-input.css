@@ -121,7 +121,7 @@ html[data-theme="dark"] {
   /* Desktop header buttons - pill style with subtle background */
   .d-header .header-buttons .btn-flat,
   .d-header .header-buttons .header-dropdown-toggle {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--mza-border)] bg-[var(--mza-surface-2)] px-4 py-2 text-sm font-semibold text-[var(--primary-high)] transition;
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[var(--mza-border)] bg-[var(--mza-surface-2)] px-3 py-1.5 text-sm font-semibold text-[var(--primary-high)] transition md:px-4 md:py-2;
   }
 
   .d-header .header-buttons .btn-flat:hover,
@@ -141,19 +141,24 @@ html[data-theme="dark"] {
    Proper spacing and flex layout for header elements
    ================================== */
 @layer components {
-  /* Header contents wrapper - proper flex layout */
+  /* Header contents wrapper - proper flex layout with responsive wrapping */
   .d-header .wrap .contents {
-    @apply flex items-center gap-2 md:gap-3;
+    @apply flex items-center gap-2 md:gap-3 min-w-0;
   }
 
-  /* Title/logo area - flexible but not break */
+  /* Title/logo area - don't shrink, flexible but not break */
   .d-header .title {
-    @apply flex items-center gap-2 min-w-0;
+    @apply flex items-center gap-2 shrink-0 min-w-0;
+  }
+
+  /* Panel container (right-side area with icons and buttons) - pushed to end */
+  .d-header .panel {
+    @apply flex items-center gap-2 md:gap-3 shrink-0 ms-auto;
   }
 
   /* Search container - expand and never collapse incorrectly */
   .d-header .header-search {
-    @apply flex-1 min-w-0 max-w-[55vw] sm:max-w-none;
+    @apply flex-1 min-w-0 min-w-[12rem] max-w-none;
   }
 
   /* Search input - full width and never under other items */
@@ -170,6 +175,17 @@ html[data-theme="dark"] {
   /* Icons container (notifications, messages, avatar) - don't shrink */
   .d-header .header-icons {
     @apply flex items-center gap-1 md:gap-2 shrink-0;
+  }
+
+  /* Responsive behavior for narrower widths - wrap and move search to second row */
+  @media (max-width: 1024px) {
+    .d-header .wrap .contents {
+      @apply flex-wrap;
+    }
+
+    .d-header .header-search {
+      @apply basis-full order-last mt-2;
+    }
   }
 }
 
@@ -192,6 +208,11 @@ html[data-theme="dark"] {
     .d-header .header-icons button {
       @apply w-11 h-11;
     }
+  }
+
+  /* Ensure search dropdown/menu appears above header buttons when open */
+  .d-header .search-menu {
+    z-index: 1200;
   }
 }
 
