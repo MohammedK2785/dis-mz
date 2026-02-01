@@ -2760,6 +2760,34 @@ body[class*="category-عروض"],
   body.categories #main-outlet .search-menu input[type='text'] {
     @apply h-11 md:h-12 px-4 text-base;
   }
+
+  /* Homepage search icons - ensure proper tap targets and RTL positioning */
+  body.navigation-topics #main-outlet .search-menu button,
+  body.navigation-topics #main-outlet .search-menu .btn,
+  body.categories #main-outlet .search-menu button,
+  body.categories #main-outlet .search-menu .btn {
+    @apply w-10 h-10 flex items-center justify-center;
+  }
+
+  /* RTL: Search lens icon positioning (right side) */
+  body.navigation-topics #main-outlet .search-menu .search-icon,
+  body.navigation-topics #main-outlet .search-menu .search-link,
+  body.navigation-topics #main-outlet .search-menu .btn-primary,
+  body.categories #main-outlet .search-menu .search-icon,
+  body.categories #main-outlet .search-menu .search-link,
+  body.categories #main-outlet .search-menu .btn-primary {
+    order: 1;
+  }
+
+  /* RTL: Filter/options icon positioning (left side) */
+  body.navigation-topics #main-outlet .search-menu .advanced-search,
+  body.navigation-topics #main-outlet .search-menu .search-advanced,
+  body.navigation-topics #main-outlet .search-menu .show-advanced-search,
+  body.categories #main-outlet .search-menu .advanced-search,
+  body.categories #main-outlet .search-menu .search-advanced,
+  body.categories #main-outlet .search-menu .show-advanced-search {
+    order: -1;
+  }
 }
 
 /* ===================================
