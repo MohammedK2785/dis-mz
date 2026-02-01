@@ -61,6 +61,9 @@ export default apiInitializer("1.34", (api) => {
       return columns;
     });
   } catch (error) {
-    console.warn("[mza-theme] mza-compact-topic-stats initializer failed", error);
+    console.warn(
+      "[mza-theme] mza-compact-topic-stats initializer failed",
+      error
+    );
   }
 });
