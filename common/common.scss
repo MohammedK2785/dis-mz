@@ -111,6 +111,70 @@ body:not(.admin-interface) .categories-list table.category-list {
   box-shadow: var(--mza-shadow-soft);
 }
 
+// ===================================
+// Category Card — Hardcoded styles (override Tailwind/variable issues)
+// Explicit hex values to render immediately without build steps
+// ===================================
+.category-list-item {
+  background-color: #fff !important;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  padding: 16px;
+  margin-bottom: 12px;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 6px 0 rgb(0 0 0 / 0.1);
+    border-color: #cbd5e1;
+  }
+}
+
+// ===================================
+// Subcategory Pills — Hardcoded styles
+// Flex wrapper + pill-styled badge links
+// ===================================
+.category-list-item .subcategories,
+.category-list-item .subcategory-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.category-list-item .subcategories a.badge-wrapper,
+.category-list-item .subcategory-list a.badge-wrapper {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  color: #334155 !important;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    color: #0ea5e9 !important;
+    text-decoration: none;
+  }
+
+  .badge-category__name {
+    color: inherit;
+  }
+}
+
 // Legacy accent colors for section tabs
 $mza-accent-green: #4caf50;
 $mza-accent-orange: #ff9800;
