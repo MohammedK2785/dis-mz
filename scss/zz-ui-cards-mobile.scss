@@ -20,7 +20,7 @@ body:not(.admin-interface).navigation-categories {
   background: var(--mza-surface-2);
 }
 
-#main-outlet {
+body:not(.admin-interface) #main-outlet {
   min-height: 60vh;
   padding-block: 1.5rem;
 }
