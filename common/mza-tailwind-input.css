@@ -54,6 +54,11 @@
   --mza-muted: var(--primary-medium, #72839a);
   --mza-focus: var(--tertiary, #0ea5e9);
   --mza-shadow-lg: 0 10px 25px rgb(0 0 0 / 0.08);
+  /* V10: Colored / diffuse shadow tokens for modern elevation */
+  --mza-shadow-colored: 0 2px 8px rgb(14 165 233 / 0.06);
+  --mza-shadow-soft: 0 2px 8px rgb(0 0 0 / 0.04);
+  --mza-shadow-float: 0 8px 24px rgb(0 0 0 / 0.1);
+  --mza-border-accent: var(--tertiary, #0ea5e9);
 }
 
 /* Progressive enhancement: override glass vars with color-mix() for browsers that support it.
@@ -1556,12 +1561,12 @@
     opacity: 1;
   }
 
-  /* Search panel improvements - V4 modern search styling */
+  /* Search panel improvements - V10: float shadow for elevated panels */
   .d-header .search-menu,
   .d-header .panel {
     background: var(--mza-surface);
     border: 1px solid var(--mza-border);
-    box-shadow: var(--mza-shadow-md);
+    box-shadow: var(--mza-shadow-float);
     border-radius: 0.75rem;
   }
 
@@ -1960,16 +1965,17 @@ html[dir="rtl"] .sidebar-wrapper {
 }
 
 /* Categories Page Polish - V10 Modern card-like styling matching topic list */
-/* Category rows - V10: rounded-xl, consistent padding */
+/* Category rows - V10: white surface, 4px accent border-strip, soft colored shadow */
 .category-list .category-list-item,
 .category-list .category-row {
-  margin-bottom: 0.75rem; /* Reduced to match topic list spacing */
-  padding-block: 0.75rem; /* py-3 = 12px */
-  padding-inline: 0.75rem; /* px-3 = 12px on mobile */
+  margin-bottom: 0.75rem;
+  padding-block: 0.75rem;
+  padding-inline: 0.75rem;
   background-color: var(--mza-surface);
   border: 1px solid var(--mza-border);
-  border-radius: 0.75rem; /* rounded-xl = 12px */
-  box-shadow: var(--mza-shadow-sm);
+  border-inline-start: 4px solid var(--mza-border-accent);
+  border-radius: 0.75rem;
+  box-shadow: var(--mza-shadow-soft);
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -1977,14 +1983,14 @@ html[dir="rtl"] .sidebar-wrapper {
 @media (min-width: 768px) {
   .category-list .category-list-item,
   .category-list .category-row {
-    padding-inline: 1rem; /* px-4 = 16px on desktop */
+    padding-inline: 1rem;
   }
 }
 
 .category-list .category-list-item:hover,
 .category-list .category-row:hover {
-  box-shadow: var(--mza-shadow-md);
-  border-color: var(--primary-low-mid);
+  box-shadow: var(--mza-shadow-colored);
+  border-color: var(--mza-border-strong);
   transform: translateY(-1px);
 }
 
@@ -2043,22 +2049,33 @@ body:not(.admin-interface) .category-list .category-title-link:hover {
   margin-inline-start: 1rem;
 }
 
-/* Category badge/tag styling */
+/* Category badge/tag styling - V10: white bg + ring + dark text + hover */
 .category-list .badge-wrapper,
 .category-list .category-badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.5rem;
-  border-radius: calc(var(--mza-radius) * 0.5);
+  padding: 0.25rem 0.625rem;
+  background: var(--mza-surface);
+  border: 1px solid var(--mza-border);
+  border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.2;
+  color: var(--primary-high, #334155);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
-/* Latest topics in category view - V8 cleaner separation */
+.category-list .badge-wrapper:hover,
+.category-list .category-badge:hover {
+  border-color: var(--mza-border-strong);
+  box-shadow: var(--mza-shadow-sm);
+  color: var(--tertiary);
+}
+
+/* Latest topics in category view - V10: stronger divider contrast */
 .category-list .latest-topic-list-item {
-  padding: 0.625rem 0; /* Slightly less padding */
-  border-bottom: 1px solid var(--primary-very-low);
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--mza-border);
   transition: background-color 0.15s ease;
 }
 

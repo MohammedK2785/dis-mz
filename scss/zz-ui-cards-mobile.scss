@@ -49,7 +49,7 @@ body:not(.admin-interface) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(4, auto);
     grid-auto-flow: column;
-    gap: 0.375rem 0.75rem;
+    gap: var(--mza-gap-2) var(--mza-gap-3);
     align-items: start;
 
     // Hide items beyond 8 (4 per column × 2 columns)
@@ -57,6 +57,7 @@ body:not(.admin-interface) {
       display: none;
     }
 
+    // V10: Subcategory pill styling — white bg, ring, dark text, hover
     .subcategory,
     .subcategory-list-item {
       width: 100%;
@@ -65,6 +66,27 @@ body:not(.admin-interface) {
       justify-content: space-between;
       white-space: normal;
       min-width: 0;
+      background: var(--mza-surface);
+      border: 1px solid var(--mza-border);
+      border-radius: var(--mza-radius-sm);
+      padding-block: 0.375rem;
+      padding-inline: 0.625rem;
+      color: var(--primary-high, #334155);
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        color 0.2s ease;
+
+      &:hover {
+        border-color: var(--mza-border-strong);
+        box-shadow: var(--mza-shadow-sm);
+        color: var(--tertiary);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
     }
 
     // Mobile: single column stack
@@ -739,11 +761,11 @@ div.link-bottom-line {
 // Slide-in menu panel with rounded card appearance
 // ===================================
 
-// Main drawer panel
+// Main drawer panel — V10: float shadow for elevated panels
 .menu-panel {
   background: var(--mza-surface);
   border-radius: var(--mza-radius-lg);
-  box-shadow: var(--mza-shadow-xl);
+  box-shadow: var(--mza-shadow-float);
   overflow: hidden;
 
   // Add rounded corners on the inner side (opposite of slide direction)
