@@ -22,9 +22,9 @@ $mza-border: #e2e8f0;
 // Light surfaces, subtle borders, soft shadows, glassmorphism
 // ===================================
 :root {
-  --mza-surface: #fff;
-  --mza-surface-2: #f8fafc;
-  --mza-border: #e2e8f0;
+  --mza-surface: var(--secondary, #fff);
+  --mza-surface-2: var(--primary-very-low, #f8fafc);
+  --mza-border: var(--primary-low, #e2e8f0);
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.07);
   --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.04);
@@ -41,29 +41,29 @@ $mza-border: #e2e8f0;
   --mza-gap-3: 0.75rem;
   --mza-gap-4: 1rem;
   --mza-text: var(--primary);
-  --mza-avatar-ring: #f1f5f9;
+  --mza-avatar-ring: var(--secondary, #f1f5f9);
+
+  // Glass backgrounds - use rgba() fallback; browsers supporting color-mix() get adaptive values
   --mza-glass-bg: rgb(255 255 255 / 0.75);
   --mza-glass-bg-solid: rgb(255 255 255 / 0.92);
 }
 
-// Dark mode overrides
-html[data-theme="dark"] {
-  --mza-surface: #1e293b;
-  --mza-surface-2: #0f172a;
-  --mza-border: #334155;
-  --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
-  --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.3);
-  --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.15);
-  --mza-avatar-ring: #475569;
-  --mza-glass-bg: rgb(30 41 59 / 0.75);
-  --mza-glass-bg-solid: rgb(30 41 59 / 0.92);
-
-  // V9: Radius and gap tokens remain same in dark mode
+// Progressive enhancement: override glass vars with color-mix() for browsers that support it
+// color-mix() allows the glass to adapt to dark/light Discourse color schemes automatically
+@supports (color: color-mix(in srgb, red, red)) {
+  :root {
+    --mza-glass-bg: color-mix(in srgb, var(--secondary, #fff) 75%, transparent);
+    --mza-glass-bg-solid: color-mix(
+      in srgb,
+      var(--secondary, #fff) 92%,
+      transparent
+    );
+  }
 }
 
-// Page background - slate-like surface for modern look (non-admin pages only)
+// Page background - use Discourse's color scheme variable so dark mode works correctly
 body:not(.admin-interface) {
-  background: #f8fafc; // slate-50
+  background: var(--secondary);
 }
 
 // Legacy accent colors for section tabs
@@ -306,11 +306,11 @@ span.badge-category {
   font-size: var(--font-down-1);
 }
 
-// Topic excerpt - enhanced spacing and styling
-// Sprint V7: single-line clamp, text-sm, muted color
-// NOTE: Hidden when Alpine excerpt component is present (topic-list-after-title connector)
+// Topic excerpt - hidden; the theme uses the topic-excerpt-alpine connector
+// (<details>/<summary> component) which renders separately via the
+// topic-list-after-title outlet and is always visible.
 div.topic-excerpt {
-  display: none; // Hidden in favor of Alpine-powered excerpt component
+  display: none;
 }
 
 // Meta columns (posts, views, activity) - V7 minimal visual weight
@@ -431,30 +431,28 @@ div.topic-statuses {
 tr.topic-list-item.pinned,
 tr.topic-list-item.globally-pinned {
   td {
-    // V7: Remove gradient background, keep surface color for card consistency
-    background: var(--mza-surface);
+    background: color-mix(in srgb, var(--tertiary) 4%, var(--mza-surface));
   }
 
-  // V7: Subtle warm amber stripe on inline-start side (RTL-safe)
+  // Subtle accent stripe on inline-start side (RTL-safe), uses theme tertiary color
   td:first-child {
-    border-inline-start: 4px solid #f59e0b; // amber-500 for warm indicator
+    border-inline-start: 4px solid var(--tertiary);
   }
 
   &:hover td {
-    background: var(--mza-surface-2);
+    background: color-mix(in srgb, var(--tertiary) 7%, var(--mza-surface-2));
   }
 }
 
-// RTL override for pinned topics (gradient removed, border handled by logical properties)
+// RTL override for pinned topics (border handled by logical properties)
 html[dir="rtl"] tr.topic-list-item.pinned,
 html[dir="rtl"] tr.topic-list-item.globally-pinned {
   td {
-    // V7: Same surface background for RTL
-    background: var(--mza-surface);
+    background: color-mix(in srgb, var(--tertiary) 4%, var(--mza-surface));
   }
 
   &:hover td {
-    background: var(--mza-surface-2);
+    background: color-mix(in srgb, var(--tertiary) 7%, var(--mza-surface-2));
   }
 }
 

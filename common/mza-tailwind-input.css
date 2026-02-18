@@ -24,10 +24,11 @@
   --color-neutral-700: #404040;
   --color-neutral-900: #171717;
   
-  /* Soft UI tokens */
-  --mza-surface: #fff;
-  --mza-surface-2: #f8fafc;
-  --mza-border: #e2e8f0;
+  /* Soft UI tokens - use Discourse CSS vars so colors adapt to any color scheme
+     (light, dark, or custom) without needing separate dark-mode overrides */
+  --mza-surface: var(--secondary, #fff);
+  --mza-surface-2: var(--primary-very-low, #f8fafc);
+  --mza-border: var(--primary-low, #e2e8f0);
   --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.07);
   --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.04);
@@ -42,24 +43,20 @@
   --mza-gap-3: 0.75rem;
   --mza-gap-4: 1rem;
   --mza-text: var(--primary, #1e293b);
-  /* Avatar ring - solid color for better contrast */
-  --mza-avatar-ring: #f1f5f9;
-  /* Glass background - higher opacity for accessibility */
+  /* Avatar ring uses the main background so rings blend with card surface */
+  --mza-avatar-ring: var(--secondary, #f1f5f9);
+  /* Glass backgrounds - rgba() fallback; browsers supporting color-mix() get adaptive values */
   --mza-glass-bg: rgb(255 255 255 / 0.75);
   --mza-glass-bg-solid: rgb(255 255 255 / 0.92);
 }
 
-/* Dark mode overrides */
-html[data-theme="dark"] {
-  --mza-surface: #1e293b;
-  --mza-surface-2: #0f172a;
-  --mza-border: #334155;
-  --mza-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
-  --mza-shadow-md: 0 4px 6px rgb(0 0 0 / 0.3);
-  --mza-shadow-xl: 0 8px 30px rgb(0 0 0 / 0.15);
-  --mza-avatar-ring: #475569;
-  --mza-glass-bg: rgb(30 41 59 / 0.75);
-  --mza-glass-bg-solid: rgb(30 41 59 / 0.92);
+/* Progressive enhancement: override glass vars with color-mix() for browsers that support it.
+   color-mix() allows the glass effect to adapt to dark/light Discourse color schemes. */
+@supports (color: color-mix(in srgb, red, red)) {
+  :root {
+    --mza-glass-bg: color-mix(in srgb, var(--secondary, #fff) 75%, transparent);
+    --mza-glass-bg-solid: color-mix(in srgb, var(--secondary, #fff) 92%, transparent);
+  }
 }
 
 /* ===================================
@@ -301,21 +298,22 @@ html[data-theme="dark"] {
 
   /* ===================================
      Transparent Main Outlet Wrappers
-     Allows page background (--mza-surface-2) to show through
+     Allows page background (--mza-surface-2) to show through.
+     Scoped to non-admin pages to avoid affecting the admin interface.
      ================================== */
   body:not(.admin-interface) {
-    background: var(--mza-surface-2);
+    background: var(--secondary);
   }
 
-  #main-outlet-wrapper {
+  body:not(.admin-interface) #main-outlet-wrapper {
     background: transparent !important;
   }
 
-  #main-outlet-wrapper > .wrap {
+  body:not(.admin-interface) #main-outlet-wrapper > .wrap {
     background: transparent !important;
   }
 
-  #main-outlet {
+  body:not(.admin-interface) #main-outlet {
     background: transparent !important;
   }
 
@@ -847,34 +845,34 @@ html[data-theme="dark"] {
     }
   }
 
-  /* Pinned topics - V10: subtle indicator, not oversized */
+  /* Pinned topics - subtle indicator using Discourse theme vars */
   tr.topic-list-item.pinned,
   tr.topic-list-item.globally-pinned {
     td {
-      /* V10: Very subtle amber tint */
-      background: color-mix(in srgb, #f59e0b 2%, var(--mza-surface));
+      /* Subtle tint using the theme's tertiary accent color */
+      background: color-mix(in srgb, var(--tertiary) 4%, var(--mza-surface));
     }
 
     td:first-child {
-      /* V10: Thinner amber stripe (4px, reduced from 6px) */
-      border-inline-start-color: #f59e0b;
+      /* Accent stripe on the inline-start edge (RTL-safe) */
+      border-inline-start-color: var(--tertiary);
       border-inline-start-width: 4px;
     }
 
     &:hover td {
-      background: color-mix(in srgb, #f59e0b 4%, var(--mza-surface-2));
+      background: color-mix(in srgb, var(--tertiary) 7%, var(--mza-surface-2));
     }
   }
 
-  /* RTL pinned topics - V10: same subtle styling */
+  /* RTL pinned topics - same subtle styling, logical properties handle direction */
   html[dir="rtl"] tr.topic-list-item.pinned,
   html[dir="rtl"] tr.topic-list-item.globally-pinned {
     td {
-      background: color-mix(in srgb, #f59e0b 2%, var(--mza-surface));
+      background: color-mix(in srgb, var(--tertiary) 4%, var(--mza-surface));
     }
 
     &:hover td {
-      background: color-mix(in srgb, #f59e0b 4%, var(--mza-surface-2));
+      background: color-mix(in srgb, var(--tertiary) 7%, var(--mza-surface-2));
     }
   }
 
@@ -1335,17 +1333,12 @@ html[data-theme="dark"] {
     /* No special styling needed, just a scoping container */
   }
 
-  /* Custom Top Header Bar - Soft secondary styling (no heavy gradient) */
+  /* Custom Top Header Bar - glass effect using adaptive Discourse-var-based glass */
   .mza-header .mza-topbar {
-    background: rgb(255 255 255 / 0.65);
+    background: var(--mza-glass-bg);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--mza-border);
     box-shadow: none;
-  }
-  
-  /* Dark mode glass topbar */
-  html[data-theme="dark"] .mza-header .mza-topbar {
-    background: rgb(30 41 59 / 0.7);
   }
 
   .mza-header .mza-topbar-inner {
@@ -1530,17 +1523,11 @@ html[data-theme="dark"] {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--mza-glass-bg);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--mza-border);
     box-shadow: var(--mza-shadow-sm);
-  }
-
-  /* Dark mode glass header */
-  html[data-theme="dark"] .d-header-wrap .d-header {
-    background: rgba(30, 41, 59, 0.75);
-    border-bottom-color: var(--mza-border);
   }
 
   /* Header links - improved readability and elegance */
@@ -1582,22 +1569,15 @@ html[data-theme="dark"] {
     border-radius: 0.75rem;
   }
 
-  /* Search input - slate-100 surface with modern focus */
+  /* Search input - uses surface-2 so it adapts to the active color scheme */
   .d-header-wrap .search-menu input[type="text"].search-input,
   .d-header-wrap .search-menu .search-input input,
   .d-header-wrap #search-term {
-    background-color: #f1f5f9; /* slate-100 */
+    background-color: var(--mza-surface-2);
     border: 1px solid var(--mza-border);
     border-radius: 0.5rem;
     padding: 0.625rem 0.875rem;
     transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  /* Dark mode search input */
-  html[data-theme="dark"] .d-header-wrap .search-menu input[type="text"].search-input,
-  html[data-theme="dark"] .d-header-wrap .search-menu .search-input input,
-  html[data-theme="dark"] .d-header-wrap #search-term {
-    background-color: var(--mza-surface-2);
   }
 
   /* Search input focus - white bg with subtle ring */
