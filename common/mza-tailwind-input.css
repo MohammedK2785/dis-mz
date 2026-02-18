@@ -48,6 +48,12 @@
   /* Glass backgrounds - rgba() fallback; browsers supporting color-mix() get adaptive values */
   --mza-glass-bg: rgb(255 255 255 / 0.75);
   --mza-glass-bg-solid: rgb(255 255 255 / 0.92);
+  /* Additional design tokens for contrast and focus */
+  --mza-surface-3: var(--primary-low, #e2e8f0);
+  --mza-border-strong: var(--primary-low-mid, #cbd5e1);
+  --mza-muted: var(--primary-medium, #72839a);
+  --mza-focus: var(--tertiary, #0ea5e9);
+  --mza-shadow-lg: 0 10px 25px rgb(0 0 0 / 0.08);
 }
 
 /* Progressive enhancement: override glass vars with color-mix() for browsers that support it.
@@ -631,23 +637,15 @@
     min-width: 0;
   }
 
-  /* Bottom line - V10: meta info smaller, muted, single line */
+  /* Bottom line - meta info, wraps on all viewports */
   div.link-bottom-line {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     flex-wrap: wrap;
-    font-size: 0.75rem; /* text-xs = 12px, smaller */
+    font-size: 0.8125rem;
     color: var(--primary-medium);
     line-height: 1.4;
-    
-    /* V10: Single line with ellipsis on mobile */
-    @media (max-width: 767px) {
-      flex-wrap: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
   }
 
   /* Category badge */
@@ -745,36 +743,34 @@
      De-emphasize counts - keep them but smaller and aligned
      ================================== */
   
-  /* Stats columns - V10: de-emphasized, smaller, muted */
+  /* Stats columns - readable, muted */
   td.num {
     text-align: center;
-    font-size: 0.6875rem; /* 11px - even smaller */
-    color: var(--primary-low-mid); /* More muted */
+    font-size: 0.75rem;
+    color: var(--primary-medium);
     white-space: nowrap;
-    min-width: 3rem; /* Reduced from 3.5rem */
+    min-width: 3rem;
     padding-inline: 0.5rem;
     background: transparent;
-    opacity: 0.85; /* Slightly faded */
 
     /* Posts map button */
     button.btn-link.posts-map.badge-posts {
       font-weight: 400;
-      font-size: 0.6875rem; /* Match cell size */
-      color: var(--primary-low-mid);
+      font-size: 0.75rem;
+      color: var(--primary-medium);
       transition: color 0.15s ease, transform 0.1s ease;
 
       &:hover {
         color: var(--tertiary);
-        opacity: 1;
       }
     }
 
-    /* Number display - smaller, lighter */
+    /* Number display */
     span.number {
       font-weight: 400;
-      font-size: 0.6875rem;
+      font-size: 0.75rem;
       font-variant-numeric: tabular-nums;
-      color: var(--primary-low-mid);
+      color: var(--primary-medium);
     }
   }
 
@@ -794,18 +790,16 @@
     font-weight: 400;
   }
 
-  /* Activity cell - V10: de-emphasized, smaller */
+  /* Activity cell */
   td.num.topic-list-data.age.activity {
-    font-size: 0.6875rem;
-    opacity: 0.85;
+    font-size: 0.75rem;
 
     a.post-activity {
-      color: var(--primary-low-mid);
+      color: var(--primary-medium);
       transition: color 0.15s ease;
 
       &:hover {
         color: var(--tertiary);
-        opacity: 1;
       }
     }
 
@@ -814,11 +808,10 @@
     }
   }
 
-  /* Views column - V10: de-emphasized, smaller */
+  /* Views column */
   td.num.views.topic-list-data {
-    color: var(--primary-low-mid);
-    font-size: 0.6875rem;
-    opacity: 0.85;
+    color: var(--primary-medium);
+    font-size: 0.75rem;
 
     span.number {
       font-variant-numeric: tabular-nums;
@@ -1183,7 +1176,7 @@
   .topic-post .actions,
   .topic-post .post-menu-area,
   .post-controls .actions {
-    opacity: 0.75;
+    opacity: 0.9;
     transition: opacity 0.2s ease;
   }
 
@@ -2880,14 +2873,11 @@ body[class*="category-عروض"],
     letter-spacing: -0.02em;
   }
   
-  /* Bottom line meta - single line, ellipsis */
+  /* Bottom line meta - wraps on very small screens */
   div.link-bottom-line {
-    gap: 0.5rem;
-    font-size: 0.625rem; /* 10px */
-    flex-wrap: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    gap: 0.375rem;
+    font-size: 0.6875rem;
+    flex-wrap: wrap;
   }
   
   /* Category badge - smaller */

@@ -47,18 +47,33 @@ $mza-border: #e2e8f0;
   --mza-glass-bg: rgb(255 255 255 / 0.75);
   --mza-glass-bg-solid: rgb(255 255 255 / 0.92);
 
+  // Additional design tokens for contrast and focus
+  --mza-surface-3: var(--primary-low, #e2e8f0);
+  --mza-border-strong: var(--primary-low-mid, #cbd5e1);
+  --mza-muted: var(--primary-medium, #72839a);
+  --mza-focus: var(--tertiary, #0ea5e9);
+  --mza-shadow-lg: 0 10px 25px rgb(0 0 0 / 0.08);
+
   // Cairo font family tokens — ensure category titles and headings use Cairo globally
-  --font-family: "Cairo", system-ui, -apple-system, "Segoe UI", arial,
-    sans-serif;
-  --heading-font-family: "Cairo", system-ui, -apple-system, "Segoe UI", arial,
-    sans-serif;
+  --font-family:
+    "Cairo", system-ui, -apple-system, "Segoe UI", arial, sans-serif;
+  --heading-font-family:
+    "Cairo", system-ui, -apple-system, "Segoe UI", arial, sans-serif;
 }
 
-// Ensure category-specific elements inherit Cairo
-.badge-category__name,
+// Ensure ALL headings and category elements use Cairo
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .category-name,
-.category-title-link {
-  font-family: var(--font-family);
+.category-title-link,
+.badge-category__name,
+.topic-title,
+.fancy-title {
+  font-family: var(--heading-font-family);
 }
 
 // Progressive enhancement: override glass vars with color-mix() for browsers that support it
@@ -77,6 +92,12 @@ $mza-border: #e2e8f0;
 // Page background - use subtle surface-2 so cards/sections stand out
 body:not(.admin-interface) {
   background: var(--mza-surface-2);
+}
+
+// Ensure card surfaces contrast with page background
+body:not(.admin-interface) .category-list .category,
+body:not(.admin-interface) .categories-list table.category-list {
+  border-radius: var(--mza-radius-md);
 }
 
 // Legacy accent colors for section tabs
@@ -888,7 +909,7 @@ div.discourse-tags {
   border-radius: 9999px;
   border: 1px solid var(--mza-border);
   box-shadow: var(--mza-shadow-sm);
-  opacity: 0.8;
+  opacity: 0.9;
   transition:
     opacity 0.2s ease,
     background 0.2s ease,
