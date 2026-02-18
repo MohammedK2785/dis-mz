@@ -578,9 +578,12 @@
     letter-spacing: -0.025em;
     color: var(--primary);
     display: block;
+    overflow: visible;
     margin-block-end: 0.5rem;
     transition: color 0.15s ease;
     white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 
     &:hover {
       color: var(--tertiary);
@@ -2323,10 +2326,14 @@ html[dir="rtl"] .mza-reading-progress-bar {
     height: 24px;
   }
 
-  /* Topic title - mobile sizing */
+  /* Topic title - mobile: no truncation, wrap fully */
   table.topic-list a.title {
-    font-size: 0.9375rem;
+    display: block;
+    overflow: visible;
     white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    font-size: 0.9375rem;
   }
 
   /* Topic excerpt - mobile clamp */
@@ -2527,9 +2534,13 @@ body[class*="category-عروض"],
       }
       
       a.title {
+        display: block;
+        overflow: visible;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
         font-size: 1rem;
         font-weight: 700;
-        white-space: normal;
       }
       
       /* Meta row below title */
@@ -2595,6 +2606,11 @@ body[class*="category-عروض"],
     }
     
     a.title {
+      display: block;
+      overflow: visible;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
       font-size: 0.9375rem;
     }
     
@@ -2825,15 +2841,17 @@ body[class*="category-عروض"],
     width: 100%;
   }
   
-  /* Topic title - compact */
+  /* Topic title - no truncation on very small screens */
   table.topic-list a.title {
+    display: block;
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     font-size: 0.8125rem; /* 13px */
     font-weight: 600;
     line-height: 1.35;
     letter-spacing: -0.02em;
-    white-space: normal;
-    word-break: break-word;
-    overflow-wrap: break-word; /* Prefer word boundaries over arbitrary breaks */
   }
   
   /* Bottom line meta - single line, ellipsis */
@@ -3036,14 +3054,22 @@ html[dir="rtl"] {
     transform: translateY(-1px);
   }
 
-  /* Topic card title - 1-2 line clamp */
+  /* Topic card title - no clamp on mobile, 2-line clamp on desktop */
   .mza-topic-card__title {
     @apply font-semibold text-base leading-snug tracking-tight text-[var(--primary)];
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+    display: block;
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     line-height: 1.4;
+
+    @media screen and (min-width: 768px) {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
   }
 
   /* Topic card metadata row */

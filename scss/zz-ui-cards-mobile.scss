@@ -258,6 +258,13 @@ table.topic-list a.title {
   margin-block-end: 0.25rem;
   transition: color 0.15s ease;
 
+  // Mobile default: no truncation, wrap naturally
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
   // Desktop only: limit to 2 lines with ellipsis
   @media screen and (width >= 768px) {
     display: -webkit-box;
@@ -484,8 +491,13 @@ div.link-bottom-line {
     }
   }
 
-  // Title sizing on mobile
+  // Title sizing on mobile: no truncation, wrap fully
   table.topic-list a.title {
+    display: block;
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     font-size: 0.9375rem;
     line-height: 1.45;
   }
@@ -583,8 +595,12 @@ div.link-bottom-line {
     }
 
     a.title {
+      display: block;
+      overflow: visible;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
       font-size: 0.875rem;
-      overflow-wrap: break-word;
     }
   }
 
