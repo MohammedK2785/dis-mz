@@ -85,6 +85,9 @@ h6,
 .fancy-title,
 .categories-list .category-name,
 table.category-list .category-name {
+  // !important needed: Discourse core and plugin stylesheets set font-family
+  // on these elements at equal or higher specificity. Without !important,
+  // Cairo is overridden by Discourse's default font stack.
   font-family: var(--heading-font-family) !important;
 }
 
@@ -394,6 +397,9 @@ table.topic-list a.title {
   transition: color 0.15s ease;
 
   // Ensure no truncation at any viewport (Task 1)
+  // Base layer uses normal declarations; mobile override in zz-ui-cards-mobile.scss
+  // adds !important to defeat Discourse core truncation that applies at higher specificity
+  // on narrow viewports.
   white-space: normal;
   overflow: visible;
   overflow-wrap: anywhere;

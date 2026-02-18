@@ -53,7 +53,11 @@ body:not(.admin-interface) .categories-list {
     gap: var(--mza-gap-2);
     align-items: center;
 
-    // Wrapper items become transparent — badge link is the visual unit
+    // Wrapper items become transparent — badge link is the visual unit.
+    // display:contents removes the wrapper box so the inner <a> badge link
+    // participates directly in the flex/grid layout, preventing empty placeholder boxes.
+    // Accessibility: these <li> wrappers have no semantic role beyond containing
+    // the link, so removal from the box tree does not affect screen reader navigation.
     .subcategory,
     .subcategory-list-item {
       display: contents;
@@ -520,7 +524,12 @@ div.link-bottom-line {
     min-width: 0;
   }
 
-  // Force full wrap on topic title links — override any truncation
+  // Force full wrap on topic title links — override any truncation.
+  // !important is needed here because Discourse core applies truncation
+  // (white-space: nowrap, overflow: hidden, text-overflow: ellipsis, line-clamp)
+  // at equivalent or higher specificity on mobile viewports.
+  // The base declarations in common.scss handle the default case;
+  // these mobile-specific !important overrides ensure truncation is fully defeated.
   table.topic-list a.title,
   .raw-topic-link,
   .link-top-line a {
