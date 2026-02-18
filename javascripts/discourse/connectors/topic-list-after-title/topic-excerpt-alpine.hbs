@@ -1,27 +1,17 @@
-{{!-- Alpine.js "Read More" Component for Long Topic Excerpts --}}
-{{!-- Only renders when topic has an excerpt (typically pinned topics) --}}
+{{!-- Native "Read More" Component for Long Topic Excerpts --}}
+{{!-- Uses the HTML <details>/<summary> element - no JavaScript required --}}
 {{#if @outletArgs.topic.excerpt}}
-  <div 
+  <details
     class="topic-excerpt-alpine"
-    x-data="{ expanded: false }"
     dir="rtl"
   >
-    {{!-- Excerpt container with conditional clamping --}}
-    <div 
-      class="mza-excerpt-content"
-      x-bind:class="{ 'mza-excerpt-clamped': !expanded }"
-    >
+    {{!-- Toggle button - visible on mobile, hidden on desktop via CSS --}}
+    {{!-- aria-label provides accessible name; visual label is provided by CSS ::before --}}
+    <summary class="mza-excerpt-toggle" aria-label="قراءة المزيد / إخفاء النص"></summary>
+
+    {{!-- Excerpt content shown when details is open --}}
+    <div class="mza-excerpt-content">
       {{{@outletArgs.topic.excerpt}}}
     </div>
-    
-    {{!-- Toggle button for mobile - hidden on desktop --}}
-    <button 
-      type="button"
-      class="mza-excerpt-toggle md:hidden"
-      x-on:click="expanded = !expanded"
-      x-text="expanded ? 'إخفاء النص' : 'قراءة المزيد'"
-    >
-      قراءة المزيد
-    </button>
-  </div>
+  </details>
 {{/if}}

@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
-# System spec for Alpine.js integration and topic excerpt component
-RSpec.describe "Alpine.js Integration" do
+# System spec for native excerpt component (replaced Alpine.js with <details>/<summary>)
+RSpec.describe "Topic Excerpt Component" do
   before { upload_theme_or_component }
 
-  it "loads Alpine.js script from CDN" do
+  it "does not load Alpine.js from CDN" do
     visit "/"
 
-    # Check that Alpine.js script is loaded in the page head
-    expect(page).to have_css('script[src*="alpinejs"]', visible: false)
+    # Alpine.js has been replaced with native <details>/<summary>
+    expect(page).not_to have_css('script[src*="alpinejs"]', visible: false)
   end
 
-  it "renders the Alpine excerpt component for topics with excerpts" do
+  it "renders the native excerpt component for topics with excerpts" do
     # Create a topic with an excerpt (pinned topics typically have excerpts)
     topic = Fabricate(:topic)
     topic.update(pinned_at: Time.zone.now, excerpt: "This is a long excerpt for testing purposes")
 
     visit "/"
 
-    # Check that the Alpine excerpt component is present
-    expect(page).to have_css(".topic-excerpt-alpine")
-    
+    # Check that the excerpt component is present (details element with topic-excerpt-alpine class)
+    expect(page).to have_css("details.topic-excerpt-alpine")
+
     # Check that the excerpt content is present
     expect(page).to have_css(".mza-excerpt-content")
   end
@@ -35,12 +35,7 @@ RSpec.describe "Alpine.js Integration" do
 
     visit "/"
 
-    # Check that the toggle button exists, has correct text, and is visible
-    expect(page).to have_css(".mza-excerpt-toggle", visible: true)
-    expect(page).to have_content("قراءة المزيد")
-
-    # Verify button is not hidden by the md:hidden class on mobile
-    button = page.find(".mza-excerpt-toggle")
-    expect(button).to be_visible
+    # Check that the <summary> toggle is visible on mobile
+    expect(page).to have_css("details.topic-excerpt-alpine > summary.mza-excerpt-toggle", visible: true)
   end
 end

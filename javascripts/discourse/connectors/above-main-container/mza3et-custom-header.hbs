@@ -2,7 +2,7 @@
 {{!-- One navigation bar under Discourse header using Tailwind v4 utilities --}}
 
 {{!-- Mobile-only Portal Navigation (Morocco & World only) --}}
-<nav class="mza-mobile-portal-nav w-full border-b backdrop-blur-md md:hidden" style="background: rgba(255, 255, 255, 0.9); border-color: var(--mza-border);" aria-label="بوابات الموقع">
+<nav class="mza-mobile-portal-nav w-full border-b backdrop-blur-md md:hidden" style="border-color: var(--mza-border);" aria-label="بوابات الموقع">
   <div class="wrap">
     <div class="flex gap-2 overflow-x-auto py-3 px-2 scrollbar-thin" style="scroll-behavior: smooth;">
       {{#if (theme-setting "nav_morocco_url")}}
@@ -20,7 +20,7 @@
 </nav>
 
 {{!-- Desktop Navigation (all links, hidden on mobile) --}}
-<nav class="w-full border-b backdrop-blur-md hidden md:block" style="background: rgba(255, 255, 255, 0.9); border-color: var(--mza-border);" aria-label="التنقل الرئيسي">
+<nav class="w-full border-b backdrop-blur-md hidden md:block" style="border-color: var(--mza-border);" aria-label="التنقل الرئيسي">
   <div class="wrap">
     <div class="flex gap-2 overflow-x-auto py-3 px-2 scrollbar-thin" style="scroll-behavior: smooth;">
       {{!-- All navigation links from theme settings in one horizontal row --}}

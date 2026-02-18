@@ -1,21 +1,2 @@
-{{!-- Mza3et Theme - Mobile-Only Portal Navigation --}}
-{{!-- Displays Morocco & World portal links only on mobile devices --}}
-
-{{#if site.mobileView}}
-  <nav class="mza-mobile-portal-nav" aria-label="بوابات الموقع المحمول">
-    <div class="wrap">
-      <div class="mza-mobile-portal-links">
-        {{#if (theme-setting "nav_morocco_url")}}
-          <a href="{{theme-setting 'nav_morocco_url'}}" class="mza-mobile-portal-link">
-            {{theme-setting "nav_morocco_label"}}
-          </a>
-        {{/if}}
-        {{#if (theme-setting "nav_world_url")}}
-          <a href="{{theme-setting 'nav_world_url'}}" class="mza-mobile-portal-link">
-            {{theme-setting "nav_world_label"}}
-          </a>
-        {{/if}}
-      </div>
-    </div>
-  </nav>
-{{/if}}
+{{!-- Mobile portal navigation is handled by mza3et-custom-header.hbs --}}
+{{!-- This connector is intentionally empty to avoid duplicate rendering --}}
