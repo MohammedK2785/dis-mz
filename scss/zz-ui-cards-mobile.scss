@@ -37,66 +37,44 @@ body:not(.admin-interface) #main-outlet {
 }
 
 // ===================================
-// SECTION 0b: Subcategories — 2-column vertical grid layout
-// Scoped to discovery/categories pages only (non-admin)
-// CSS Grid fills down first (grid-auto-flow: column): 4 items per column, 2 columns = 8 max
-// RTL-safe using logical CSS properties; mobile falls back to single column
+// SECTION 0b: Subcategories — 2-column grid on desktop, flex pills on mobile
+// Scoped to category-list context only (non-admin)
+// Desktop (>= 1024px): CSS Grid fills down first (grid-auto-flow: column)
+// Mobile/tablet: flex-wrap pills — no big boxes
+// RTL-safe using logical CSS properties
 // ===================================
-body:not(.admin-interface) {
+body:not(.admin-interface) .category-list-item,
+body:not(.admin-interface) .categories-list {
   .subcategories,
   .subcategory-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(4, auto);
-    grid-auto-flow: column;
-    gap: var(--mza-gap-2) var(--mza-gap-3);
-    align-items: start;
+    // Default: flex-wrap pills (mobile/tablet)
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mza-gap-2);
+    align-items: center;
 
-    // Hide items beyond 8 (4 per column × 2 columns)
-    > *:nth-child(n + 9) {
-      display: none;
-    }
-
-    // V10: Subcategory pill styling — white bg, ring, dark text, hover
+    // Wrapper items become transparent — badge link is the visual unit.
+    // display:contents removes the wrapper box so the inner <a> badge link
+    // participates directly in the flex/grid layout, preventing empty placeholder boxes.
+    // Accessibility: these <li> wrappers have no semantic role beyond containing
+    // the link, so removal from the box tree does not affect screen reader navigation.
     .subcategory,
     .subcategory-list-item {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      white-space: normal;
-      min-width: 0;
-      background: var(--mza-surface);
-      border: 1px solid var(--mza-border);
-      border-radius: var(--mza-radius-sm);
-      padding-block: 0.375rem;
-      padding-inline: 0.625rem;
-      color: var(--mza-text-high);
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        color 0.2s ease;
-
-      &:hover {
-        border-color: var(--mza-border-strong);
-        box-shadow: var(--mza-shadow-sm);
-        color: var(--tertiary);
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
+      display: contents;
     }
 
-    // Mobile: single column stack
-    @media screen and (width <= 640px) {
-      grid-template-columns: 1fr;
-      grid-template-rows: none;
-      grid-auto-flow: row;
+    // Desktop (>= 1024px): upgrade to 2-column grid
+    @media screen and (width >= 1024px) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(4, auto);
+      grid-auto-flow: column;
+      gap: var(--mza-gap-2) var(--mza-gap-3);
+      align-items: start;
 
+      // Hide items beyond 8 (4 per column × 2 columns)
       > *:nth-child(n + 9) {
-        display: flex;
+        display: none;
       }
     }
   }
@@ -538,10 +516,30 @@ div.link-bottom-line {
   }
 
   // Title sizing on mobile: no truncation, wrap fully
-  table.topic-list a.title {
+  // Fix flex parents preventing title text from wrapping
+  .link-top-line,
+  .topic-details,
+  td.main-link,
+  .topic-title {
+    min-width: 0;
+  }
+
+  // Force full wrap on topic title links — override any truncation.
+  // !important is needed here because Discourse core applies truncation
+  // (white-space: nowrap, overflow: hidden, text-overflow: ellipsis, line-clamp)
+  // at equivalent or higher specificity on mobile viewports.
+  // The base declarations in common.scss handle the default case;
+  // these mobile-specific !important overrides ensure truncation is fully defeated.
+  table.topic-list a.title,
+  .raw-topic-link,
+  .link-top-line a {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
     display: block;
-    overflow: visible;
-    white-space: normal;
+    max-width: 100%;
+    -webkit-line-clamp: unset !important; /* stylelint-disable-line property-no-vendor-prefix */
+    line-clamp: unset !important;
     overflow-wrap: anywhere;
     word-break: break-word;
     font-size: 0.9375rem;
