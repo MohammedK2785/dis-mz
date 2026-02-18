@@ -589,11 +589,11 @@ div.link-bottom-line {
 }
 
 // ===================================
-// SECTION 6: Alpine.js Excerpt Component
-// "Read More" toggle for long topic excerpts with graceful degradation
+// SECTION 6: Native Excerpt Component
+// "Read More" toggle using <details>/<summary> - no JavaScript required
 // ===================================
 
-// Main container for Alpine excerpt component
+// Main container (details element)
 .topic-excerpt-alpine {
   margin-block-start: 0.625rem;
   padding-inline-start: 1rem;
@@ -605,42 +605,40 @@ div.link-bottom-line {
   border-inline-start: 3px solid var(--primary-low-mid);
   background-color: var(--primary-very-low);
   border-radius: 4px;
+
+  // Remove the default browser marker/arrow from <summary>
+  > summary.mza-excerpt-toggle {
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  // On desktop: always show excerpt content, hide toggle
+  @media screen and (width >= 768px) {
+    > summary.mza-excerpt-toggle {
+      display: none;
+    }
+
+    > .mza-excerpt-content {
+      display: block;
+    }
+  }
 }
 
 // Excerpt content container
 .mza-excerpt-content {
   margin-block-end: 0.5rem;
-  transition: all 0.3s ease;
-
-  // Graceful degradation: show full excerpt if Alpine fails to load
-  // This ensures content is accessible even without JavaScript
 }
 
-// Clamped state - only on mobile (max 3 lines)
-.mza-excerpt-clamped {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-// Desktop: Always show full excerpt (no clamping)
-@media screen and (width >= 768px) {
-  .mza-excerpt-clamped {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
-  }
-}
-
-// Toggle button styling
+// Toggle button styling (the <summary> element)
 .mza-excerpt-toggle {
   display: inline-flex;
   align-items: center;
   padding-inline: 0.75rem;
   padding-block: 0.375rem;
-  font-size: 0.8125rem;
+  font-size: 0;
   font-weight: 500;
   color: var(--tertiary);
   background: var(--mza-surface);
@@ -649,6 +647,17 @@ div.link-bottom-line {
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  margin-block-end: 0.5rem;
+
+  // Visual label text via ::before (actual text is in aria-label for screen readers)
+  &::before {
+    content: "قراءة المزيد";
+    font-size: 0.8125rem;
+  }
+
+  details[open] > &::before {
+    content: "إخفاء النص";
+  }
 
   &:hover {
     background: var(--mza-surface-2);
@@ -798,15 +807,14 @@ html[dir="rtl"] {
 // Mobile-only navigation bar for Morocco & World portals
 // Displayed only on mobile view using {{#if site.mobileView}} + md:hidden
 // ===================================
-
 .mza-mobile-portal-nav {
   position: relative;
   z-index: 100;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--mza-glass-bg-solid);
   backdrop-filter: blur(12px);
   border-block-end: 1px solid var(--mza-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgb(0, 0, 0, 0.05);
 
   // Container wrapper
   .wrap {
@@ -858,7 +866,7 @@ html[dir="rtl"] {
   background: var(--mza-surface);
   border: 1px solid var(--mza-border);
   color: var(--primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.05);
   transition: all 0.2s ease;
   text-decoration: none;
 
@@ -866,7 +874,7 @@ html[dir="rtl"] {
     background: var(--mza-surface-2);
     border-color: var(--tertiary);
     color: var(--tertiary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
     transform: translateY(-1px);
     text-decoration: none;
   }
@@ -874,7 +882,7 @@ html[dir="rtl"] {
   &:focus-visible {
     outline: 2px solid var(--tertiary);
     outline-offset: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
   }
 
   &:active {

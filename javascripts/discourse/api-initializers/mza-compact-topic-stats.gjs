@@ -26,11 +26,9 @@ const CompactStatsItemCell = <template>
 
 export default apiInitializer("1.34", (api) => {
   try {
-    // Guard: ensure api.container.lookup is available
-    const siteSettings = api.container?.lookup?.("service:site-settings");
-
-    // Only proceed if the setting is enabled (and siteSettings exists)
-    if (!siteSettings?.compact_topic_stats) {
+    // Guard: read from theme settings (settings is injected by the theme compiler)
+    // compact_topic_stats is a theme setting defined in settings.yml, not a site setting
+    if (!settings.compact_topic_stats) {
       return;
     }
 
