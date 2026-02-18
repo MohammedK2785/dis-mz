@@ -46,6 +46,19 @@ $mza-border: #e2e8f0;
   // Glass backgrounds - use rgba() fallback; browsers supporting color-mix() get adaptive values
   --mza-glass-bg: rgb(255 255 255 / 0.75);
   --mza-glass-bg-solid: rgb(255 255 255 / 0.92);
+
+  // Cairo font family tokens — ensure category titles and headings use Cairo globally
+  --font-family: "Cairo", system-ui, -apple-system, "Segoe UI", arial,
+    sans-serif;
+  --heading-font-family: "Cairo", system-ui, -apple-system, "Segoe UI", arial,
+    sans-serif;
+}
+
+// Ensure category-specific elements inherit Cairo
+.badge-category__name,
+.category-name,
+.category-title-link {
+  font-family: var(--font-family);
 }
 
 // Progressive enhancement: override glass vars with color-mix() for browsers that support it
@@ -61,9 +74,9 @@ $mza-border: #e2e8f0;
   }
 }
 
-// Page background - use Discourse's color scheme variable so dark mode works correctly
+// Page background - use subtle surface-2 so cards/sections stand out
 body:not(.admin-interface) {
-  background: var(--secondary);
+  background: var(--mza-surface-2);
 }
 
 // Legacy accent colors for section tabs
