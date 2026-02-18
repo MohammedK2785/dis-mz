@@ -23,6 +23,11 @@ body:not(.admin-interface).navigation-categories {
 body:not(.admin-interface) #main-outlet {
   min-height: 60vh;
   padding-block: 1.5rem;
+
+  // PR1: Reduce top whitespace on mobile
+  @media screen and (width <= 768px) {
+    padding-block-start: 0.75rem;
+  }
 }
 
 .discovery-container {
@@ -141,6 +146,12 @@ body:not(.admin-interface) nav[aria-label="التنقل الرئيسي"] {
     color: var(--primary-medium);
     text-align: center;
     margin-block-end: 0;
+  }
+
+  // PR1: Tighter padding on mobile
+  @media screen and (width <= 768px) {
+    padding-block: 1rem;
+    margin-block-end: 1rem;
   }
 
   // Medium screens and above
@@ -909,5 +920,38 @@ html[dir="rtl"] {
     min-height: 44px;
     padding-inline: 1rem;
     font-size: 0.8125rem;
+  }
+}
+
+// ===================================
+// PR1: System Banner / Site Notice Mobile Sizing
+// Reduces Discourse built-in banners/notices on small screens
+// so they take up less vertical space and don't crowd content
+// Scoped to non-admin to avoid affecting admin UI
+// ===================================
+@media screen and (width <= 768px) {
+  body:not(.admin-interface) {
+    // Discourse global site notice (.d-banner, #site-notice)
+    .d-banner,
+    #site-notice,
+    .global-notice,
+    .site-header-notice {
+      padding-block: 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.4;
+
+      .banner-content,
+      p {
+        margin-block: 0;
+      }
+    }
+
+    // Alert banners rendered inside #main-outlet
+    #main-outlet .alert,
+    #main-outlet .flash {
+      padding: 0.5rem 0.875rem;
+      font-size: 0.8125rem;
+      margin-block-end: 0.5rem;
+    }
   }
 }
