@@ -38,6 +38,16 @@ body:not(.admin-interface) #main-outlet {
   @media screen and (width >= 768px) {
     padding-inline: 1.5rem;
   }
+
+  @media screen and (width >= 1280px) {
+    max-width: 96rem;
+    padding-inline: 2rem;
+  }
+
+  @media screen and (width >= 1536px) {
+    max-width: 110rem;
+    padding-inline: 2.5rem;
+  }
 }
 
 // ===================================
