@@ -55,10 +55,11 @@ $mza-border: #e2e8f0;
   --mza-shadow-lg: 0 10px 25px rgb(0 0 0 / 0.08);
 
   // V10: Colored / diffuse shadow tokens for modern elevation
-  --mza-shadow-colored: 0 2px 8px rgb(14 165 233 / 0.06);
+  --mza-shadow-brand: 0 2px 8px rgb(14 165 233 / 0.06);
   --mza-shadow-soft: 0 2px 8px rgb(0 0 0 / 0.04);
   --mza-shadow-float: 0 8px 24px rgb(0 0 0 / 0.1);
   --mza-border-accent: var(--tertiary, #0ea5e9);
+  --mza-text-high: var(--primary-high, #334155);
 
   // Cairo font family tokens — ensure category titles and headings use Cairo globally
   --font-family:
@@ -342,7 +343,7 @@ a.badge-wrapper {
   background: var(--mza-surface);
   border: 1px solid var(--mza-border);
   border-radius: 9999px;
-  color: var(--primary-high, #334155);
+  color: var(--mza-text-high);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -359,7 +360,7 @@ a.badge-wrapper {
 span.badge-category {
   font-weight: 600;
   font-size: var(--font-down-1);
-  color: var(--primary-high, #334155);
+  color: var(--mza-text-high);
 }
 
 // Topic excerpt - hidden; the theme uses the topic-excerpt-alpine connector
