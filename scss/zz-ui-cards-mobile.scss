@@ -480,6 +480,7 @@ html.mobile-view body:not(.admin-interface) {
   .list-container,
   .topic-list-container,
   .topic-list-body,
+  #list-area,
   #main-outlet .container,
   #main-outlet .wrap {
     width: 100%;
@@ -487,6 +488,11 @@ html.mobile-view body:not(.admin-interface) {
     min-width: 0;
     flex: 1 1 auto;
     box-sizing: border-box;
+  }
+
+  // Prevent horizontal scroll on discovery container
+  .discovery-container {
+    overflow-x: clip;
   }
 
   // Topic list table must fill container width
@@ -545,7 +551,8 @@ html.mobile-view body:not(.admin-interface) {
   }
 
   // Main link cell must not constrain width
-  td.main-link {
+  td.main-link,
+  td.main-link.clearfix.topic-list-data {
     min-width: 0;
     width: 100%;
   }
