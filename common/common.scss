@@ -68,7 +68,7 @@ $mza-border: #e2e8f0;
     "Cairo", system-ui, -apple-system, "Segoe UI", arial, sans-serif;
 }
 
-// Ensure ALL headings and category elements use Cairo (Task 4)
+// Ensure ALL headings and category elements use Cairo
 h1,
 h2,
 h3,
@@ -77,18 +77,10 @@ h5,
 h6,
 .category-name,
 .category-title-link,
-.category-text-title,
-.category-heading h1,
 .badge-category__name,
-.parent-category-name,
 .topic-title,
-.fancy-title,
-.categories-list .category-name,
-table.category-list .category-name {
-  // !important needed: Discourse core and plugin stylesheets set font-family
-  // on these elements at equal or higher specificity. Without !important,
-  // Cairo is overridden by Discourse's default font stack.
-  font-family: var(--heading-font-family) !important;
+.fancy-title {
+  font-family: var(--heading-font-family);
 }
 
 // Progressive enhancement: override glass vars with color-mix() for browsers that support it
@@ -109,24 +101,6 @@ body:not(.admin-interface) {
   background: var(--mza-surface-2);
 }
 
-// ===================================
-// Task 5: Desktop responsive container — wider usable area on large screens
-// Uses 1440px max-width with responsive padding via clamp()
-// Scoped to non-admin to avoid breaking admin/header alignment
-// ===================================
-body:not(.admin-interface) #main-outlet > .container,
-body:not(.admin-interface) #main-outlet > .wrap {
-  max-width: 1440px;
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 3vw, 3rem);
-}
-
-// ===================================
-// Task 3: Visual contrast — clear surface system for homepage
-// Page background → card surface → borders/dividers → shadows
-// Category blocks clearly separated via borders, shadows, dividers
-// ===================================
-
 // Ensure card surfaces contrast with page background
 // V10: White surface + subtle border + soft shadow for clear elevation
 body:not(.admin-interface) .category-list .category,
@@ -140,34 +114,21 @@ body:not(.admin-interface) .categories-list table.category-list {
 // ===================================
 // Category Card — Hardcoded styles (override Tailwind/variable issues)
 // Explicit hex values to render immediately without build steps
-// Enhanced with stronger shadow and divider for visual contrast (Task 3)
 // ===================================
 .category-list-item {
   background-color: #fff !important;
   border: 1px solid #e2e8f0;
   border-radius: 0.75rem;
-  box-shadow:
-    0 1px 3px 0 rgb(0 0 0 / 0.07),
-    0 1px 2px 0 rgb(0 0 0 / 0.04);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   padding: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   transition:
     box-shadow 0.2s ease,
     border-color 0.2s ease;
 
   &:hover {
-    box-shadow:
-      0 4px 12px 0 rgb(0 0 0 / 0.1),
-      0 2px 4px 0 rgb(0 0 0 / 0.06);
+    box-shadow: 0 4px 6px 0 rgb(0 0 0 / 0.1);
     border-color: #cbd5e1;
-  }
-
-  // Divider between category content and subcategories
-  .subcategories,
-  .subcategory-list {
-    border-top: 1px solid #e2e8f0;
-    padding-top: 12px;
-    margin-top: 12px;
   }
 }
 
@@ -375,11 +336,10 @@ tr.topic-list-item {
   }
 }
 
-// Main content cell - better spacing, min-width: 0 so flex children can shrink/wrap
+// Main content cell - better spacing
 td.main-link.clearfix.topic-list-data {
   padding-inline-start: 1.25rem;
   padding-inline-end: 1.25rem;
-  min-width: 0;
 }
 
 // Topic title - consistent sizing for readability with Cairo font optimization
@@ -392,19 +352,8 @@ table.topic-list a.title {
   letter-spacing: -0.025em; // tracking-tight for Cairo
   color: var(--mza-text);
   display: block;
-  max-width: 100%;
   margin-block-end: 0.5rem;
   transition: color 0.15s ease;
-
-  // Ensure no truncation at any viewport (Task 1)
-  // Base layer uses normal declarations; mobile override in zz-ui-cards-mobile.scss
-  // adds !important to defeat Discourse core truncation that applies at higher specificity
-  // on narrow viewports.
-  white-space: normal;
-  overflow: visible;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: unset;
 
   &:hover {
     color: var(--tertiary);
@@ -428,7 +377,6 @@ div.topic-details {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  min-width: 0;
 }
 
 // Top line (title and badges)
@@ -437,7 +385,6 @@ div.link-top-line {
   align-items: flex-start;
   gap: 0.75rem;
   flex-wrap: wrap;
-  min-width: 0;
 }
 
 // Bottom line (category, tags, metadata) - enhanced spacing
