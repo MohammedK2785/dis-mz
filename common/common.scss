@@ -764,7 +764,7 @@ div.discourse-tags {
 }
 
 // Extra small devices - ensure no horizontal scroll at 375px
-@media screen and (width <= 375px) {
+@media screen and (max-width: 375px) {
   tr.topic-list-item {
     td {
       padding-inline: 0.75rem;

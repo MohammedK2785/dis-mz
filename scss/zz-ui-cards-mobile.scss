@@ -25,7 +25,7 @@ body:not(.admin-interface) #main-outlet {
   padding-block: 1.5rem;
 
   // PR1: Reduce top whitespace on mobile
-  @media screen and (width <= 768px) {
+  @media screen and (max-width: 768px) {
     padding-block-start: 0.75rem;
   }
 }
@@ -64,7 +64,7 @@ body:not(.admin-interface) .categories-list {
     }
 
     // Desktop (>= 1024px): upgrade to 2-column grid
-    @media screen and (width >= 1024px) {
+    @media screen and (min-width: 1024px) {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: repeat(6, auto);
@@ -189,13 +189,13 @@ body:not(.admin-interface) nav[aria-label="التنقل الرئيسي"] {
   }
 
   // PR1: Tighter padding on mobile
-  @media screen and (width <= 768px) {
+  @media screen and (max-width: 768px) {
     padding-block: 1rem;
     margin-block-end: 1rem;
   }
 
   // Medium screens and above
-  @media screen and (width >= 768px) {
+  @media screen and (min-width: 768px) {
     padding-block: 2rem;
 
     h1 {
@@ -463,14 +463,22 @@ div.link-bottom-line {
 // No horizontal overflow, touch-friendly elements, readable stats
 // Denser cards to show more content above the fold
 // ===================================
-@media screen and (width <= 768px) {
+@media screen and (max-width: 768px) {
   // Task 1: Ensure topic list stretches to full wrapper width on mobile (/c/* pages)
+  html.mobile-view body:not(.admin-interface),
   body:not(.admin-interface) {
+    .discovery-container,
     .list-container,
     .topic-list-container {
       width: 100%;
+      max-width: none;
       min-width: 0;
       flex: 1 1 auto;
+    }
+
+    td.main-link {
+      min-width: 0;
+      width: 100%;
     }
   }
 
@@ -639,7 +647,7 @@ div.link-bottom-line {
 }
 
 // Extra small screens (375px and below)
-@media screen and (width <= 375px) {
+@media screen and (max-width: 375px) {
   // Prevent horizontal overflow
   body {
     overflow-x: hidden;
@@ -712,7 +720,7 @@ div.link-bottom-line {
   }
 
   // On desktop: always show excerpt content, hide toggle
-  @media screen and (width >= 768px) {
+  @media screen and (min-width: 768px) {
     > summary.mza-excerpt-toggle {
       display: none;
     }
@@ -781,7 +789,7 @@ div.link-bottom-line {
 
   // Add rounded corners on the inner side (opposite of slide direction)
   // For LTR: rounds left side, for RTL: rounds right side
-  @media screen and (width <= 768px) {
+  @media screen and (max-width: 768px) {
     border-start-start-radius: var(--mza-radius-lg);
     border-end-start-radius: var(--mza-radius-lg);
   }
@@ -884,7 +892,7 @@ html[dir="rtl"] {
 
   // Drawer rounds on the correct side in RTL (right side)
   .menu-panel {
-    @media screen and (width <= 768px) {
+    @media screen and (max-width: 768px) {
       border-start-end-radius: var(--mza-radius-lg);
       border-end-end-radius: var(--mza-radius-lg);
       border-start-start-radius: 0;
@@ -987,7 +995,7 @@ html[dir="rtl"] {
 }
 
 // Mobile-specific optimizations
-@media screen and (width <= 768px) {
+@media screen and (max-width: 768px) {
   .mza-mobile-portal-nav {
     // Ensure it appears above content
     position: sticky;
@@ -1014,7 +1022,7 @@ html[dir="rtl"] {
 // so they take up less vertical space and don't crowd content
 // Scoped to non-admin to avoid affecting admin UI
 // ===================================
-@media screen and (width <= 768px) {
+@media screen and (max-width: 768px) {
   body:not(.admin-interface) {
     // Discourse global site notice (.d-banner, #site-notice)
     .d-banner,
