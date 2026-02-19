@@ -67,13 +67,13 @@ body:not(.admin-interface) .categories-list {
     @media screen and (width >= 1024px) {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: repeat(6, auto);
+      grid-template-rows: repeat(4, auto);
       grid-auto-flow: column;
       gap: var(--mza-gap-2) var(--mza-gap-3);
       align-items: start;
 
-      // Hide items beyond 12 (6 per column × 2 columns)
-      > *:nth-child(n + 13) {
+      // Hide items beyond 8 (4 per column × 2 columns)
+      > *:nth-child(n + 9) {
         display: none;
       }
     }
@@ -464,21 +464,10 @@ div.link-bottom-line {
 // Denser cards to show more content above the fold
 // ===================================
 @media screen and (width <= 768px) {
-  // Task 1: Ensure topic list stretches to full wrapper width on mobile (/c/* pages)
-  body:not(.admin-interface) {
-    .list-container,
-    .topic-list-container {
-      width: 100%;
-      min-width: 0;
-      flex: 1 1 auto;
-    }
-  }
-
   // Topic list mobile: stacked cards - more compact
   table.topic-list {
     display: block;
     border-spacing: 0;
-    width: 100%;
 
     thead,
     tr.topic-list-header {
@@ -487,12 +476,10 @@ div.link-bottom-line {
 
     tbody {
       display: block;
-      width: 100%;
     }
 
     tr.topic-list-item {
       display: block;
-      width: 100%;
       margin-block-end: 0.75rem;
       background: var(--mza-surface);
       border: 1px solid var(--mza-border);
