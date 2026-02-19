@@ -61,30 +61,35 @@ $mza-border: #e2e8f0;
   --mza-border-accent: var(--tertiary, #0ea5e9);
   --mza-text-high: var(--primary-high, #334155);
 
-  // Cairo font family tokens — ensure category titles and headings use Cairo globally
+  // Cairo font family token — base font for body text (applies globally)
   --font-family:
     "Cairo", system-ui, -apple-system, "Segoe UI", arial, sans-serif;
+}
+
+// Heading font token scoped to non-admin only — prevents Cairo from
+// overriding the admin interface typography.
+body:not(.admin-interface) {
   --heading-font-family:
     "Cairo", system-ui, -apple-system, "Segoe UI", arial, sans-serif;
 }
 
-// Ensure ALL headings and category elements use Cairo (Task 4)
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.category-name,
-.category-title-link,
-.category-text-title,
-.category-heading h1,
-.badge-category__name,
-.parent-category-name,
-.topic-title,
-.fancy-title,
-.categories-list .category-name,
-table.category-list .category-name {
+// Ensure ALL headings and category elements use Cairo on non-admin pages (Task 4)
+body:not(.admin-interface) h1,
+body:not(.admin-interface) h2,
+body:not(.admin-interface) h3,
+body:not(.admin-interface) h4,
+body:not(.admin-interface) h5,
+body:not(.admin-interface) h6,
+body:not(.admin-interface) .category-name,
+body:not(.admin-interface) .category-title-link,
+body:not(.admin-interface) .category-text-title,
+body:not(.admin-interface) .category-heading h1,
+body:not(.admin-interface) .badge-category__name,
+body:not(.admin-interface) .parent-category-name,
+body:not(.admin-interface) .topic-title,
+body:not(.admin-interface) .fancy-title,
+body:not(.admin-interface) .categories-list .category-name,
+body:not(.admin-interface) table.category-list .category-name {
   // !important needed: Discourse core and plugin stylesheets set font-family
   // on these elements at equal or higher specificity. Without !important,
   // Cairo is overridden by Discourse's default font stack.
@@ -110,14 +115,13 @@ body:not(.admin-interface) {
 }
 
 // ===================================
-// Task 5: Desktop responsive container — wider usable area on large screens
-// Uses 1440px max-width with responsive padding via clamp()
+// Task 5: Desktop responsive container — full-width responsive layout
+// Uses responsive padding via clamp(), no fixed max-width constraint
 // Scoped to non-admin to avoid breaking admin/header alignment
 // ===================================
 body:not(.admin-interface) #main-outlet > .container,
 body:not(.admin-interface) #main-outlet > .wrap {
-  max-width: 1440px;
-  margin-inline: auto;
+  width: 100%;
   padding-inline: clamp(1rem, 3vw, 3rem);
 }
 
