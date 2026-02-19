@@ -40,7 +40,7 @@ body:not(.admin-interface) #main-outlet {
 // SECTION 0b: Subcategories — 2-column grid on desktop, flex pills on mobile
 // Scoped to category-list context only (non-admin)
 // Desktop (>= 1024px): CSS Grid fills down first (grid-auto-flow: column)
-// 4 rows × 2 columns = 8 items max visible
+// 6 rows × 2 columns = 12 items max visible
 // Mobile/tablet: flex-wrap pills — no big boxes
 // RTL-safe using logical CSS properties
 // ===================================
@@ -54,27 +54,30 @@ body:not(.admin-interface) .categories-list {
     gap: var(--mza-gap-2);
     align-items: center;
 
-    // Wrapper items become transparent — badge link is the visual unit.
-    // display:contents removes the wrapper box so the inner <a> badge link
-    // participates directly in the flex/grid layout, preventing empty placeholder boxes.
-    // Accessibility: these <li> wrappers have no semantic role beyond containing
-    // the link, so removal from the box tree does not affect screen reader navigation.
+    // Wrapper items: use block display for Safari compatibility.
+    // display:contents causes issues on older iOS Safari, so we keep
+    // wrappers as block and let the inner <a> be the styled pill.
+    // The wrapper has no visible box (no background/border) to preserve layout.
     .subcategory,
     .subcategory-list-item {
-      display: contents;
+      display: block;
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
     }
 
     // Desktop (>= 1024px): upgrade to 2-column grid
     @media screen and (min-width: 1024px) {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: repeat(4, auto);
+      grid-template-rows: repeat(6, auto);
       grid-auto-flow: column;
       gap: var(--mza-gap-2) var(--mza-gap-3);
       align-items: start;
 
-      // Hide items beyond 8 (4 per column × 2 columns)
-      > *:nth-child(n + 9) {
+      // Hide items beyond 12 (6 per column × 2 columns)
+      > *:nth-child(n + 13) {
         display: none;
       }
     }
@@ -466,13 +469,119 @@ div.link-bottom-line {
 }
 
 // ===================================
-// SECTION 5: Mobile Optimizations (Dense Layout)
+// SECTION 5a: html.mobile-view Topic List Full-Width (v1.1 Fix)
+// Applies when Discourse detects mobile (html.mobile-view class) regardless of viewport.
+// Ensures topic list in /c/* pages stretches to full width.
+// Scoped to body:not(.admin-interface) to avoid admin breakage.
+// ===================================
+html.mobile-view body:not(.admin-interface) {
+  // Container chain must allow full width expansion
+  .discovery-container,
+  .list-container,
+  .topic-list-container,
+  .topic-list-body,
+  #list-area,
+  #main-outlet .container,
+  #main-outlet .wrap {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    flex: 1 1 auto;
+    box-sizing: border-box;
+  }
+
+  // Prevent horizontal scroll on discovery container
+  .discovery-container {
+    overflow-x: clip;
+  }
+
+  // Topic list table must fill container width
+  table.topic-list {
+    width: 100%;
+    max-width: none;
+    display: block;
+    border-spacing: 0;
+
+    thead,
+    tr.topic-list-header {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+      width: 100%;
+    }
+
+    tr.topic-list-item {
+      display: block;
+      width: 100%;
+      margin-block-end: 0.75rem;
+      background: var(--mza-surface);
+      border: 1px solid var(--mza-border);
+      border-radius: var(--mza-radius-md);
+      box-shadow: var(--mza-shadow-sm);
+      overflow: hidden;
+
+      td {
+        display: block;
+        width: 100%;
+        padding-block: 0.5rem;
+        padding-inline: 0.875rem;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      td:first-child,
+      td:last-child {
+        border: none;
+        border-radius: 0;
+      }
+
+      // Pinned indicator on mobile
+      &.pinned,
+      &.globally-pinned {
+        border-inline-start: 3px solid var(--tertiary);
+      }
+
+      &.closed {
+        border-inline-start: 3px solid var(--primary-medium);
+      }
+    }
+  }
+
+  // Main link cell must not constrain width
+  td.main-link,
+  td.main-link.clearfix.topic-list-data {
+    min-width: 0;
+    width: 100%;
+  }
+
+  // Title text wrapping (defeat core truncation)
+  table.topic-list a.title,
+  .raw-topic-link,
+  .link-top-line a {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    display: block;
+    max-width: 100%;
+    -webkit-line-clamp: unset !important; /* stylelint-disable-line property-no-vendor-prefix */
+    line-clamp: unset !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+}
+
+// ===================================
+// SECTION 5b: Mobile Optimizations (Dense Layout)
 // No horizontal overflow, touch-friendly elements, readable stats
 // Denser cards to show more content above the fold
 // ===================================
 @media screen and (max-width: 768px) {
-  // Task 1: Ensure topic list stretches to full wrapper width on mobile (/c/* pages)
-  html.mobile-view body:not(.admin-interface),
+  // Container full-width rules (also covers non-mobile-view class scenarios)
   body:not(.admin-interface) {
     .discovery-container,
     .list-container,

@@ -41,6 +41,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - `border-inline-start`, `padding-inline`, `margin-block`, etc.
   - Proper text alignment with `text-align: start`
 
+### Fixed - v1.1
+
+- **Mobile /c/* topic list**: Now stretches to full width using `html.mobile-view` scoping, ensuring proper layout even when Discourse mobile detection differs from viewport breakpoints
+- **Desktop subcategories grid**: Updated to 2 columns × 6 items (max 12 visible), changed from previous 4 rows/8 items
+- **Safari compatibility**: Replaced `display: contents` on subcategory wrappers with `display: block` for older iOS Safari compatibility
+
 ### Documentation
 
 - Added `docs/CHANGELOG.md` - This changelog file
