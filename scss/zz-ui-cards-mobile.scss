@@ -40,7 +40,6 @@ body:not(.admin-interface) #main-outlet {
 // SECTION 0b: Subcategories — 2-column grid on desktop, flex pills on mobile
 // Scoped to category-list context only (non-admin)
 // Desktop (>= 1024px): CSS Grid fills down first (grid-auto-flow: column)
-// 4 rows × 2 columns = 8 items max visible
 // Mobile/tablet: flex-wrap pills — no big boxes
 // RTL-safe using logical CSS properties
 // ===================================
@@ -68,13 +67,13 @@ body:not(.admin-interface) .categories-list {
     @media screen and (min-width: 1024px) {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: repeat(4, auto);
+      grid-template-rows: repeat(6, auto);
       grid-auto-flow: column;
       gap: var(--mza-gap-2) var(--mza-gap-3);
       align-items: start;
 
-      // Hide items beyond 8 (4 per column × 2 columns)
-      > *:nth-child(n + 9) {
+      // Hide items beyond 12 (6 per column × 2 columns)
+      > *:nth-child(n + 13) {
         display: none;
       }
     }
@@ -314,12 +313,6 @@ div.topic-details {
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
-  min-width: 0;
-}
-
-// Flex containers for topic title — must have min-width:0 to allow title text to wrap
-div.link-top-line,
-td.main-link {
   min-width: 0;
 }
 
